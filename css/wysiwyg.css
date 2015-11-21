@@ -1,0 +1,77 @@
+#completeEditeur {
+    background-color: green;
+    margin: 5px;
+    padding: 5px;
+}
+
+#html_editeur {
+    background-color: purple;
+    margin: 10px;
+}
+
+#btn_html_refresh {
+    visibility: hidden;
+}
+
+#del_news {
+    background-color: #DD1224;
+    margin: 5px;
+    padding: 5px;
+}
+
+#edit_news {
+    background-color: #1224DD;
+    margin: 5px;
+    padding: 5px;
+}
+
+#selecter_news_del {
+    width: 150px;
+}
+
+#editeur {
+    height: 300px;
+    border: 1px solid black;
+    padding: 5px;
+    overflow: auto;
+    background-color: white;
+    margin: 10px;
+}
+
+#buttons {
+    background-color: yellow;
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+#titre {
+    width: 70%;
+    z-index: 2;
+}
+
+#resultat {
+    width: 600px;
+    height: 300px;
+    border: 1px solid black;
+    padding: 5px;
+    overflow: auto;
+    visibility: hidden;
+    position: absolute;
+    margin: 5px;
+    width: 98.2%;
+}
+
+#selecters {
+    display: inline-block;
+    background-color: blue;
+    float: right;
+    position: relative;
+    margin: 5px;
+    z-index: 1;
+}
+
+#selecters select {
+    width: 150px;
+    margin: 5px;
+}
