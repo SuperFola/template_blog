@@ -1,6 +1,6 @@
 <?php
 $registred_users = array();
-$registred_users['folaefolc'] = '827cff9ded58162cfbf6692f2ae059af9595ea0f';  // sha1
+$registred_users['user'] = 'pass';  // sha1
 
 function check_access($user, $pass, $users){
     $access_granted = false;
