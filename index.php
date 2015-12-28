@@ -2,13 +2,16 @@
 
 <HTML>
     <head>
-        <title>Blog title</title>
+        <title>titre</title>
         <link meta="screen" rel="stylesheet" type="text/css" href="css/design.css" />
         <meta charset="utf-8" />
-        <meta name="description" content="desc" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Language" content="fr-FR" />
+        <meta name="robots" content="all" />
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
         
         <script src="scripts/spoiler.js"></script>
+        <script src="scripts/images.js"></script>
         <script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
         
         <?php
@@ -18,61 +21,81 @@
         ?>
     </head>
     <body>
-        <p id="start">
-            welcome message
-        </p>
+        <div class="start">
+            <h1>Titre</h1>
+            <h3>Slogan</h3>
+            <?php include('public/search.php'); ?>
+        </div>
         
-        <div class="main" tabindex=0>
-            <div id="submain">
-                <h1>Articles</h1>
-                    <ul>
-                        <?php
-                            $cur_new = count_news();
-                            
+        <div class="main">
+            <h1>Articles</h1>
+                <ul>
+                    <?php
+                        $cur_new = count_news();
+                        if (!isset($_GET['post'])){
+                            $fin = $cur_new - 10;
+                            if ($fin < 0){
+                                $fin = 0;
+                            }
+                            while($cur_new > $fin){
+                                include('news/new' . $cur_new . '.php');
+                                $cur_new--;
+                            }
+                        }else if(isset($_GET['post']) and $_GET['post'] == 'all'){
                             while($cur_new > 0){
                                 include('news/new' . $cur_new . '.php');
                                 $cur_new--;
                             }
-                        ?>
-                        <br />
-                        <?php
-                            include('portfolio/portfolio.php');
-                        ?>
-                    </ul>
-            </div>
-            
-            <?php include('public/search.php'); ?>
-            
-            <!-- NE RIEN ECRIRE APRES CETTE BALISE -->
+                        }else if(isset($_GET['post']) and is_numeric($_GET['post'])){
+                            $post = intval($_GET['POST']);
+                            if (0 < $post and $post <= count_news()){
+                                include('news/new' . $post . '.php');
+                            }else{
+                                $fin = $cur_new - 10;
+                                if ($fin < 0){
+                                    $fin = 0;
+                                }
+                                while($cur_new > $fin){
+                                    include('news/new' . $cur_new . '.php');
+                                    $cur_new--;
+                                }
+                            }
+                        }
+                    ?>
+                    <br />
+                    <li><a href="portfolio/">Mon portfolio</a></li>
+                </ul>
+                <br />
+                <a href="index.php?post=all">Voir tous les posts</a>
+                <br />
+        <!-- NE RIEN ECRIRE APRES CETTE BALISE -->
         </div>
         
-        <div class="videos" tabindex=1>
-            <h1>Mes videos</h1>
-                Video sur blablabla du XX-XX-XX : <a href="" target="blank">YouTube</a>
-                
-                <br /><br />
-                <!-- NE RIEN ECRIRE APRES CETTE BALISE -->
-        </div>
-        
-        <div class="liens" id="l" tabindex=2>
+        <div class="liens">
             <h1>Liens</h1>
                 <ul>
-                    <li> <a href="link" target="blank">link name</a></li>
+                    <li></li>
                 </ul>
                 <!-- NE RIEN ECRIRE APRES CETTE BALISE -->
         </div>
         
-        <div class="recrutement" id="r" tabindex=3>
+        <div class="recrutement">
             <h1>Recrutement</h1>
                 <ul>
-                    <li>recrutement</li>
+                    <li></li>
                 </ul>
-                Pour me contacter, envoyez moi un message privé sur blablabla !
+                Pour me contacter, [...]
                 <br /><br />
                 <!-- NE RIEN ECRIRE APRES CETTE BALISE -->
-        </div>       
+        </div>
         
-        <br />
-        <br />
+        <footer>
+            <br /><br />
+            <!--<a href="news/"><img src="pic/end_picture.png" /></a>-->
+        </footer>
+        
+        <?php
+            include('public/modalebox.php');
+        ?>
     </body>
 </HTML>

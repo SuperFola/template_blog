@@ -1,4 +1,4 @@
 ﻿AuthName "Page d'administration protegee"
 AuthType Basic
-AuthUserFile "path to .htpasswd"
+AuthUserFile "/home/sitename/www/admin/.htpasswd"
 Require valid-user

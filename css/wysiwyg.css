@@ -9,12 +9,23 @@
     margin: 10px;
 }
 
+#html_editeur_news{
+    background-color: purple;
+    margin: 10px;
+}
+
 #btn_html_refresh {
     visibility: hidden;
 }
 
 #del_news {
     background-color: #DD1224;
+    margin: 5px;
+    padding: 5px;
+}
+
+#maj_news{
+    background-color: #12DD24;
     margin: 5px;
     padding: 5px;
 }
@@ -30,6 +41,15 @@
 }
 
 #editeur {
+    height: 300px;
+    border: 1px solid black;
+    padding: 5px;
+    overflow: auto;
+    background-color: white;
+    margin: 10px;
+}
+
+#editeur2{
     height: 300px;
     border: 1px solid black;
     padding: 5px;
@@ -59,7 +79,17 @@
     visibility: hidden;
     position: absolute;
     margin: 5px;
-    width: 98.2%;
+}
+
+#resultat2{
+    width: 600px;
+    height: 300px;
+    border: 1px solid black;
+    padding: 5px;
+    overflow: auto;
+    visibility: hidden;
+    position: absolute;
+    margin: 5px;
 }
 
 #selecters {

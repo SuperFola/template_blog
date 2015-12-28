@@ -4,6 +4,6 @@ function s(obj) {
         document.getElementById(obj.toString()).style.position = 'relative';
     }else{
         document.getElementById(obj.toString()).style.visibility = 'hidden';
-        document.getElementById(obj.toString()).style.position = 'absolute';
+        document.getElementById(obj.toString()).style.position = 'fixed';
     }
 }

@@ -10,7 +10,11 @@ function command(name, argument){
     if (typeof argument === 'undefined') {
         argument = '';
     }
-    document.execCommand(name, false, argument);
+    if (name != "insertImage"){
+        document.execCommand(name, false, argument);
+    }else{
+        document.getElementById("editeur").innerHTML = document.getElementById("editeur").innerHTML + "<img src='" + argument + "' onclick='clickImg(this);'>";
+    }
 }
 
 function show_resultat(){
@@ -28,6 +32,33 @@ function show_resultat(){
     }
 }
 
+function maj_html(){
+    document.getElementById("editeur").innerHTML = document.getElementById("resultat").value;
+}
+
 function refresh_html(){
     document.getElementById("resultat").value = document.getElementById("editeur").innerHTML;
+}
+
+function show_resultat2(){
+    if (document.getElementById("resultat2").style.visibility != "visible"){
+        document.getElementById("resultat2").style.visibility = "visible";
+        document.getElementById("btn_html_refresh2").style.visibility = "visible";
+        document.getElementById("btn_html2").value = "Cacher le HTML";
+        document.getElementById("resultat2").style.position = "relative";
+        document.getElementById("resultat2").value = document.getElementById("editeur2").innerHTML;
+    }else{
+        document.getElementById("resultat2").style.visibility = "hidden";
+        document.getElementById("btn_html_refresh2").style.visibility = "hidden";
+        document.getElementById("btn_html2").value = "Obtenir le HTML";
+        document.getElementById("resultat2").style.position = "absolute";
+    }
+}
+
+function maj_html2(){
+    document.getElementById("editeur2").innerHTML = document.getElementById("resultat2").value;
+}
+
+function refresh_html2(){
+    document.getElementById("resultat2").value = document.getElementById("editeur2").innerHTML;
 }
