@@ -84,7 +84,7 @@
             $filepath = $this->generateFilepath($post);
 
             if (!is_file($filepath)) {
-                throw new Exception('Le postayant l\'id '.$post->getId().' n\'existe pas');
+                throw new Exception('Le post ayant l\'id '.$post->getId().' n\'existe pas');
             }
 
             unlink($filepath);
