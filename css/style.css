@@ -136,3 +136,9 @@ div.commentaires-container .commentaire .body {
     padding-left: 75px;
     position: relative;
 }
+div.connection {
+    text-align: justify;
+    border: 1px dashed #aaa;
+    width: 100%;
+    height: 100%;
+}
