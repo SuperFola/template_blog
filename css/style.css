@@ -145,3 +145,6 @@ div.connection {
     width: auto;
     height: 100%;
 }
+.nolink {
+    cursor: default;
+}

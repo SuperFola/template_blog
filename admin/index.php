@@ -39,7 +39,7 @@
                     // les news
                     echo "Liste des news : <br />";
                     echo "<ul>";
-                    $pm = PostManager();
+                    $pm = new PostManager();
                     foreach ($pm->findAll() as $post) {
                         echo "<li>";
                         echo "{$post->getId()} - {$post->getTitre()}  {$post->getDisplayableDate()}";
