@@ -17,13 +17,9 @@
         ?>
     </head>
     <body>
-        <div class="jumbotron">
-            <div class="login-btn col-md-12">
-                <a class="btn btn-primary btn-xs" href="admin/writing.php">Connexion</a>
-            </div>
-            <h1>Titre</h1>
-            <h3>Slogan</h3>
-        </div>
+        <?php
+            include(__DIR__ . '/../header.php');
+        ?>
         <div class="container">
             <?php
                 if (!isset($_POST['user']) and !isset($_POST['pwd'])){

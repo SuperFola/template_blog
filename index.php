@@ -17,13 +17,9 @@
         ?>
     </head>
     <body>
-        <div class="jumbotron">
-            <div class="login-btn col-md-12">
-                <a class="btn btn-primary btn-xs" href="admin/writing.php">Connexion</a>
-            </div>
-            <h1>Titre</h1>
-            <h3>Slogan</h3>
-        </div>
+        <?php
+            include('header.php');
+        ?>
         <div class="container">
             <div class="posts">
                 <h1>Derniers articles</h1>
@@ -82,9 +78,9 @@
                     </ul>
                 </div>
             </div>
-            <footer>
-                <hr>
-            </footer>
+            <?php
+                include('footer.php');
+            ?>
         </div>
     </body>
 </HTML>
