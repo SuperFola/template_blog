@@ -1,5 +1,4 @@
 <?php
-
     class PostManager {
         protected $directory;
 

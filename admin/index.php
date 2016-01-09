@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿<?php
+    session_start();
+?>
+
+<!DOCTYPE html>
 
 <HTML>
     <head>
@@ -25,6 +29,8 @@
                 if (!isset($_POST['user']) and !isset($_POST['pwd'])){
                     include('connect.php');
                 }else if (true){
+                    // connexion réussie
+                    // pas de session créée ici pour le moment
                     echo "Interface d'administration, bonjour {$_POST['user']}";
                 }
             ?>

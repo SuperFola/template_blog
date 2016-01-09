@@ -3,7 +3,7 @@
         if (true) {
             // connexion réussie
             session_start();
-            $_SESSION[$_POST['user']] = array(
+            $_SESSION["user"] = array(
                 "pseudo" => $_POST['user'],
                 "pwd" => $_POST['pwd']
             );
