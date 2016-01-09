@@ -31,7 +31,12 @@
                 }else if (true){
                     // connexion réussie
                     // pas de session créée ici pour le moment
-                    echo "Interface d'administration, bonjour {$_POST['user']}<br />";
+                    echo "Interface d'administration, bonjour {$_POST['user']}<br /><br />";
+                    
+                    echo "<a href=\"writing.php\">Ecrire un article</a> <br />";
+                    echo "<br /><br />";
+                    
+                    // les news
                     echo "Liste des news : <br />";
                     echo "<ul>";
                     $pm = PostManager();
@@ -42,6 +47,26 @@
                             echo " - a été édité";
                         }
                         echo "</li>";
+                    }
+                    echo "</ul>";
+                    
+                    echo "<hr />";
+                    
+                    // les commentaires (tous)
+                    echo "<br />";
+                    echo "Liste des commentaires de tous les articles : <br />";
+                    echo "<ul>";
+                    $count = 0;
+                    $max = 100;
+                    foreach ($pm->findAll() as $post) {
+                        foreach($post->getCommentairesSorted() as $commentaire) {
+                            echo "<li>";
+                            echo "Par {$commentaire->getPseudo()} ({$commentaire->getIp()}) - {$commentaire->getDisplayableDate()} <br />";
+                            echo "<div class=\"spoiler\">{$commentaire->getMessage()}</div>";
+                            echo "</li>";
+                            
+                            ++$count;
+                        }
                     }
                     echo "</ul>";
                 }
