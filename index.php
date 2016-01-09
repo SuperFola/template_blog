@@ -3,99 +3,88 @@
 <HTML>
     <head>
         <title>titre</title>
-        <link meta="screen" rel="stylesheet" type="text/css" href="css/design.css" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="Content-Language" content="fr-FR" />
         <meta name="robots" content="all" />
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
-        
-        <script src="scripts/spoiler.js"></script>
-        <script src="scripts/images.js"></script>
-        <script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
-        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <!-- Website Style -->
+        <link rel="stylesheet" href="css/style.css">
         <?php
-            include('analytics/ip_analytics.php');
-            include('analytics/cptviews_analytics.php');
-            include('public/count_news.php');
+            include('private/post_storage.php');
         ?>
     </head>
     <body>
-        <div class="start">
+        <div class="jumbotron">
+            <div class="login-btn col-md-12">
+                <a class="btn btn-primary btn-xs" href="admin/writing.php">Connexion</a>
+            </div>
             <h1>Titre</h1>
             <h3>Slogan</h3>
-            <?php include('public/search.php'); ?>
         </div>
-        
-        <div class="main">
-            <h1>Articles</h1>
-                <ul>
-                    <?php
-                        $cur_new = count_news();
-                        if (!isset($_GET['post'])){
-                            $fin = $cur_new - 10;
-                            if ($fin < 0){
-                                $fin = 0;
+        <div class="container">
+            <div class="posts">
+                <h1>Derniers articles</h1>
+
+                <div class="top-posts-container container-fluid">
+                    <ul class="top-posts">
+                        <li class="col-md-3">
+                            <div>
+                                <h3>Titre</h3>
+                            </div>
+                        </li>
+                        <li class="col-md-3">
+                            <div>
+                                <h3>Titre</h3>
+                            </div>
+                        </li>
+                        <li class="col-md-3">
+                            <div>
+                                <h3>Titre</h3>
+                            </div>
+                        </li>
+                        <li class="col-md-3">
+                            <div>
+                                <h3>Titre</h3>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <hr />
+
+                <div class="posts-list-container container-fluid">
+                    <ul class="posts-list">
+                        <?php
+                            $postManager = new PostManager();
+                            $posts = $postManager->findAll();
+
+                            foreach($posts as $post) {
+                                ?>
+                                <li>
+                                    <div>
+                                        <div class="posts-list-item-header">
+                                            <h3><a href="post.php?id=<?php echo $post->getId() ?>"><?php echo $post->getTitre() ?></a></h3>
+                                            <h4><span class="label label-default"><?php echo $post->getCategorie() ?></span></h4>
+                                        </div>
+                                        <p class="content-preview">
+                                            <?php //echo $post->getContentPreview() ?>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br />
+                                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        </p>
+                                    </div>
+                                </li>
+                            <?php
                             }
-                            while($cur_new > $fin){
-                                include('news/new' . $cur_new . '.php');
-                                $cur_new--;
-                            }
-                        }else if(isset($_GET['post']) and $_GET['post'] == 'all'){
-                            while($cur_new > 0){
-                                include('news/new' . $cur_new . '.php');
-                                $cur_new--;
-                            }
-                        }else if(isset($_GET['post']) and is_numeric($_GET['post'])){
-                            $post = intval($_GET['POST']);
-                            if (0 < $post and $post <= count_news()){
-                                include('news/new' . $post . '.php');
-                            }else{
-                                $fin = $cur_new - 10;
-                                if ($fin < 0){
-                                    $fin = 0;
-                                }
-                                while($cur_new > $fin){
-                                    include('news/new' . $cur_new . '.php');
-                                    $cur_new--;
-                                }
-                            }
-                        }
-                    ?>
-                    <br />
-                    <li><a href="portfolio/">Mon portfolio</a></li>
-                </ul>
-                <br />
-                <a href="index.php?post=all">Voir tous les posts</a>
-                <br />
-        <!-- NE RIEN ECRIRE APRES CETTE BALISE -->
+                        ?>
+                    </ul>
+                </div>
+            </div>
+            <footer>
+                <hr>
+            </footer>
         </div>
-        
-        <div class="liens">
-            <h1>Liens</h1>
-                <ul>
-                    <li></li>
-                </ul>
-                <!-- NE RIEN ECRIRE APRES CETTE BALISE -->
-        </div>
-        
-        <div class="recrutement">
-            <h1>Recrutement</h1>
-                <ul>
-                    <li></li>
-                </ul>
-                Pour me contacter, [...]
-                <br /><br />
-                <!-- NE RIEN ECRIRE APRES CETTE BALISE -->
-        </div>
-        
-        <footer>
-            <br /><br />
-            <!--<a href="news/"><img src="pic/end_picture.png" /></a>-->
-        </footer>
-        
-        <?php
-            include('public/modalebox.php');
-        ?>
     </body>
 </HTML>
