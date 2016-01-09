@@ -31,7 +31,19 @@
                 }else if (true){
                     // connexion réussie
                     // pas de session créée ici pour le moment
-                    echo "Interface d'administration, bonjour {$_POST['user']}";
+                    echo "Interface d'administration, bonjour {$_POST['user']}<br />";
+                    echo "Liste des news : <br />";
+                    echo "<ul>";
+                    $pm = PostManager();
+                    foreach ($pm->findAll() as $post) {
+                        echo "<li>";
+                        echo "{$post->getId()} - {$post->getTitre()}  {$post->getDisplayableDate()}";
+                        if ($post->getEdited()){
+                            echo " - a été édité";
+                        }
+                        echo "</li>";
+                    }
+                    echo "</ul>";
                 }
             ?>
             
