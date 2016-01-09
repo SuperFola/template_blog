@@ -48,10 +48,10 @@ class PostManager {
     /**
      * Créer un fichier et y stocke $post
      *
-     * @param $post
+     * @param Post $post
      * @throws Exception
      */
-    public function persistPost($post) {
+    public function persistPost(Post $post) {
         $post->setId($this->generatePostId());
         $filepath = $this->generateFilepath($post);
 
@@ -64,11 +64,12 @@ class PostManager {
     /**
      * Met à jour le fichier attaché à $post
      *
-     * @param $post
+     * @param Post $post
      * @throws Exception
      */
-    public function updatePost($post) {
+    public function updatePost(Post $post) {
         $filepath = $this->generateFilepath($post);
+        $post->setTimestampEdition(time());
 
         if (!is_file($filepath)) {
             throw new Exception('Le post ayant l\'id '.$post->getId().' n\'existe pas');
@@ -79,10 +80,10 @@ class PostManager {
     /**
      * Supprime fichier associé à $post
      *
-     * @param $post
+     * @param Post $post
      * @throws Exception
      */
-    public function deletePost($post) {
+    public function deletePost(Post $post) {
         $filepath = $this->generateFilepath($post);
 
         if (!is_file($filepath)) {
@@ -143,7 +144,8 @@ class PostManager {
 class Post {
     protected $id;
     protected $titre;
-    protected $timestamp;
+    protected $timestampCreation;
+    protected $timestampEdition;
     protected $content;
     protected $categorie;
     protected $storedData;
@@ -260,7 +262,7 @@ class Post {
      * @return string
      */
     public function getDisplayableDate() {
-        $diff = time() - $this->timestamp;
+        $diff = time() - $this->timestampCreation;
         if ($diff < 120) {
             return 'à l\'instant';
         }
@@ -273,12 +275,12 @@ class Post {
                 return 'Il y a '. date('G', $diff) . ' heure';
             }
         } elseif ($diff < 172800) {
-            return 'Hier à '. date('H', $this->timestamp) . 'h';
+            return 'Hier à '. date('H', $this->timestampCreation) . 'h';
         } else {
-            if (intval(date('Y')) != intval(date('Y', $this->timestamp))) {
-                return date('j', $this->timestamp) . ' ' . date('F', $this->timestamp) . ' ' . date('Y', $this->timestamp) . ', ' . date('H', $this->timestamp) . 'h' . date('i', $this->timestamp);
+            if (intval(date('Y')) != intval(date('Y', $this->timestampCreation))) {
+                return date('j', $this->timestampCreation) . ' ' . date('F', $this->timestampCreation) . ' ' . date('Y', $this->timestampCreation) . ', ' . date('H', $this->timestampCreation) . 'h' . date('i', $this->timestampCreation);
             } else {
-                return date('j', $this->timestamp) . ' ' . date('F', $this->timestamp) . ', ' . date('H', $this->timestamp) . 'h' . date('i', $this->timestamp);
+                return date('j', $this->timestampCreation) . ' ' . date('F', $this->timestampCreation) . ', ' . date('H', $this->timestampCreation) . 'h' . date('i', $this->timestampCreation);
             }
         }
     }
@@ -321,14 +323,24 @@ class Post {
         return $this->titre;
     }
 
-    public function setTimestamp($timestamp) {
-        $this->timestamp = $timestamp;
+    public function setTimestampCreation($timestampCreation) {
+        $this->timestampCreation = $timestampCreation;
 
         return $this;
     }
 
-    public function getTimestamp() {
-        return $this->timestamp;
+    public function getTimestampCreation() {
+        return $this->timestampCreation;
+    }
+
+    public function setTimestampEdition($timestampEdition) {
+        $this->timestampEdition = $timestampEdition;
+
+        return $this;
+    }
+
+    public function getTimestampEdition() {
+        return $this->timestampEdition;
     }
 
     public function setContent($content) {
@@ -387,7 +399,8 @@ class Commentaire {
     protected $storedData;
 
     public function  __construct() {
-        $this->timestamp = time();
+        $this->timestampCreation = time();
+        $this->timestampEdition = time();
     }
 
     public function hydrate($array) {
