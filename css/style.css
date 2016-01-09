@@ -148,3 +148,8 @@ div.connection {
 .nolink {
     cursor: default;
 }
+div.spoiler {
+    visibility: hidden;
+    position: absolute;
+    background-color: darkgray;
+}

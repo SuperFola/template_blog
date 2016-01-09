@@ -1,26 +1,28 @@
 <?php
     include('private/post_storage.php');
+    
+    if (isset($_GET['id'])){
+        $postid = intval($_GET['id']);
 
-    $postid = intval($_GET['id']);
+        $postManager = new PostManager();
+        $post = $postManager->findPost($postid);
 
-    $postManager = new PostManager();
-    $post = $postManager->findPost($postid);
+        if ($post->getId() == 0) {
+            http_response_code(404);
+            exit();
+        }
 
-    if ($post->getId() == 0) {
-        http_response_code(404);
-        exit();
-    }
-
-    if ($_POST['cmd'] == 'post_comment_add') {
-        $commentaire = new Commentaire();
-        $commentaire->handlePostRequest();
-        $validation = $commentaire->validate();
-        if ($validation['valid']) {
-            $post->addCommentaire($commentaire);
-            $postManager->updatePost($post);
+        if ($_POST['cmd'] == 'post_comment_add') {
+            $commentaire = new Commentaire();
+            $commentaire->handlePostRequest();
+            $validation = $commentaire->validate();
+            if ($validation['valid']) {
+                $post->addCommentaire($commentaire);
+                $postManager->updatePost($post);
+            }
         }
     }
-
+    
 ?>
 
 <!DOCTYPE html>

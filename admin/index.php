@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <!-- Website Style -->
         <link rel="stylesheet" href="../css/style.css">
+        <script src="../scripts/spoiler.js"></script>
         <?php
             include(__DIR__ . '/../private/post_storage.php');
         ?>
@@ -31,10 +32,14 @@
                 }else if (true){
                     // connexion réussie
                     // pas de session créée ici pour le moment
-                    echo "Interface d'administration, bonjour {$_POST['user']}<br /><br />";
+                    echo "Interface d'administration, bonjour {$_POST['user']}";
                     
-                    echo "<a href=\"writing.php\">Ecrire un article</a> <br />";
-                    echo "<br /><br />";
+                    echo "<div class=\"breadcrumb-container\">
+                            <ol class=\"breadcrumb\">
+                                <li><a href=\"index.php\">Accueil</a></li>
+                                <li><a href=\"writing.php\">Ecrire un article</a></li>
+                            </ol>
+                        </div>";
                     
                     // les news
                     echo "Liste des news : <br />";
@@ -60,12 +65,17 @@
                     $max = 100;
                     foreach ($pm->findAll() as $post) {
                         foreach($post->getCommentairesSorted() as $commentaire) {
-                            echo "<li>";
-                            echo "Par {$commentaire->getPseudo()} ({$commentaire->getIp()}) - {$commentaire->getDisplayableDate()} <br />";
-                            echo "<div class=\"spoiler\">{$commentaire->getMessage()}</div>";
-                            echo "</li>";
-                            
-                            ++$count;
+                            if ($count < $max){
+                                echo "<li>";
+                                echo "Par {$commentaire->getPseudo()} (ip:{$commentaire->getIp()}) - <a onclick=\"s('" . $count . "');\">{$commentaire->getDisplayableDate()}</a> <br />";
+                                echo "<div class=\"spoiler\" id='" . $count . "'>{$commentaire->getMessage()}</div>";
+                                echo "</li>";
+                                
+                                ++$count;
+                            }
+                        }
+                        if ($count >= $max){
+                            break;
                         }
                     }
                     echo "</ul>";
