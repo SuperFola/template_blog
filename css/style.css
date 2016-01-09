@@ -1,0 +1,138 @@
+body {
+    background-color: #2B2B2B;
+}
+div.login-btn {
+    text-align: right;
+}
+.jumbotron {
+    padding-top: 10px;
+    text-align: center;
+}
+.container {
+    background-color: white;
+}
+div.top-posts-container {
+    margin-top: 25px;
+}
+ul.top-posts {
+    list-style: none;
+    padding: 0;
+    margin-right: -15px;
+    margin-left: -15px;
+    width: 100%;
+}
+ul.top-posts li {
+    display: table;
+    table-layout: fixed;
+}
+ul.top-posts li div {
+    background-color: darkgray;
+    display: table-cell;
+    height: 140px;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+    transition: all .3s linear;
+}
+ul.top-posts li div * {
+    transition: all .3s linear;
+}
+ul.top-posts li div:hover {
+    background-color: #a6a6a6;
+}
+ul.top-posts li div:hover * {
+    transform: scale(1.1);
+}
+ul.top-posts li div h3 {
+
+}
+ul.top-posts li div h4 {
+
+}
+div.posts-list-container {
+    margin-top: 25px;
+    padding-left: 45px;
+}
+ul.posts-list {
+    list-style: none;
+    padding: 0;
+}
+ul.posts-list li:nth-last-child {
+    margin-bottom: 15px;
+}
+ul.posts-list li div .posts-list-item-header {
+    margin-left: 25px;
+}
+ul.posts-list li div h3 {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+ul.posts-list li div h4 {
+    margin-top: 0;
+    font-size: 12px;
+}
+ul.posts-list li div p.content-preview {
+    color: #AAAAAA;
+}
+div.writing-form-container {
+    padding-top: 20px;
+}
+div.writing-form-container form .well {
+    padding: 15px;
+}
+div.writing-form-container form .well .form-group:last-child {
+    margin-bottom: 0;
+}
+div.writing-form-container form .form-footer {
+    margin-bottom: 25px;
+    text-align: right;
+}
+div.breadcrumb-container {
+    margin-top: 15px;
+    padding: 15px;
+}
+div.post .post-header {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    display: block;
+}
+div.post .post-header * {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+div.post .post-header h4 {
+    margin-left: 12px;
+    margin-top: 8px;
+}
+div.post .post-header hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 0;
+    border-top: 1px dashed #eee
+}
+div.post .post-content {
+    padding: 20px;
+    font-size: 15px;
+}
+div.commentaire-form-container {
+    padding: 15px;
+}
+div.commentaire-form-container .form-footer {
+    padding-right: 10px;
+    text-align: right;
+}
+div.commentaires-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+div.commentaires-container .commentaire {
+    margin-bottom: 25px;
+}
+div.commentaires-container .commentaire .avatar {
+    float: left;
+    margin-right: 15px;
+}
+div.commentaires-container .commentaire .body {
+    padding-left: 75px;
+    position: relative;
+}
