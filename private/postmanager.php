@@ -360,6 +360,7 @@ class Post {
     }
 
     public function addCommentaire(Commentaire $commentaire) {
+        $commentaire->setId(count($this->commentaires));
         $this->commentaires[] = $commentaire;
     }
 
@@ -391,6 +392,7 @@ class Post {
 }
 
 class Commentaire {
+    protected $id;
     protected $pseudo;
     protected $timestamp;
     protected $ip;
@@ -398,8 +400,7 @@ class Commentaire {
     protected $storedData;
 
     public function  __construct() {
-        $this->timestampCreation = time();
-        $this->timestampEdition = time();
+        $this->timestamp = time();
     }
 
     public function hydrate($array) {
@@ -486,44 +487,112 @@ class Commentaire {
         }
     }
 
-    public function setPseudo($pseudo) {
-        $this->pseudo = $pseudo;
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * @param mixed $id
+     * @return Commentaire
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
         return $this;
     }
 
-    public function getPseudo() {
+    /**
+     * @return mixed
+     */
+    public function getPseudo()
+    {
         return $this->pseudo;
     }
 
-    public function setTimestamp($timestamp) {
-        $this->timestamp = $timestamp;
-
+    /**
+     * @param mixed $pseudo
+     * @return Commentaire
+     */
+    public function setPseudo($pseudo)
+    {
+        $this->pseudo = $pseudo;
         return $this;
     }
 
-    public function getTimestamp() {
+    /**
+     * @return int
+     */
+    public function getTimestamp()
+    {
         return $this->timestamp;
     }
 
-    public function setIp($ip) {
-        $this->ip = $ip;
-
+    /**
+     * @param int $timestamp
+     * @return Commentaire
+     */
+    public function setTimestamp($timestamp)
+    {
+        $this->timestamp = $timestamp;
         return $this;
     }
 
-    public function  getIp() {
+    /**
+     * @return mixed
+     */
+    public function getIp()
+    {
         return $this->ip;
     }
 
-    public function setMessage($message) {
-        $this->message = $message;
-
+    /**
+     * @param mixed $ip
+     * @return Commentaire
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
         return $this;
     }
 
-    public function getMessage() {
+    /**
+     * @return mixed
+     */
+    public function getMessage()
+    {
         return $this->message;
+    }
+
+    /**
+     * @param mixed $message
+     * @return Commentaire
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStoredData()
+    {
+        return $this->storedData;
+    }
+
+    /**
+     * @param mixed $storedData
+     * @return Commentaire
+     */
+    public function setStoredData($storedData)
+    {
+        $this->storedData = $storedData;
+        return $this;
     }
 }
 
