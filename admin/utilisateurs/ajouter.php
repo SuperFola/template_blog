@@ -1,7 +1,7 @@
 <?php
     include('../../private/usermanager.php');
 
-    $roles = array('ADMINISTRATEUR', 'AUTEUR', 'MODERATEUR');
+    $roles = array('ADMINISTRATEUR', 'AUTEUR', 'MODERATEUR', 'MEMBRE');
 
     $userManager = new UserManager();
     $user = new User();
