@@ -26,6 +26,8 @@
                         echo 'La page que vous cherchez n\'existe probablement plus (ou n\'a jamais existée)';
                     } else if ($_GET['error'] == '403') {
                         echo 'Vous n\'avez pas les droits suffisants pour accéder à cette page';
+                    } else {
+                        echo 'Aucune erreur ne s\'est produite';
                     }
                 } else {
                     echo 'Aucune erreur ne s\'est produite';

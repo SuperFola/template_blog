@@ -4,10 +4,10 @@
             // connexion réussie
             session_start();
             $_SESSION["pseudo"] = $_POST["user"];
-            $_SESSION["role"] = "MEMBRE";
+            $_SESSION["role"] = "ADMINISTRATEUR";
             header("Location: index.php");
         }
     } else {
-        header("Location: error.php?error=connexion");
+        header("Location: ../error.php?error=connexion");
     }
 ?>

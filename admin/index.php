@@ -27,12 +27,12 @@
         ?>
         <div class="container">
             <?php
-                if (!isset($_POST['user']) and !isset($_POST['pwd'])){
+                if (!isset($_SESSION['pseudo']) and (!isset($_SESSION['role']) or $_SESSION['role'] != 'ADMINISTRATEUR')){
                     include('connect.php');
-                }else if (true){
+                }else if (true and $_SESSION['role'] == 'ADMINISTRATEUR'){
                     // connexion réussie
                     // pas de session créée ici pour le moment
-                    echo "Interface d'administration, bonjour {$_POST['user']}";
+                    echo "Interface d'administration, bonjour {$_SESSION['pseudo']}";
                     
                     echo "<div class=\"breadcrumb-container\">
                             <ol class=\"breadcrumb\">
@@ -67,7 +67,8 @@
                         foreach($post->getCommentairesSorted() as $commentaire) {
                             if ($count < $max){
                                 echo "<li>";
-                                echo "Par {$commentaire->getPseudo()} (ip:{$commentaire->getIp()}) - <a onclick=\"s('" . $count . "');\">{$commentaire->getDisplayableDate()}</a> <br />";
+                                echo "Par {$commentaire->getPseudo()} (ip:{$commentaire->getIp()}) - <a onclick=\"s('" . $count . "');\">{$commentaire->getDisplayableDate()}</a> 
+                                      <a onclick=\"\">Supprimer</a> - <a onclick=\"\">Editer</a><br />";
                                 echo "<div class=\"spoiler\" id='" . $count . "'>{$commentaire->getMessage()}</div>";
                                 echo "</li>";
                                 
