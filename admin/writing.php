@@ -9,15 +9,17 @@
     $post = new Post();
     $categories = array('Programmation', 'Vie du blog', 'Windows', 'Android', 'Github', 'Moi');
 
-    if ($_POST['cmd'] == 'post_add') {
-        $post = new Post();
-        $post->handlePostRequest();
-        $validation = $post->validate();
-        if ($validation['valid']) {
-            $postManager->persistPost($post);
+    if (isset($_POST['cmd'])) {
+        if ($_POST['cmd'] == 'post_add') {
+            $post = new Post();
+            $post->handlePostRequest();
+            $validation = $post->validate();
+            if ($validation['valid']) {
+                $postManager->persistPost($post);
 
-            header('Location: ../index.php');
-            exit('Post succefuly added');
+                header('Location: ../index.php');
+                exit('Post succefuly added');
+            }
         }
     }
 ?>

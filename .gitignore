@@ -1,14 +1,43 @@
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
 
-.idea/misc.xml
+# Folder config file
+Desktop.ini
 
-.idea/workspace.xml
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
 
-.idea/vcs.xml
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
 
-.idea/template_blog.iml
+# Windows shortcuts
+*.lnk
 
-.idea/modules.xml
+# =========================
+# Operating System Files
+# =========================
 
-.gitattributes
+# OSX
+# =========================
 
-.gitattributes
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk

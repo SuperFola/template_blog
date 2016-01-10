@@ -136,6 +136,7 @@ div.commentaires-container .commentaire .body {
     padding-left: 75px;
     position: relative;
 }
+<<<<<<< HEAD
 
 div.connection form {
     display: inline-block;
@@ -154,6 +155,8 @@ div.spoiler {
     position: absolute;
     background-color: darkgray;
 }
+=======
+>>>>>>> refs/remotes/origin/master
 form {
     padding: 10px;
 }

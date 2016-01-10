@@ -1,6 +1,3 @@
-<?php
-    error_reporting(E_ALL);
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,28 +11,39 @@
     </head>
     <body>
         <?php
+<<<<<<< HEAD
         include(__DIR__ . '../private/_check_access.php');
         include(__DIR__ . '../public/count_news.php');
         include(__DIR__ . '../private/post_storage.php');
          
+=======
+            include('../private/_check_access.php');
+            include('../public/count_news.php');
+            include('../private/comments_code.php');
+        ?>
+        <?php
+>>>>>>> refs/remotes/origin/master
         if (isset($_POST['titre']) and isset($_POST['contentHTML']) and $_POST['titre'] != '' and $_POST['contentHTML'] != ''
                     and isset($_POST['user']) and isset($_POST['pass']) and isset($_POST['categorie'])){
             $access_granted = check_access($_POST['user'], $_POST['pass'], $registred_users);
             
             if ($access_granted){
                 echo 'Access Granted ! Creating news ...';
-
-
-                $post = new Post();
-                $post
-                    ->setTitre($_POST['titre'])
-                    ->setContent($_POST['contentHTML'])
-                    ->setCategorie($_POST['categorie']);
-
-                $postManager = new PostManager();
-                $postManager->persistPost($post);
-
-                echo $post->asJSON();
+                
+                $news_number = count_news("../") + 1;
+                
+                $nouvelle_news = fopen('new' . $news_number . '.php', 'w');
+                
+                fputs($nouvelle_news, "<li><a onclick=\"s('" . $news_number . "')\">[" . $_POST['categorie'] .  "] - " . $_POST['titre'] . " " . date("d/m/y") . "</a></li>");
+                fputs($nouvelle_news, "<div class=\"spoiler\" id=\"" . $news_number . "\">");
+                fwrite($nouvelle_news, $_POST['contentHTML']);
+                fputs($nouvelle_news, "</div>");
+                
+                fclose($nouvelle_news);
+                
+                $xml = load_xml();
+                create_comments_zone_for_article('c' . $news_number, $_POST['user'], $xml);
+                $xml->saveXML();
                 
                 header('Location: ..');
             }
