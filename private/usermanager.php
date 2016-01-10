@@ -243,6 +243,21 @@
         }
 
         /**
+         * Permet à partir du mot de passe donné (en clair) de valider le login d'un utilisateur
+         *
+         * @param $password
+         *
+         * @return bool
+         */
+        public function checkLogin($password) {
+            if (sha1($this->salt.$password) == $this->cryptedPassword) {
+                return true;
+            }
+
+            return false;
+        }
+
+        /**
          * Méthode rapide pour verifier le role d'un utilisateur
          *
          * @param $role
