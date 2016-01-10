@@ -70,9 +70,7 @@
                                             <h4><span class="label label-default"><?php echo $post->getCategorie() ?></span></h4>
                                         </div>
                                         <p class="content-preview">
-                                            <?php //echo $post->getContentPreview() ?>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br />
-                                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                            <?php echo nl2br($post->getContentPreview()); ?>
                                         </p>
                                     </div>
                                 </li>

@@ -171,21 +171,6 @@
             }
         }
 
-        public function getContentPreview() {
-            $array = explode('<br>', $this->content);
-
-            if (count($array) == 0) {
-                return '';
-            }
-
-            $preview = $array[0].'<br>';
-            if (count($array) > 1) {
-                $preview .= $array[1];
-            }
-
-            return $preview;
-        }
-
         /**
          * Créer un objet post à partir de la requête
          *
@@ -342,7 +327,7 @@
             $contentPreview = "";
             $contentPreviewSize = 158;
             $count = 0;
-            foreach($this->getContent() as $char) {
+            foreach(array($this->content) as $char) {
                 $contentPreview .= $char;
                 
                 ++$count;
@@ -351,6 +336,7 @@
                     break;
                 }
             }
+            $contentPreview .= '<br />';
             return $contentPreview;
         }
 
