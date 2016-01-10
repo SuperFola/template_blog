@@ -182,16 +182,20 @@ class Post {
      * @return string
      */
     public function getContentPreview() {
-        $array = explode('<br>', $this->content);
-
-        if (count($array) == 0) {
-            return '';
+        $preview = "";
+        $size = 158;
+        $count = 0;
+        
+        foreach(array($this->content) as $char) {
+            $preview .= $char;
+            ++$count;
+            
+            if ($count >= $size && in_array($char, array(' ', ',', ':', '!', '?', '.', ';'))){
+                break;
+            }
         }
 
-        $preview = $array[0].'<br>';
-        if (count($array) > 1) {
-            $preview .= $array[1];
-        }
+        $preview .= '<br />';
 
         return $preview;
     }

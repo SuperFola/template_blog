@@ -17,7 +17,7 @@
         <!-- Website Style -->
         <link rel="stylesheet" href="css/style.css">
         <?php
-            include('private/post_storage.php');
+            include('private/postmanager.php');
         ?>
     </head>
     <body>

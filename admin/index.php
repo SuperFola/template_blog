@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="../css/style.css">
         <script src="../scripts/spoiler.js"></script>
         <?php
-            include(__DIR__ . '/../private/post_storage.php');
+            include(__DIR__ . '/../private/postmanager.php');
             include(__DIR__ . '/../private/usermanager.php');
         ?>
     </head>
