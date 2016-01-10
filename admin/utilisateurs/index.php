@@ -1,8 +1,8 @@
 <?php
-include('../../private/usermanager.php');
+    include('../../private/usermanager.php');
 
-$userManager = new UserManager();
-$users = $userManager->getUsers();
+    $userManager = new UserManager();
+    $users = $userManager->getUsers();
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,29 +29,29 @@ $users = $userManager->getUsers();
         </div>
         <table class="table">
             <thead>
-                <tr>
-                    <th>Pseudo</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Dernière activité</th>
-                    <th style="width: 100px;" class="text-center">Action</th>
-                </tr>
+            <tr>
+                <th>Pseudo</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Dernière activité</th>
+                <th style="width: 100px;" class="text-center">Action</th>
+            </tr>
             </thead>
             <tbody>
-                <?php if (count($users) == 0): ?>
-                    <tr>
-                        <td colspan="5" class="text-center">Aucun utilisateur enregistré</td>
-                    </tr>
-                <?php endif ?>
-                <?php foreach($users as $user): ?>
-                    <tr>
-                        <td><?php echo $user->getPseudo() ?></td>
-                        <td><?php echo $user->getEmail() ?></td>
-                        <td><?php echo $user->getRole() ?></td>
-                        <td><?php echo $user->getLastLogin() ?></td>
-                        <td class="text-center"><a class="btn btn-default" href="modifier.php?id=<?php echo $user->getId() ?>">Modifier</a></td>
-                    </tr>
-                <?php endforeach ?>
+            <?php if (count($users) == 0): ?>
+                <tr>
+                    <td colspan="5" class="text-center">Aucun utilisateur enregistré</td>
+                </tr>
+            <?php endif ?>
+            <?php foreach($users as $user): ?>
+                <tr>
+                    <td><?php echo $user->getPseudo() ?></td>
+                    <td><?php echo $user->getEmail() ?></td>
+                    <td><?php echo $user->getRole() ?></td>
+                    <td><?php echo $user->getLastLogin() ?></td>
+                    <td class="text-center"><a class="btn btn-default" href="modifier.php?id=<?php echo $user->getId() ?>">Modifier</a></td>
+                </tr>
+            <?php endforeach ?>
             </tbody>
         </table>
     </div>
