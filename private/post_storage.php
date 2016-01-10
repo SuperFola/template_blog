@@ -337,6 +337,22 @@
         public function getContent() {
             return $this->content;
         }
+        
+        public function getContentPreview() {
+            $contentPreview = "";
+            $contentPreviewSize = 158;
+            $count = 0;
+            foreach($this->getContent() as $char) {
+                $contentPreview .= $char;
+                
+                ++$count;
+                
+                if ($count >= $contentPreviewSize and in_array($char, array(' ', ',', ':', ';', '.', '!', '?'))) {
+                    break;
+                }
+            }
+            return $contentPreview;
+        }
 
         public function setCategorie($categorie) {
             $this->categorie = $categorie;

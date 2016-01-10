@@ -19,6 +19,7 @@
         <script src="../scripts/spoiler.js"></script>
         <?php
             include(__DIR__ . '/../private/post_storage.php');
+            include(__DIR__ . '/../private/usermanager.php');
         ?>
     </head>
     <body>
@@ -47,9 +48,9 @@
                     $pm = new PostManager();
                     foreach ($pm->findAll() as $post) {
                         echo "<li>";
-                        echo "{$post->getId()} - {$post->getTitre()}  {$post->getDisplayableDate()}";
+                        echo "{$post->getId()} - {$post->getCategorie()} {$post->getTitre()}  {$post->getDisplayableDate()}";
                         if ($post->getEdited()){
-                            echo " - a été édité";
+                            echo " - A été édité";
                         }
                         echo "</li>";
                     }
@@ -69,7 +70,7 @@
                                 echo "<li>";
                                 echo "Par {$commentaire->getPseudo()} (ip:{$commentaire->getIp()}) - <a onclick=\"s('" . $count . "');\">{$commentaire->getDisplayableDate()}</a> - 
                                       <a href=\"ad-com-ed-su.php?action=delete&postid={$post->getId()}&comts={$commentaire->getTimestamp()}\" target=blank>Supprimer</a> - 
-                                      <a href=\"ad-com-ed-su.php?action=edit&postid={$post->getId()}$comts={$commentaire->getTimestamp()}\" target=blank>Editer</a><br />";
+                                      <a href=\"ad-com-ed-su.php?action=edit&postid={$post->getId()}&comts={$commentaire->getTimestamp()}\" target=blank>Editer</a><br />";
                                 echo "<div class=\"spoiler\" id='" . $count . "'>{$commentaire->getMessage()}</div>";
                                 echo "</li>";
                                 
