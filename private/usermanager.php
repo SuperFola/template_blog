@@ -24,13 +24,28 @@
 
 
         /**
+         * Permet de récupérer un utilisateur par son id
+         *
+         * @param $id
+         *
+         * @return User|null
+         */
+        public function findUser($id) {
+            if (isset($this->users[intval($id)])) {
+                return $this->users[intval($id)];
+            }
+
+            return null;
+        }
+
+        /**
          * Permet de récupérer un utilisateur par son pseudo
          *
          * @param $pseudo
          *
          * @return User|null
          */
-        public function findUser($pseudo) {
+        public function findUserByPseudo($pseudo) {
             foreach ($this->users as $user) {
                 if ($user->getPseudo() == $pseudo) {
                     return $user;
@@ -63,8 +78,13 @@
          * Permet de supprimer un utilisateur de l'array $users
          *
          * @param User $user
+         *
+         * @throws Exception
          */
         public function removeUser(User $user) {
+            if ($user->isRoot()) {
+                throw new Exception('Impossible de supprimer l\'utilisateur "'. $user->getPseudo().'", ce dernier etant definit comme "root"');
+            }
             unset($this->users[$user->getId()]);
         }
 
@@ -157,9 +177,12 @@
         protected $timestampCreation;
         protected $lastLogin;
 
+        protected $root;
+
         public function __construct() {
             $this->timestampCreation = time();
             $this->lastLogin = time();
+            $this->root = false;
         }
 
         /**
@@ -170,8 +193,10 @@
         public function handlePostRequest() {
             $this->pseudo = htmlentities($_POST['user_pseudo']);
             $this->email = htmlentities($_POST['user_email']);
-            $this->salt = $this->generateSalt();
-            $this->cryptedPassword = sha1($this->salt.$_POST['user_password']);
+            if ($_POST['user_password'] != '') {
+                $this->salt = $this->generateSalt();
+                $this->cryptedPassword = sha1($this->salt.$_POST['user_password']);
+            }
             $this->role = $_POST['user_role'];
         }
 
@@ -361,5 +386,23 @@
             $this->lastLogin = $lastLogin;
             return $this;
         }
+
+        /**
+         * @return boolean
+         */
+        public function isRoot()
+        {
+            return $this->root;
+        }
+
+        /**
+         * @param boolean $root
+         */
+        public function setRoot($root)
+        {
+            $this->root = $root;
+        }
+
+
 
     }
