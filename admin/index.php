@@ -69,7 +69,7 @@
                                 echo "<li>";
                                 echo "Par {$commentaire->getPseudo()} (ip:{$commentaire->getIp()}) - <a onclick=\"s('" . $count . "');\">{$commentaire->getDisplayableDate()}</a> - 
                                       <a href=\"ad-com-ed-su.php?action=delete&postid={$post->getId()}&comts={$commentaire->getTimestamp()}\" target=blank>Supprimer</a> - 
-                                      <a href=\"\" target=blank>Editer</a><br />";
+                                      <a href=\"ad-com-ed-su.php?action=edit&postid={$post->getId()}$comts={$commentaire->getTimestamp()}\" target=blank>Editer</a><br />";
                                 echo "<div class=\"spoiler\" id='" . $count . "'>{$commentaire->getMessage()}</div>";
                                 echo "</li>";
                                 
