@@ -1,5 +1,6 @@
 <?php
-    include('../private/post_storage.php');
+    include('../private/abstract.php');
+    include('../private/postmanager.php');
 
     $postManager = new PostManager();
     $validation = array(

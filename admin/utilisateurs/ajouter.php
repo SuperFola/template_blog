@@ -1,4 +1,5 @@
 <?php
+    include('../../private/abstract.php');
     include('../../private/usermanager.php');
 
     $roles = array('ADMINISTRATEUR', 'AUTEUR', 'MODERATEUR', 'MEMBRE');

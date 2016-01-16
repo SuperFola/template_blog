@@ -1,3 +1,7 @@
+<?php
+    include('private/abstract.php');
+    include('private/postmanager.php');
+?>
 <!DOCTYPE html>
 
 <HTML>
@@ -12,9 +16,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <!-- Website Style -->
         <link rel="stylesheet" href="css/style.css">
-        <?php
-            include('private/post_storage.php');
-        ?>
     </head>
     <body>
         <div class="jumbotron">

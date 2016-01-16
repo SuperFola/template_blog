@@ -166,7 +166,7 @@ class UserManager {
 
 }
 
-class User {
+class User extends AbstractClass {
     protected $id;
     protected $pseudo;
     protected $email;

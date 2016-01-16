@@ -141,7 +141,7 @@ class PostManager {
     }
 }
 
-class Post {
+class Post extends AbstractClass {
     protected $id;
     protected $titre;
     protected $timestampCreation;
@@ -391,7 +391,7 @@ class Post {
     }
 }
 
-class Commentaire {
+class Commentaire extends AbstractClass {
     protected $id;
     protected $pseudo;
     protected $timestamp;

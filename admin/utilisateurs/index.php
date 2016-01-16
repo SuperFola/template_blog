@@ -1,4 +1,5 @@
 <?php
+    include('../../private/abstract.php');
     include('../../private/usermanager.php');
 
     $userManager = new UserManager();
