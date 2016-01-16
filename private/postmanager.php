@@ -34,7 +34,7 @@ class PostManager {
                 $post = new Post();
                 $array = $this->getFile($this->directory.'/'.$file);
                 $post->hydrate($array);
-                $posts[$post->getTimestamp()] = $post;
+                $posts[$post->getTimestampCreation()] = $post;
             }
         }
 

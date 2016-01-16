@@ -6,7 +6,13 @@
 
 <HTML>
     <head>
-        <title>titre</title>
+        <?php
+            include('private/configmanager.php');
+            $cm = new ConfigManager();
+            $title = $cm->getBlogTitle();
+            $slogan = $cm->getBlogSlogan();
+        ?>
+        <title><?php echo $title . ' - ' . $slogan; ?></title>
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="Content-Language" content="fr-FR" />

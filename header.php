@@ -14,6 +14,12 @@
                     }
                 ?>
             </div>
-            <h1>Titre</h1>
-            <h3>Slogan</h3>
+            <?php
+                include("private/configmanager.php");
+                $cm = new ConfigManager();
+                $title = $cm->getBlogTitle();
+                $slogan = $cm->getBlogSlogan();
+            ?>
+            <h1><?php echo $title; ?></h1>
+            <h3><?php echo $slogan; ?></h3>
         </div>
