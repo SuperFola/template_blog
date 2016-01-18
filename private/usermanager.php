@@ -1,8 +1,4 @@
 <?php
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
 class UserManager {
     private $users;
     private $directory;

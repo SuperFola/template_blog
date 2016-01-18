@@ -1,6 +1,6 @@
 ﻿    <head>
         <?php
-            include(__DIR__ . 'private/autoloader.php');
+            include(__DIR__ . '/private/autoloader.php');
             
             $cm = new ConfigManager();
             $title = $cm->getBlogTitle();
