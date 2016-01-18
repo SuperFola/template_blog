@@ -7,9 +7,7 @@
 <HTML>
     <?php include('head.php'); ?>
     <body>
-        <?php
-            include('header.php');
-        ?>
+        <?php include('header.php'); ?>
         <div class="container">
             <div class="posts">
                 <h1>Derniers articles</h1>

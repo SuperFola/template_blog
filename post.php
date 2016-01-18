@@ -1,54 +1,33 @@
-<?php
-    include('private/postmanager.php');
-    
-    if (isset($_GET['id'])){
-        $postid = intval($_GET['id']);
-
-        $postManager = new PostManager();
-        $post = $postManager->findPost($postid);
-
-        if ($post->getId() == 0) {
-            http_response_code(404);
-            exit();
-        }
-
-        if ($_POST['cmd'] == 'post_comment_add') {
-            $commentaire = new Commentaire();
-            $commentaire->handlePostRequest();
-            $validation = $commentaire->validate();
-            if ($validation['valid']) {
-                $post->addCommentaire($commentaire);
-                $postManager->updatePost($post);
-            }
-        }
-    } else {
-        header("Location: index.php");
-    }
-    
-?>
-
 <!DOCTYPE html>
 <HTML>
-    <head>
-        <title>Le blog d'un codeur</title>
-        <meta charset="utf-8" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta http-equiv="Content-Language" content="fr-FR" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
-
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <!-- Website Style -->
-        <link rel="stylesheet" href="css/style.css">
-        
-        <?php include("private/configmanager.php"); ?>
-
-    </head>
+    <?php include('head.php'); ?>
     <body>
     <?php
+        if (isset($_GET['id'])){
+            $postid = intval($_GET['id']);
+
+            $postManager = new PostManager();
+            $post = $postManager->findPost($postid);
+
+            if ($post->getId() == 0) {
+                http_response_code(404);
+                exit();
+            }
+
+            if ($_POST['cmd'] == 'post_comment_add') {
+                $commentaire = new Commentaire();
+                $commentaire->handlePostRequest();
+                $validation = $commentaire->validate();
+                if ($validation['valid']) {
+                    $post->addCommentaire($commentaire);
+                    $postManager->updatePost($post);
+                }
+            }
+        } else {
+            header("Location: index.php");
+        }
         include("header.php");
     ?>
-
     <div class="container">
         <div class="breadcrumb-container">
             <ol class="breadcrumb">

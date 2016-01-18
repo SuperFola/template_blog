@@ -7,9 +7,7 @@
 <HTML>
     <?php include('../head.php'); ?>
     <body>
-        <?php
-            include(__DIR__ . '/header.php');
-        ?>
+        <?php include(__DIR__ . '/header.php'); ?>
         <div class="container">
             <?php
                 if (!isset($_SESSION['pseudo']) and (!isset($_SESSION['role']) or $_SESSION['role'] != 'ADMINISTRATEUR')){
