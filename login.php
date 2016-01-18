@@ -26,8 +26,6 @@
                     Mot de passe : <input type="password" name="pwd" /><br /><br />
                     <button type="submit">Connexion</button>
                 </form>
-                <br />
-                <a href="admin/">Connexion administrateur</a>
             </div>
             <?php
                 include('footer.php');

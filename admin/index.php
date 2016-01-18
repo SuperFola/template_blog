@@ -5,31 +5,15 @@
 <!DOCTYPE html>
 
 <HTML>
-    <head>
-        <title>titre</title>
-        <meta charset="utf-8" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta http-equiv="Content-Language" content="fr-FR" />
-        <meta name="robots" content="all" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <!-- Website Style -->
-        <link rel="stylesheet" href="../css/style.css">
-        <script src="../scripts/spoiler.js"></script>
-        <?php
-            include(__DIR__ . '/../private/postmanager.php');
-            include(__DIR__ . '/../private/usermanager.php');
-        ?>
-    </head>
+    <?php include('../head.php'); ?>
     <body>
         <?php
-            include(__DIR__ . '/../header.php');
+            include(__DIR__ . '/header.php');
         ?>
         <div class="container">
             <?php
                 if (!isset($_SESSION['pseudo']) and (!isset($_SESSION['role']) or $_SESSION['role'] != 'ADMINISTRATEUR')){
-                    include('connect.php');
+                    header("Location: ../login.php");
                 }else if (true and $_SESSION['role'] == 'ADMINISTRATEUR'){
                     // connexion réussie
                     // pas de session créée ici pour le moment
