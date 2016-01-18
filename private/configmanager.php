@@ -1,7 +1,9 @@
 ﻿<?php
     class ConfigManager {
+        public $path;
+        
         public function __construct() {
-            $this->path = realpath(__DIR__ . '/../private/config.json');
+            $this->path = __DIR__.'/../private/config.json';
         }
         
         /**

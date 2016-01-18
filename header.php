@@ -15,7 +15,6 @@
                 ?>
             </div>
             <?php
-                include("private/configmanager.php");
                 $cm = new ConfigManager();
                 $title = $cm->getBlogTitle();
                 $slogan = $cm->getBlogSlogan();

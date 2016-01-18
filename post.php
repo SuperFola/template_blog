@@ -1,5 +1,5 @@
 <?php
-    include('private/post_storage.php');
+    include('private/postmanager.php');
     
     if (isset($_GET['id'])){
         $postid = intval($_GET['id']);
@@ -21,6 +21,8 @@
                 $postManager->updatePost($post);
             }
         }
+    } else {
+        header("Location: index.php");
     }
     
 ?>
@@ -38,6 +40,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <!-- Website Style -->
         <link rel="stylesheet" href="css/style.css">
+        
+        <?php include("private/configmanager.php"); ?>
 
     </head>
     <body>
