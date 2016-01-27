@@ -1,49 +1,32 @@
-<?php
-    include('../private/postmanager.php');
-
-    $postManager = new PostManager();
-    $validation = array(
-        'valid' => false,
-        'errors' => array()
-    );
-    $post = new Post();
-    $categories = array('Programmation', 'Vie du blog', 'Windows', 'Android', 'Github', 'Moi');
-
-    if (isset($_POST['cmd'])) {
-        if ($_POST['cmd'] == 'post_add') {
-            $post = new Post();
-            $post->handlePostRequest();
-            $validation = $post->validate();
-            if ($validation['valid']) {
-                $postManager->persistPost($post);
-
-                header('Location: ../index.php');
-                exit('Post succefuly added');
-            }
-        }
-    }
-?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Writing</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
-        <link meta="screen" rel="stylesheet" type="text/css" href="../css/wysiwyg.css" />
-
-        <script type='text/javascript' src='../scripts/wysiwyg.js'></script>
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <!-- Website Style -->
-        <link rel="stylesheet" href="../css/style.css">
-
-    </head>
+    <?php include("head.php"); ?>
     <body>
-        <div class="jumbotron">
-            <h1>Titre</h1>
-            <h3>Rédiger un article</h3>
-        </div>
+        <?php include('header.php'); ?>
+        <?php
+            $postManager = new PostManager();
+            $validation = array(
+                'valid' => false,
+                'errors' => array()
+            );
+            $post = new Post();
+            $categories = array('Programmation', 'Vie du blog', 'Windows', 'Android', 'Github', 'Moi');
+
+            if (isset($_POST['cmd'])) {
+                if ($_POST['cmd'] == 'post_add') {
+                    $post = new Post();
+                    $post->handlePostRequest();
+                    $validation = $post->validate();
+                    if ($validation['valid']) {
+                        $postManager->persistPost($post);
+
+                        header('Location: ../index.php');
+                        exit('Post succefuly added');
+                    }
+                }
+            }
+        ?>
+        <?php if (isset($_SESSION) and in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR'))) { ?>
         <div class="container">
             <div class="writing-form-container">
                 <form method="post" class="form-horizontal">
@@ -88,6 +71,9 @@
                     </div>
 
                 </form>
+        <? } else {
+            header('Location: ../error.php?error=403');
+        } ?>
         </div>
     </body>
 </html>

@@ -5,22 +5,22 @@
 <!DOCTYPE html>
 
 <HTML>
-    <?php include('../head.php'); ?>
+    <?php include('head.php'); ?>
     <body>
         <?php include(__DIR__ . '/header.php'); ?>
         <div class="container">
             <?php
                 if (!isset($_SESSION['pseudo']) and (!isset($_SESSION['role']) or $_SESSION['role'] != 'ADMINISTRATEUR')){
                     header("Location: ../login.php");
-                }else if (true and $_SESSION['role'] == 'ADMINISTRATEUR'){
+                } else if ($_SESSION['role'] == 'ADMINISTRATEUR'){
                     // connexion réussie
-                    // pas de session créée ici pour le moment
                     echo "Interface d'administration, bonjour {$_SESSION['pseudo']}";
                     
                     echo "<div class=\"breadcrumb-container\">
                             <ol class=\"breadcrumb\">
                                 <li><a href=\"index.php\">Accueil</a></li>
                                 <li><a href=\"writing.php\">Ecrire un article</a></li>
+                                <li><a href=\"utilisateurs/\">Gérer les utilisateurs</a></li>
                             </ol>
                         </div>";
                     
