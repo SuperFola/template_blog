@@ -20,7 +20,12 @@
 
             if ($_POST['cmd'] == 'post_comment_add') {
                 $commentaire = new Commentaire();
-                $commentaire->handlePostRequest();
+                if (!isset($_SESSION) or !isset($_SESSION['pseudo']))
+                    $pseudo = htmlentities($_POST['post_comment_pseudo']);
+                else
+                    $pseudo = $_SESSION['pseudo'];
+                $message = htmlentities($_POST['post_comment_message']);
+                $commentaire->handlePostRequest($pseudo, $message);
                 $validation = $commentaire->validate();
                 if ($validation['valid']) {
                     $post->addCommentaire($commentaire);
@@ -60,7 +65,11 @@
                         <div class="container-fluid">
                             <h4>Donnez votre opinion !</h4>
                             <div class="form-group">
+                                <?php if (!isset($_SESSION)) { ?>
                                 <input class="form-control" placeholder="Pseudo" name="post_comment_pseudo" />
+                                <?php } else {
+                                    echo '<h5>' . $_SESSION['pseudo'] . '</h5>';
+                                } ?>
                             </div>
                             <div class="form-group">
                                 <textarea class="form-control" row="5" placeholder="Votre message..." name="post_comment_message"></textarea>

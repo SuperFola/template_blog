@@ -50,7 +50,6 @@ class PostManager {
                 $array = $this->getFile($this->directory.'/post'.$i.'.json');
                 $post->hydrate($array);
                 $posts[$post->getTimestampCreation()] = $post;
-                echo '<br>'.print_r($posts).'<br>';
             }
             $i++;
         }
@@ -321,7 +320,7 @@ class Post {
         ksort($commentaires);
 
         # On retourne uniquement les valeurs du tableaux
-        return array_values($commentaires);
+        return array_values(array_reverse($commentaires));
     }
 
     public function setId($id) {
@@ -435,9 +434,9 @@ class Commentaire {
     /**
      * Remplit le Commentaire à partir de la requête
      */
-    public function handlePostRequest() {
-        $this->pseudo = htmlentities($_POST['post_comment_pseudo']);
-        $this->message = htmlentities($_POST['post_comment_message']);
+    public function handlePostRequest($pseudo, $message) {
+        $this->pseudo = $pseudo;
+        $this->message = $message;
     }
 
     /**
