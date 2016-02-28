@@ -387,7 +387,31 @@ class User {
      */
     public function getLastLogin()
     {
-        return $this->lastLogin;
+        return $this->getDisplayableDate($this->lastLogin);
+    }
+    
+    public function getDisplayableDate($date_) {
+        $diff = time() - $date_;
+        if ($diff < 120) {
+            return 'à l\'instant';
+        }
+        if ($diff < 3600) {
+            return 'Il y a '. date('i', $diff) . ' minutes';
+        } elseif ($diff < 86400) {
+            if (intval(date('G', $diff)) > 1) {
+                return 'Il y a '. date('G', $diff) . ' heures';
+            } else {
+                return 'Il y a '. date('G', $diff) . ' heure';
+            }
+        } elseif ($diff < 172800) {
+            return 'Hier à '. date('H', $this->timestampCreation) . 'h';
+        } else {
+            if (intval(date('Y')) != intval(date('Y', $this->timestampCreation))) {
+                return date('j', $this->timestampCreation) . ' ' . date('F', $this->timestampCreation) . ' ' . date('Y', $this->timestampCreation) . ', ' . date('H', $this->timestampCreation) . 'h' . date('i', $this->timestampCreation);
+            } else {
+                return date('j', $this->timestampCreation) . ' ' . date('F', $this->timestampCreation) . ', ' . date('H', $this->timestampCreation) . 'h' . date('i', $this->timestampCreation);
+            }
+        }
     }
 
     /**

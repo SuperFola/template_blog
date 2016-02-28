@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    
     include('../../private/usermanager.php');
     if (isset($_SESSION) and $_SESSION['role'] == 'ADMINISTRATEUR') {
         $roles = array('ADMINISTRATEUR', 'AUTEUR', 'MODERATEUR', 'MEMBRE');

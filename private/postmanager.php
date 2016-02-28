@@ -1,4 +1,18 @@
 <?php
+function count_news($from){
+    $cur_new = 0;
+
+    $tmp = opendir($from) or die('Erreur');
+    while($entry = @readdir($tmp)) {
+        if(!is_dir($from . '/' . $entry) && $entry != '.' && $entry != '..') {
+            $cur_new++;
+        }
+    }
+    closedir($tmp);
+    
+    return $cur_new;
+}
+
 class PostManager {
     protected $directory;
 
@@ -28,20 +42,23 @@ class PostManager {
      */
     public function findAll() {
         $posts = array();
-        $files = scandir($this->directory);
-        foreach($files as $file) {
-            if (preg_match('/^post([0-9]+).json/', $file)) {
+        $files = count_news($this->directory);
+        $i = 1;
+        while($i <= $files) {
+            if (file_exists($this->directory.'/post'.$i.'.json')) {
                 $post = new Post();
-                $array = $this->getFile($this->directory.'/'.$file);
+                $array = $this->getFile($this->directory.'/post'.$i.'.json');
                 $post->hydrate($array);
                 $posts[$post->getTimestampCreation()] = $post;
+                echo '<br>'.print_r($posts).'<br>';
             }
+            $i++;
         }
 
         # On range le tableaux par ordre de timestamp croissant
         ksort($posts);
 
-        # On retourne uniquement les valeurs du tableaux que l'on a préalablement inverser
+        # On retourne uniquement les valeurs du tableaux que l'on a préalablement inversé
         return array_values(array_reverse($posts));
     }
 
@@ -154,7 +171,7 @@ class Post {
 
     public function __construct($id = 0) {
         $this->id = $id;
-        $this->timestamp = time();
+        $this->timestampCreation = time();
         $this->commentaires = array();
         $this->edited = false;
     }
@@ -165,7 +182,7 @@ class Post {
     public function hydrate($array) {
         $this->id = $array['id'];
         $this->titre = $array['titre'];
-        $this->timestamp = $array['timestamp'];
+        $this->timestampCreation = $array['timestamp'];
         $this->content = $array['content'];
         $this->categorie = $array['categorie'];
         $this->storedData = $array;
@@ -220,7 +237,7 @@ class Post {
         $array = array(
             'id' => $this->id,
             'titre' => $this->titre,
-            'timestamp' => $this->timestamp,
+            'timestamp' => $this->timestampCreation,
             'content' => $this->content,
             'categorie' => $this->categorie,
             'commentaires' => array()

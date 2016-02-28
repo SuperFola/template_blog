@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     include('../../private/usermanager.php');
 
     $roles = array('ADMINISTRATEUR', 'AUTEUR', 'MODERATEUR', 'MEMBRE');
@@ -63,7 +65,7 @@
         <h3><?php echo $slogan; ?></h3>
     </div>
     <div class="container">
-        <?php if (isset($_SESSION) and $_SESSION['role'] == 'ADMINISTRATEUR') ?>
+        <?php if (isset($_SESSION) and $_SESSION['role'] == 'ADMINISTRATEUR') { ?>
         <h2>Nouvel utilisateur</h2>
         <p class="text-left">
             <a class="btn btn-default" href="index.php">Retour</a>

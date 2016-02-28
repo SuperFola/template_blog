@@ -45,7 +45,7 @@
         <h3><?php echo $slogan; ?></h3>
     </div>
     <div class="container">
-        <?php if (isset($_SESSION) and $_SESSION['role'] == 'ADMINISTRATEUR') ?>
+        <?php if (isset($_SESSION) and $_SESSION['role'] == 'ADMINISTRATEUR') { ?>
         <h2>Utilisateurs</h2>
         <div class="text-right">
             <a class="btn btn-primary" href="ajouter.php">Nouvel utilisateur</a>
