@@ -136,16 +136,8 @@ div.commentaires-container .commentaire .body {
     padding-left: 75px;
     position: relative;
 }
-<<<<<<< HEAD
-
-div.connection form {
-    display: inline-block;
-}
 div.connection {
-    text-align: justify;
-    border: 1px dashed #aaa;
-    width: auto;
-    height: 100%;
+    padding: 15px;
 }
 .nolink {
     cursor: default;
@@ -155,8 +147,10 @@ div.spoiler {
     position: absolute;
     background-color: darkgray;
 }
-=======
->>>>>>> refs/remotes/origin/master
-form {
-    padding: 10px;
+form.login {
+    padding: 15px;
+    max-width: 250px;
+    margin: auto;
+    text-align: center;
+    border: 1px dashed black;
 }

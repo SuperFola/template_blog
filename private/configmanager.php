@@ -1,4 +1,4 @@
-﻿<?php
+<?php
     class ConfigManager {
         public $path;
         
@@ -12,26 +12,31 @@
          * @return array
          */
         public function getConfig() {
-            return json_decode(file_get_contents($this->path), true);
+            $filecontent = file_get_contents($this->path);
+            $array = json_decode($filecontent, true);
+            return $array;
         }
         
         public function getBlogTitle() {
-            if (isset($this->getConfig()['blogtitle'])) {
-                return $this->getConfig()['blogtitle'];
+            $config = $this->getConfig();
+            if (isset($config['blogtitle'])) {
+                return $config['blogtitle'];
             }
             return "Title";
         }
         
         public function getBlogSlogan() {
-            if (isset($this->getConfig()['blogslogan'])) {
-                return $this->getConfig()['blogslogan'];
+            $config = $this->getConfig();
+            if (isset($config['blogslogan'])) {
+                return $config['blogslogan'];
             }
             return "Slogan";
         }
         
         public function getBlogFooter() {
-            if (isset($this->getConfig()['blogfooter'])) {
-                return $this->getConfig()['blogfooter'];
+            $config = $this->getConfig();
+            if (isset($config['blogfooter'])) {
+                return $config['blogfooter'];
             }
             return "";
         }
@@ -42,7 +47,8 @@
          * @param $key
          */
         public function setConfig($key) {
-            if (isset($this->getConfig()[$key])) {
+            $config = $this->getConfig();
+            if (isset($config[$key])) {
                 // do some stuff
             }
         }

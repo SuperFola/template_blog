@@ -31,6 +31,7 @@
                     $post->addCommentaire($commentaire);
                     $postManager->updatePost($post);
                 }
+                header("Location: post.php?id=" . $_GET['id'] . "#comments");
             }
         } else {
             header("Location: index.php");
@@ -63,14 +64,19 @@
                 <div class="commentaire-form-container well col-md-8 col-md-offset-2">
                     <form class="commentaire-form form-horizontal" method="post">
                         <div class="container-fluid">
+                            <?php if (!isset($_SESSION) or !isset($_SESSION['pseudo'])) { ?>
                             <h4>Donnez votre opinion !</h4>
                             <div class="form-group">
-                                <?php if (!isset($_SESSION)) { ?>
                                 <input class="form-control" placeholder="Pseudo" name="post_comment_pseudo" />
-                                <?php } else {
-                                    echo '<h5>' . $_SESSION['pseudo'] . '</h5>';
-                                } ?>
                             </div>
+                            <?php } else {
+                                echo '<h4 style="display: inline;">Donnez votre opinion !</h4>';
+                                echo '<div class="avatar" style="display: inline; float: right; line-height: 20px;">';
+                                echo '<b>' . $_SESSION['pseudo'] . '</b>';
+                                echo '<img src="http://identicon.org?t=' . $_SESSION['pseudo'] . '&s=50" class="img-responsive">';
+                                echo '<br />';
+                                echo '</div>';
+                            } ?>
                             <div class="form-group">
                                 <textarea class="form-control" row="5" placeholder="Votre message..." name="post_comment_message"></textarea>
                             </div>
@@ -87,7 +93,7 @@
                     <?php if (count($post->getCommentaires()) < 1): ?>
                             <h3 style="text-align: center">Aucun commentaire</h3>
                     <?php else: ?>
-                            <h3><?php echo count($post->getCommentaires()) ?> Commentaire<?php if (count($post->getCommentaires()) > 1): ?>s<?php endif ?> : </h3>
+                            <h3 id="comments"><?php echo count($post->getCommentaires()) ?> Commentaire<?php if (count($post->getCommentaires()) > 1): ?>s<?php endif ?> : </h3>
                     <?php endif ?>
                     <?php
                     foreach($post->getCommentairesSorted() as $commentaire){

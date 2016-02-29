@@ -6,11 +6,13 @@
                 <a class="btn btn-primary btn-xs" href="login.php">Connexion</a>
                 <?php
                     } else {
-                        if ($_SESSION['role'] == 'ADMINISTRATEUR'){
+                        if (in_array($_SESSION['role'], array('ADMINISTRATEUR', 'MODERATEUR'))){
                             echo "<a class=\"btn btn-primary btn-xs\" href=\"admin/index.php\">" . $_SESSION['pseudo'] . "</a>";
                         } else {
                             echo "<a class=\"btn btn-primary btn-xs\">" . $_SESSION['pseudo'] . "</a>";
                         }
+                        
+                        echo " <a class=\"btn btn-danger btn-xs\" href=\"logout.php\">Déconnexion</a>";
                     }
                 ?>
             </div>
@@ -19,6 +21,6 @@
                 $title = $cm->getBlogTitle();
                 $slogan = $cm->getBlogSlogan();
             ?>
-            <h1><?php echo $title; ?></h1>
+            <h1><a href="index.php" style="text-decoration: none;"><?php echo $title; ?></a></h1>
             <h3><?php echo $slogan; ?></h3>
         </div>

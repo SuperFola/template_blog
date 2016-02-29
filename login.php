@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <HTML>
     <?php include("head.php"); ?>
@@ -6,10 +6,16 @@
         <?php include('header.php'); ?>
         <div class="container">
             <div class="connection">
-                <form method="post" action="loginconfirm.php">
-                    Utilisateur : <input type="text" name="user" /><br />
-                    Mot de passe : <input type="password" name="pwd" /><br /><br />
-                    <button type="submit">Connexion</button>
+                <form method="post" class="login" action="loginconfirm.php">
+                    <div class="form-group">
+                        <label for="user">Utilisateur :</label>
+                        <input type="text" class="form-control" id="user" name="user" placeholder="Nom d'utilisateur">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Mot de passe">
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Connexion">
                 </form>
             </div>
             <?php include('footer.php'); ?>

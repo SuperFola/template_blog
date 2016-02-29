@@ -19,7 +19,7 @@
                 $title = $cm->getBlogTitle();
                 $slogan = $cm->getBlogSlogan();
             ?>
-            <h1><?php echo $title; ?></h1>
+            <h1><a href="index.php" style="text-decoration: none;"><?php echo $title; ?></a></h1>
             <h3><?php echo $slogan; ?></h3>
             <h5>- Administration -</h5>
         </div>
