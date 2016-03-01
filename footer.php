@@ -4,7 +4,10 @@
                     $footer = $cm->getBlogFooter();
                 ?>
                 <hr>
-                <?php
-                    echo $footer;
-                ?>
+                <center>
+                    <?php
+                        echo $footer;
+                    ?>
+                </center>
+                <br />
             </footer>

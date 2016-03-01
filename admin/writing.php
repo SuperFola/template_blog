@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
     <?php include("head.php"); ?>
+    <link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
     <body>
         <?php include('header.php'); ?>
         <?php
@@ -63,60 +64,73 @@
                                 </div>
                                 <br />
                                 <div id="completeEditeur">
-                                    <input type="button" value="G" style="font-weight:bold;" onclick="command('bold');" class="btn btn-default" />
-                                    <input type="button" value="I" style="font-style:italic;" onclick="command('italic');" class="btn btn-default" />
-                                    <input type="button" value="S" style="text-decoration:underline;" onclick="command('underline');" class="btn btn-default" />
-                                    
-                                    <input type="button" value="Lien" onclick="command('createLink');" class="btn btn-default" />
-                                    <input type="button" value="Image" onclick="command('insertImage');" class="btn btn-default" />
+                                    <a class="btn btn-default" onclick="command('bold');"><i class="fa fa-bold fa-lg"></i></a>
+                                    <a class="btn btn-default" onclick="command('italic');"><i class="fa fa-italic fa-lg"></i></a>
+                                    <a class="btn btn-default" onclick="command('underline');"><i class="fa fa-underline fa-lg"></i></a>
+                                    <a class="btn btn-default" onclick="command('createLink');"><i class="fa fa-link fa-lg"></i></a>
+                                    <a class="btn btn-default" onclick="command('insertImage');"><i class="fa fa-picture-o fa-lg"></i></a>
                                     
                                     <a href="../private/cible_envoi.php" target="blank" class="btn btn-default">Héberger une image</a>
                                     
-                                    <select onchange="command('heading', this.value); this.selectedIndex = 0;" class="form-control" style="display: inline; width: 15%;">
-                                        <option value="">Titre</option>
-                                        <option value="h1">Titre 1</option>
-                                        <option value="h2">Titre 2</option>
-                                        <option value="h3">Titre 3</option>
-                                        <option value="h4">Titre 4</option>
-                                        <option value="h5">Titre 5</option>
-                                        <option value="h6">Titre 6</option>
-                                    </select>
+                                    <div class="btn-group">
+                                        <a class="btn btn-default"><i class="fa fa-header fa-fw"></i> Titre</a>
+                                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="fa fa-caret-down"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a onclick="command('heading', 'h1')"><i class="fa fa-header fa-fw"></i>1</a></li>
+                                                <li><a onclick="command('heading', 'h2')"><i class="fa fa-header fa-fw"></i>2</a></li>
+                                                <li><a onclick="command('heading', 'h3')"><i class="fa fa-header fa-fw"></i>3</a></li>
+                                                <li><a onclick="command('heading', 'h4')"><i class="fa fa-header fa-fw"></i>4</a></li>
+                                                <li><a onclick="command('heading', 'h5')"><i class="fa fa-header fa-fw"></i>5</a></li>
+                                                <li><a onclick="command('heading', 'h6')"><i class="fa fa-header fa-fw"></i>6</a></li>
+                                            </ul>
+                                    </div>
                                     
-                                    <select onchange="command(this.value); this.selectedIndex = 0;" class="form-control" style="display: inline; width: 15%;">
-                                        <option value="">Alignement</option>
-                                        <option value="justifyleft">Aligné à gauche</option>
-                                        <option value="justifyright">Aligné à droite</option>
-                                        <option value="justifycenter">Centré</option>
-                                        <option value="justifyfull">Justifié</option>
-                                    </select>
+                                    <div class="btn-group">
+                                        <a class="btn btn-default"><i class="fa fa-indent fa-fw"></i> Mise en forme</a>
+                                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="fa fa-caret-down"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a onclick="command('justifycenter')"><i class="fa fa-align-center fa-fw"></i> Centrer</a></li>
+                                                <li><a onclick="command('justifyfull')"><i class="fa fa-align-justify fa-fw"></i> Justifier</a></li>
+                                                <li class="divider"></li>
+                                                <li><a onclick="command('justifyleft')"><i class="fa fa-align-left fa-fw"></i> A gauche</a></li>
+                                                <li><a onclick="command('justifyright')"><i class="fa fa-align-right fa-fw"></i> A droite</a></li>
+                                                <li class="divider"></li>
+                                                <li><a onclick="command('subscript')"><i class="fa fa-subscript fa-fw"></i> Indice</a></li>
+                                                <li><a onclick="command('superscript')"><i class="fa fa-superscript fa-fw"></i> Exposant</a></li>
+                                            </ul>
+                                    </div>
                                     
-                                    <select onchange="command(this.value); this.selectedIndex = 0;" class="form-control" style="display: inline; width: 22%;">
-                                        <option value="">Indice / Exposant</option>
-                                        <option value="subscript">Mettre en indice</option>
-                                        <option value="superscript">Mettre en exposant</option>
-                                    </select>
+                                    <div class="btn-group">
+                                        <a class="btn btn-default"><i class="fa fa-list fa-fw"></i> Listes</a>
+                                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="fa fa-caret-down"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a onclick="command('insertunorderedlist')"><i class="fa fa-list-ul fa-fw"></i> A puce</a></li>
+                                                <li><a onclick="command('insertorderedlist')"><i class="fa fa-list-ol fa-fw"></i> Numérotée</a></li>
+                                            </ul>
+                                    </div>
                                     
-                                    <select onchange="command(this.value); this.selectedIndex = 0;" class="form-control" style="display: inline; width: 15%;">
-                                        <option value="">Liste</option>
-                                        <option value="insertunorderedlist">Liste à puces</option>
-                                        <option value="insertorderedlist">Liste numérotée</option>
-                                    </select>
-                                    
-                                    <select onchange="command('forecolor', this.value); this.selectedIndex = 0;" class="form-control" style="display: inline; width: 21%;">
-                                        <option value="">Couleur du texte</option>
-                                        <option value="blue">Bleu</option>
-                                        <option value="red">Rouge</option>
-                                        <option value="yellow">Jaune</option>
-                                        <option value="green">Vert</option>
-                                        <option value="black">Noir</option>
-                                        <option value="white">Blanc</option>
-                                    </select>
+                                    <div class="btn-group">
+                                        <a class="btn btn-default"><i class="fa fa-paperclip fa-fw"></i> Couleur</a>
+                                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="fa fa-caret-down"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a onclick="command('forecolor', 'blue')"> Bleu</a></li>
+                                                <li><a onclick="command('forecolor', 'red')"> Rouge</a></li>
+                                                <li><a onclick="command('forecolor', 'yellow')"> Jaune</a></li>
+                                                <li><a onclick="command('forecolor', 'green')"> Vert</a></li>
+                                                <li><a onclick="command('forecolor', 'black')"> Noir</a></li>
+                                                <li><a onclick="command('forecolor', 'white')"> Blanc</a></li>
+                                            </ul>
+                                    </div>
                                     
                                     <br />
                                     <br />
                                     
                                     <div class="<?php if(array_key_exists('post_content', $validation['errors'])): ?>has-error<?php endif ?>">
-                                        <div class="form-control" name="post_content" placeholder="Exprimes toi !" rows=30 id="editeur" contentEditable></div>
+                                        <div class="form-control" name="post_content" height="600" id="editeur" contentEditable></div>
                                         <?php if(array_key_exists('post_content', $validation['errors'])): ?>
                                             <span class="help-block"><?php echo $validation['errors']['post_content'] ?></span>
                                         <?php endif ?>
@@ -136,5 +150,7 @@
             header('Location: ../error.php?error=403');
         } ?>
         </div>
+        <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </body>
 </html>
