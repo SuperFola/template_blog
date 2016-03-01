@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    
     include('../../private/usermanager.php');
 
     $roles = array('ADMINISTRATEUR', 'AUTEUR', 'MODERATEUR', 'MEMBRE');
@@ -35,14 +37,36 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <!-- Website Style -->
     <link rel="stylesheet" href="../../css/style.css">
+    <?php include('../../private/configmanager.php'); ?>
 
 </head>
 <body>
     <div class="jumbotron">
-        <h1>[NOM]</h1>
-        <h3>Modifier un utilisateur</h3>
+        <div class="login-btn col-md-12">
+            <?php
+                if (!isset($_SESSION) or !isset($_SESSION['pseudo'])){
+             ?>
+            <a class="btn btn-primary btn-xs" href="../../login.php">Connexion</a>
+            <?php
+                } else {
+                    if ($_SESSION['role'] == 'ADMINISTRATEUR'){
+                        echo "<a class=\"btn btn-primary btn-xs\" href=\"../\">" . $_SESSION['pseudo'] . "</a>";
+                    } else {
+                        echo "<a class=\"btn btn-primary btn-xs\">" . $_SESSION['pseudo'] . "</a>";
+                    }
+                }
+            ?>
+        </div>
+        <?php
+            $cm = new ConfigManager();
+            $title = $cm->getBlogTitle();
+            $slogan = $cm->getBlogSlogan();
+        ?>
+        <h1><?php echo $title; ?></h1>
+        <h3><?php echo $slogan; ?></h3>
     </div>
     <div class="container">
+        <?php if (isset($_SESSION) and $_SESSION['role'] == 'ADMINISTRATEUR') { ?>
         <h2>Modifier : <?php echo $user->getPseudo() ?></h2>
         <p class="text-left">
             <a class="btn btn-default" href="index.php">Retour</a>
@@ -85,6 +109,9 @@
                 <input type="submit" class="btn btn-primary" value="Sauvegarder">
             </div>
         </form>
+        <?php } else {
+            header('Location: ../../error.php?error=403');
+        }?>
     </div>
 </body>
 </html>

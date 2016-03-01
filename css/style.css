@@ -136,6 +136,21 @@ div.commentaires-container .commentaire .body {
     padding-left: 75px;
     position: relative;
 }
-form {
-    padding: 10px;
+div.connection {
+    padding: 15px;
+}
+.nolink {
+    cursor: default;
+}
+div.spoiler {
+    visibility: hidden;
+    position: absolute;
+    background-color: darkgray;
+}
+form.login {
+    padding: 15px;
+    max-width: 250px;
+    margin: auto;
+    text-align: center;
+    border: 1px dashed black;
 }

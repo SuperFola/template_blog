@@ -1,7 +1,7 @@
 ﻿<?php
     session_start();
     
-    include(__DIR__ . "\\..\\private\\post_storage.php");
+    include(__DIR__ . "/../private/postmanager.php");
     
     if (isset($_SESSION)) {
         if ($_SESSION['role'] == 'ADMINISTRATEUR') {
@@ -30,7 +30,11 @@
                             }
                         }
                         
-                        echo 'Supprimé';
+                        if ($done) {
+                            echo 'Supprimé';
+                        } else {
+                            echo 'Il s\'est passé quoi ?';
+                        }
                     }
                 } else if ($_GET['action'] == 'edit') {
                     

@@ -11,11 +11,18 @@
     </head>
     <body>
         <?php
+<<<<<<< HEAD
+        include(__DIR__ . '../private/_check_access.php');
+        include(__DIR__ . '../public/count_news.php');
+        include(__DIR__ . '../private/post_storage.php');
+         
+=======
             include('../private/_check_access.php');
             include('../public/count_news.php');
             include('../private/comments_code.php');
         ?>
         <?php
+>>>>>>> refs/remotes/origin/master
         if (isset($_POST['titre']) and isset($_POST['contentHTML']) and $_POST['titre'] != '' and $_POST['contentHTML'] != ''
                     and isset($_POST['user']) and isset($_POST['pass']) and isset($_POST['categorie'])){
             $access_granted = check_access($_POST['user'], $_POST['pass'], $registred_users);
@@ -274,7 +281,7 @@
                     $i = 0;
                     while($entry = @readdir($tmp)) {
                         if(!is_dir($entry) && $entry != '.' && $entry != '..' && $entry != 'index.php') {
-                            echo '<option value="' . $i . '">' . $entry . '</option>';
+                            echo '                    <option value="' . $i . '">' . $entry . '</option>';
                         }
                         $i++;
                     }

@@ -1,55 +1,45 @@
 <?php
-    include('../private/post_storage.php');
-
-    $postManager = new PostManager();
-    $validation = array(
-        'valid' => false,
-        'errors' => array()
-    );
-    $post = new Post();
-    $categories = array('Programmation', 'Vie du blog', 'Windows', 'Android', 'Github', 'Moi');
-
-    if (isset($_POST['cmd'])) {
-        if ($_POST['cmd'] == 'post_add') {
-            $post = new Post();
-            $post->handlePostRequest();
-            $validation = $post->validate();
-            if ($validation['valid']) {
-                $postManager->persistPost($post);
-
-                header('Location: ../index.php');
-                exit('Post succefuly added');
-            }
-        }
-    }
+    session_start();
 ?>
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Writing</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
-        <link meta="screen" rel="stylesheet" type="text/css" href="../css/wysiwyg.css" />
-
-        <script type='text/javascript' src='../scripts/wysiwyg.js'></script>
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <!-- Website Style -->
-        <link rel="stylesheet" href="../css/style.css">
-
-    </head>
+    <?php include("head.php"); ?>
+    <link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
     <body>
-        <div class="jumbotron">
-            <h1>Titre</h1>
-            <h3>Rédiger un article</h3>
-        </div>
+        <?php include('header.php'); ?>
+        <?php
+            $postManager = new PostManager();
+            $validation = array(
+                'valid' => false,
+                'errors' => array()
+            );
+            $post = new Post();
+            $categories = array('Programmation', 'Vie du blog', 'Windows', 'Android', 'Github', 'Les langages du web', 'Python', 'La famille C');
+
+            if (isset($_POST['cmd'])) {
+                if ($_POST['cmd'] == 'post_add') {
+                    $post = new Post();
+                    $post->handlePostRequest();
+                    $validation = $post->validate();
+                    if ($validation['valid']) {
+                        $postManager->persistPost($post);
+
+                        header('Location: ../index.php');
+                        exit('Post successfuly added');
+                    }
+                }
+            }
+        ?>
+        <?php if (isset($_SESSION) and in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR'))) { ?>
+        <script src="../scripts/wysiwyg.js"></script>
         <div class="container">
             <div class="writing-form-container">
                 <form method="post" class="form-horizontal">
-                    <div class="well col-md-8 col-md-offset-2">
+                    <div class="well col-md-12 col-lg-10 col-lg-offset-1">
                         <div class="container-fluid">
                             <div class="form-group">
+                                <i>Ne vous préocupez pas d'ajouter la date à la news, cela est fait automatiquement :)</i><br /><br />
                                 <div class="form-group<?php if(array_key_exists('post_titre', $validation['errors'])): ?> has-error<?php endif ?>">
                                     <label for="post_titre" class="col-sm-2 control-label">Titre</label>
                                     <div class="col-sm-10">
@@ -72,11 +62,79 @@
                                         <?php endif ?>
                                     </div>
                                 </div>
-                                <div class="<?php if(array_key_exists('post_content', $validation['errors'])): ?>has-error<?php endif ?>">
-                                    <textarea class="form-control" name="post_content" placeholder="Exprimes toi !" rows="10"></textarea>
-                                    <?php if(array_key_exists('post_content', $validation['errors'])): ?>
-                                        <span class="help-block"><?php echo $validation['errors']['post_content'] ?></span>
-                                    <?php endif ?>
+                                <br />
+                                <div id="completeEditeur">
+                                    <a class="btn btn-default" onclick="command('bold');"><i class="fa fa-bold fa-lg"></i></a>
+                                    <a class="btn btn-default" onclick="command('italic');"><i class="fa fa-italic fa-lg"></i></a>
+                                    <a class="btn btn-default" onclick="command('underline');"><i class="fa fa-underline fa-lg"></i></a>
+                                    <a class="btn btn-default" onclick="command('createLink');"><i class="fa fa-link fa-lg"></i></a>
+                                    <a class="btn btn-default" onclick="command('insertImage');"><i class="fa fa-picture-o fa-lg"></i></a>
+                                    
+                                    <a href="../private/cible_envoi.php" target="blank" class="btn btn-default">Héberger une image</a>
+                                    
+                                    <div class="btn-group">
+                                        <a class="btn btn-default"><i class="fa fa-header fa-fw"></i> Titre</a>
+                                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="fa fa-caret-down"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a onclick="command('heading', 'h1')"><i class="fa fa-header fa-fw"></i>1</a></li>
+                                                <li><a onclick="command('heading', 'h2')"><i class="fa fa-header fa-fw"></i>2</a></li>
+                                                <li><a onclick="command('heading', 'h3')"><i class="fa fa-header fa-fw"></i>3</a></li>
+                                                <li><a onclick="command('heading', 'h4')"><i class="fa fa-header fa-fw"></i>4</a></li>
+                                                <li><a onclick="command('heading', 'h5')"><i class="fa fa-header fa-fw"></i>5</a></li>
+                                                <li><a onclick="command('heading', 'h6')"><i class="fa fa-header fa-fw"></i>6</a></li>
+                                            </ul>
+                                    </div>
+                                    
+                                    <div class="btn-group">
+                                        <a class="btn btn-default"><i class="fa fa-indent fa-fw"></i> Mise en forme</a>
+                                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="fa fa-caret-down"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a onclick="command('justifycenter')"><i class="fa fa-align-center fa-fw"></i> Centrer</a></li>
+                                                <li><a onclick="command('justifyfull')"><i class="fa fa-align-justify fa-fw"></i> Justifier</a></li>
+                                                <li class="divider"></li>
+                                                <li><a onclick="command('justifyleft')"><i class="fa fa-align-left fa-fw"></i> A gauche</a></li>
+                                                <li><a onclick="command('justifyright')"><i class="fa fa-align-right fa-fw"></i> A droite</a></li>
+                                                <li class="divider"></li>
+                                                <li><a onclick="command('subscript')"><i class="fa fa-subscript fa-fw"></i> Indice</a></li>
+                                                <li><a onclick="command('superscript')"><i class="fa fa-superscript fa-fw"></i> Exposant</a></li>
+                                            </ul>
+                                    </div>
+                                    
+                                    <div class="btn-group">
+                                        <a class="btn btn-default"><i class="fa fa-list fa-fw"></i> Listes</a>
+                                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="fa fa-caret-down"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a onclick="command('insertunorderedlist')"><i class="fa fa-list-ul fa-fw"></i> A puce</a></li>
+                                                <li><a onclick="command('insertorderedlist')"><i class="fa fa-list-ol fa-fw"></i> Numérotée</a></li>
+                                            </ul>
+                                    </div>
+                                    
+                                    <div class="btn-group">
+                                        <a class="btn btn-default"><i class="fa fa-paperclip fa-fw"></i> Couleur</a>
+                                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="fa fa-caret-down"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a onclick="command('forecolor', 'blue')"> Bleu</a></li>
+                                                <li><a onclick="command('forecolor', 'red')"> Rouge</a></li>
+                                                <li><a onclick="command('forecolor', 'yellow')"> Jaune</a></li>
+                                                <li><a onclick="command('forecolor', 'green')"> Vert</a></li>
+                                                <li><a onclick="command('forecolor', 'black')"> Noir</a></li>
+                                                <li><a onclick="command('forecolor', 'white')"> Blanc</a></li>
+                                            </ul>
+                                    </div>
+                                    
+                                    <br />
+                                    <br />
+                                    
+                                    <div class="<?php if(array_key_exists('post_content', $validation['errors'])): ?>has-error<?php endif ?>">
+                                        <div class="form-control" name="post_content" height="600" id="editeur" contentEditable></div>
+                                        <?php if(array_key_exists('post_content', $validation['errors'])): ?>
+                                            <span class="help-block"><?php echo $validation['errors']['post_content'] ?></span>
+                                        <?php endif ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -88,6 +146,11 @@
                     </div>
 
                 </form>
+        <? } else {
+            header('Location: ../error.php?error=403');
+        } ?>
         </div>
+        <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </body>
 </html>
