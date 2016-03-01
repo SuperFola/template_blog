@@ -189,14 +189,14 @@ class User {
      *
      * @return Post
      */
-    public function handlePostRequest() {
-        $this->pseudo = htmlentities($_POST['user_pseudo']);
-        $this->email = htmlentities($_POST['user_email']);
-        if ($_POST['user_password'] != '') {
+    public function handlePostRequest($pseudo, $password, $email, $role) {
+        $this->pseudo = htmlentities($pseudo);
+        $this->email = htmlentities($email);
+        if ($password != '') {
             $this->salt = $this->generateSalt();
-            $this->cryptedPassword = sha1($this->salt.$_POST['user_password']);
+            $this->cryptedPassword = sha1($this->salt.$password);
         }
-        $this->role = $_POST['user_role'];
+        $this->role = $role;
     }
 
     /**

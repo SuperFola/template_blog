@@ -18,6 +18,10 @@
                     <input type="submit" class="btn btn-primary" value="Connexion">
                 </form>
             </div>
+            <hr />
+            <center>
+                <a href="signup.php">S'inscrire</a>
+            </center>
             <?php include('footer.php'); ?>
         </div>
     </body>
