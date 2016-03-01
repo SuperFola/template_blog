@@ -154,3 +154,6 @@ form.login {
     text-align: center;
     border: 1px dashed black;
 }
+div#editeur {
+    height: 450px;
+}
