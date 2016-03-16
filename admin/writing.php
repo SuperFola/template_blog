@@ -20,7 +20,8 @@
             if (isset($_POST['cmd'])) {
                 if ($_POST['cmd'] == 'post_add') {
                     $post = new Post();
-                    $post->handlePostRequest();
+                    //handlePostRequest($title, $categorie, $content, $author_name)
+                    $post->handlePostRequest($_POST['post_titre'], $_POST['post_categorie'], $_POST['post_content'], $_SESSION['pseudo']);
                     $validation = $post->validate();
                     if ($validation['valid']) {
                         $postManager->persistPost($post);
@@ -40,26 +41,26 @@
                         <div class="container-fluid">
                             <div class="form-group">
                                 <i>Ne vous préocupez pas d'ajouter la date à la news, cela est fait automatiquement :)</i><br /><br />
-                                <div class="form-group<?php if(array_key_exists('post_titre', $validation['errors'])): ?> has-error<?php endif ?>">
+                                <div class="form-group<?php if(array_key_exists('post_titre', $validation['errors'])): ?> has-error<?php endif; ?>">
                                     <label for="post_titre" class="col-sm-2 control-label">Titre</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="post_titre" name="post_titre" placeholder="Titre" value="<?php echo $post->getTitre() ?>">
+                                        <input type="text" class="form-control" id="post_titre" name="post_titre" placeholder="Titre" value="<?php echo $post->getTitre(); ?>">
                                         <?php if(array_key_exists('post_titre', $validation['errors'])): ?>
-                                            <span class="help-block"><?php echo $validation['errors']['post_titre'] ?></span>
-                                        <?php endif ?>
+                                            <span class="help-block"><?php echo $validation['errors']['post_titre']; ?></span>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
-                                <div class="form-group<?php if(array_key_exists('post_categorie', $validation['errors'])): ?> has-error<?php endif ?>">
+                                <div class="form-group<?php if(array_key_exists('post_categorie', $validation['errors'])): ?> has-error<?php endif; ?>">
                                     <label for="post_categorie" class="col-sm-2 control-label">Catégorie</label>
                                     <div class="col-sm-10">
                                         <select id="post_categorie" name="post_categorie" class="form-control">
                                             <?php foreach($categories as $categorie): ?>
-                                                <option value="<?php echo $categorie ?>"<?php if($categorie == $post->getCategorie()): ?> selected<?php endif ?>><?php echo $categorie ?></option>
-                                            <?php endforeach ?>
+                                                <option value="<?php echo $categorie; ?>"<?php if($categorie == $post->getCategorie()): ?> selected<?php endif; ?>><?php echo $categorie; ?></option>
+                                            <?php endforeach; ?>
                                         </select>
                                         <?php if(array_key_exists('post_categorie', $validation['errors'])): ?>
-                                            <span class="help-block"><?php echo $validation['errors']['post_categorie'] ?></span>
-                                        <?php endif ?>
+                                            <span class="help-block"><?php echo $validation['errors']['post_categorie']; ?></span>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <br />
@@ -129,11 +130,11 @@
                                     <br />
                                     <br />
                                     
-                                    <div class="<?php if(array_key_exists('post_content', $validation['errors'])): ?>has-error<?php endif ?>">
-                                        <div class="form-control" name="post_content" height="600" id="editeur" contentEditable></div>
+                                    <div class="<?php if(array_key_exists('post_content', $validation['errors'])): ?>has-error<?php endif; ?>">
+                                        <div class="form-control" name="post_content" height="600" id="post_titre" contentEditable></div>
                                         <?php if(array_key_exists('post_content', $validation['errors'])): ?>
-                                            <span class="help-block"><?php echo $validation['errors']['post_content'] ?></span>
-                                        <?php endif ?>
+                                            <span class="help-block"><?php echo $validation['errors']['post_content']; ?></span>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +147,7 @@
                     </div>
 
                 </form>
-        <? } else {
+        <?php } else {
             header('Location: ../error.php?error=403');
         } ?>
         </div>

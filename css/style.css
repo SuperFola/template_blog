@@ -110,10 +110,10 @@ div.post .post-header hr {
     border: 0;
     border-top: 1px dashed #eee
 }
-div.post .post-content {
+/*div.post .post-content {
     padding: 20px;
     font-size: 15px;
-}
+}*/
 div.commentaire-form-container {
     padding: 15px;
 }

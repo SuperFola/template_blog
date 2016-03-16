@@ -167,12 +167,14 @@ class Post {
     protected $storedData;
     protected $commentaires;
     protected $edited;
+    protected $author;
 
     public function __construct($id = 0) {
         $this->id = $id;
         $this->timestampCreation = time();
         $this->commentaires = array();
         $this->edited = false;
+        $author = "Anonyme";
     }
 
     /**
@@ -185,6 +187,7 @@ class Post {
         $this->content = $array['content'];
         $this->categorie = $array['categorie'];
         $this->storedData = $array;
+        $this->author = $array['author'];
         foreach($array['commentaires'] as $commentaireArray) {
             $commentaire = new Commentaire();
             $commentaire->hydrate($commentaireArray);
@@ -219,10 +222,11 @@ class Post {
     /**
      * Remplit le Post à partir de la requête
      */
-    public function handlePostRequest() {
-        $this->titre = htmlentities($_POST['post_titre']);
-        $this->categorie = htmlentities($_POST['post_categorie']);
-        $this->content = htmlentities($_POST['post_content']);
+    public function handlePostRequest($title, $categorie, $content, $author_name) {
+        $this->titre = htmlentities($title);
+        $this->categorie = htmlentities($categorie);
+        $this->content = htmlentities($content);
+        $this->author = htmlentities($author_name);
 
         $this->edited = true;
     }
@@ -239,6 +243,7 @@ class Post {
             'timestamp' => $this->timestampCreation,
             'content' => $this->content,
             'categorie' => $this->categorie,
+            'author' => $this->author,
             'commentaires' => array()
         );
 

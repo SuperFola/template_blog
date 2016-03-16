@@ -1,0 +1,247 @@
+<!--
+* HTML pour Urworld
+* Auteur : Romain Claveau (Neoblast1996)
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>UrWorld - Jeu 2D en Python</title>
+		<link rel="stylesheet" type="text/css" href="css/design.css" />
+	</head>
+
+	<body>
+		<div id="logo">
+			<img src="images/logo.png" />
+		</div>
+		<div id="content">
+			<div id="nav">
+				<ul>
+					<li><a href="#1">Introduction</a></li>
+					<li><a href="#2">Plus sur le projet</a></li>
+					<li><a href="#3">Généralités</a></li>
+					<li><a href="#4">Objectifs</a></li>
+					<li><a href="#5">Le projet et son originalité</a></li>
+					<li><a href="#6">Téléchargement</a></li>
+					<li><a href="#7">Avancement</a></li>
+					<li><a href="#8">Screenshots</a></li>
+					<li><a href="#9">Votre contribution</a></li>
+					<li><a href="#10">Tutoriel et notes</a></li>
+					<li><a href="#11">Retours et copyrights</a></li>
+					<li><a href="http://www.forumpyprojects.forumactif.org/">Forum</a></li>
+				</ul>
+			</div>
+			<div id="page">
+				<h1 id="1">Introdution</h1>
+				<div align='right'><a onclick='javacript:window.scrollBy(0,-9999);'>(up)</a></div>
+				<p>
+					Bonjour à tous, ici je vous présente mon jeu 2D de type animal crossing-like. Vous pouvez bien entendu suivre le sujet sur le site du zéro, ou du moins le très célèbre OpenClassroom.<br /><br />Bonjour à tous et à toutes, je suis Folaefolc, actuellement étudiant en 2nde. Je code en python et ai pris connaissance avec pygame en juillet 2014. Cela est certes peu mais je me suis lancé un défi pour voir où j'en étais avec python 3 et pygame. Créer un jeu 2D était mon défi. J'ai commencé ce projet il y a un mois, en aout pour être exact. Le projet s'appelle "Boubouilles Land!", mais sérieusement, on s'en moque, le contenu est, d'après moi le plus important.
+				</p>
+
+				<h1 id="2">Plus sur le projet</h1>
+				<div align='right'><a onclick='javacript:window.scrollBy(0,-9999);'>(up)</a></div>
+				<p>
+					Comme dit en introduction j'ai voulu me lancer un défi pour me tester. J'ai choisi un "mode" de jeu simple : on se déplace, on achète, on vend, on creuse, on pêche . . . Les graphismes sont vraiment simplistes, le code est plus important. Petit à petit mon code s'est étoffé de fonctionnalité et ce jeu est devenu plus qu'un défi : c'était désormais un projet à part entière.
+				</p>
+
+				<h1 id="3">Généralités</h1>
+				<div align='right'><a onclick='javacript:window.scrollBy(0,-9999);'>(up)</a></div>
+				<p>
+					Je songe bien à coder une application pour changer de pack de textures et proposer d'en créer. Pour le moment on se déplace dans un monde en 2D, j'ai pensé à intégrer de l'isométrique (pas sûr). Il est possible de parler à un commercant, de creuser, de pêcher, de trouver des objets qui s'ajoutent à l'inventaire (un grand merci à josmiley pour son module reader :D ), de voir sa carte, j'ai intégré un choix de pseudo, le choix du mode de jeu (peacefull ou pas), la sauvegarde en quittant, je suis en train de rédiger un tuto en même temps que je code pour ne pas oublier de fonctionnalités (même si je sûr d'en avoir passées hélas).
+				</p>
+
+				<h1 id="4">Objectifs</h1>
+				<div align='right'><a onclick='javacript:window.scrollBy(0,-9999);'>(up)</a></div>
+				<p>
+					J'essaye de rendre mon code le plus clair possible et bientôt je souhaite passer à une version du jeu en réseau (cela est tout à fait possible avec mon niveau (je pense pouvoir accueillir 5 personnes ce qui est déjà bien)) avec les pseudos au dessus des noms des personnages. J'espère pouvoir mener ce projet à bien et ajouter pas mal de choses en accord avec mes playtesteurs. Le jeu est open source et mon objectif par rapport à cette facette est de le rendre facile d'utilisation, de modification . . . Pour demander le code, contactez moi par e-mail ! 
+				</p>
+
+				<h1 id="5">Le projet et son originalité</h1>
+				<div align='right'><a onclick='javacript:window.scrollBy(0,-9999);'>(up)</a></div>
+				<p>
+					Pourquoi mon projet est bien ? Euh... ben j'en sais rien en fait je ne fait que vous le présenter pour avoir des avis. Les moyens mis en oeuvre sont : une solide couche réseau, le jeu avec pygame pour python 3.4.0 (je pense pouvoir publier le jeu vers décembre, le mieux serait avant Noël pour mon oncle qui est aussi programmeur). Je distriburais le code source sur demande. Mon projet sur le net ? Oui pourquoi pas, une petite com' pour avoir des avis / mise place de contenu pour le jeu tel que des pack de textures Mais pourquoi mon projet est sympa ? J'utilise python qui donne une grande facilité de développement et aussi une rapidité d'exécution assez extraordinaire je trouve. Le jeu sera compatible avec Windows XP, Windows 8.1 et bien sûr Linux (j'utilise une version lite mais pas grave je me débrouillerai :) ). Voilà voilà.
+				</p>
+
+				<h1 id="6">Téléchargement</h1>
+				<div align='right'><a onclick='javacript:window.scrollBy(0,-9999);'>(up)</a></div>
+					<p>
+						<b>Informations : (v. 8.0.2)</b>
+					</p>
+					<ul>
+						<li>Le jeu contient actuellement 12000 lignes de code !</li>
+						<li>Le jeu n'est pas encore disponible en version bêta, toute les versions actuelles sont des pré-alphas</li>
+						<li>Ce logiciel nécessite <a href="http://www.pygame.org/ftp/pygame-1.9.2a0.win32-py3.2.msi"><b>Pygame</b></a> (version Windows) et <a href="https://www.python.org/ftp/python/3.4.1/python-3.4.1.msi"><b>Python 3.4.0</b></a> (version Windows)</li>
+						<li>La version compilée n'est pas encore disponible</li>
+						<li>Le jeu est distribué sous une licence GPL
+					</ul>
+					<p>
+						Téléchargement du jeu : <a href="javascript:alert('Indisponible !');">Lien ici</a><br />
+						Téléchargement du serveur : <a href="https://github.com/Loodoor/UrWorld-Alpha-3.x/tree/master/server">Lien ici</a>
+					</p>
+
+				<h1 id="7">Avancement</h1>
+				<div align='right'><a onclick='javacript:window.scrollBy(0,-9999);'>(up)</a></div>
+				<p>
+					<b>Les points en <font color='orange'>orange</font> sont en cours développement</b>
+				</p>
+				<ul>
+					<li>Correction d'un bug : la téléportation ne pouvait pas se faire plusieurs fois</li>
+					<li>Amélioration de la gravité</li>
+					<li>Animation de l'équipement lors du building des niveaux</li>
+					<li>Résolution de bug d'affichage d'équipement</li>
+					<li>Correction de bug lors du placement de bloc sans mouvement de souris</li>
+					<li>Correction de bug dans la téléportation et dans l'écoulement de l'eau</li>
+					<li>Bug précédent corrigé, erreur dans le code des 'escaliers' je vais voir cela le plus possible</li>
+					<li>Un bug non corrigé a été trouvé : il se peut que sur une map on ne puisse pas se déplacer, il faut donc se téléporter plusieurs fois avant de re-pouvoir se déplacer normalement</li>
+					<li>Ajout d'un bloc indestructible</li>
+					<li>Corrections de bugs lors du début d'une nouvelle partie</li>
+					<li>Le personnage peut 'se téléporte' au lieu du clique (il faut faire clique droit)</li>
+					<li>Le personnage suit la souris du regard</li>
+					<li>Correction de bugs autour de l'utilisation d'os.sep</li>
+					<li>Utilisation massive d'os.sep pour préparer le jeu au passage sous Linux !</li>
+					<li>On peut poser plusieur blocs à la fois sans avoir besoin de re-cliquer</li>
+					<li>On ne voit plus le pointeur de la souris</li>
+					<li>Correction de bug : le carré entourant la sélection n'est visible que si on bouge la souris</li>
+					<li>Ajout d'un carré entourant le bloc que l'on pointe actuellement</li>
+					<li>Code de la mise en réseau bientôt en place pour jouer en LAN (sur la même box) !</li>
+					<li>Changement de la méthode delecture de niveau, gain en fps, building des maps stable !</li>
+					<li>Bug détecté au niveau de l'arrêt de la musique avec 'f'</li>
+					<li>Sauvegarde du niveau courrant qui a été modifié par l'utilisateur</li>
+					<li>Correction de bug : la musique ne se jouait pas, ajout de son lors de l'arrivée d'un monstre</li>
+					<li>L'eau "ruiselle", elle coue si en dessous de là où on l'a placé il y a du vide</li>
+					<li>Le code est fait pour la fonctionnalité de building des maps à la terraria</li>
+					<li>Ajout des crédits</li>
+					<li>Légère modification du code, ajout mineurs et corrections de bug</li>
+					<li>Réduction du code de la fonction pour pêcher pour optimiser encore plus les performances !</li>
+					<li>Réduction du code de la boucle principale à environ 200 lignes !</li>
+					<li>Ajout du choix de la 'position' du son : On ou Off (avec 'f')</li>
+					<li>Ajout des collisions avec les personnages</li>
+					<li>Ajout d'un log de sa version payante pour éviter une réutilisation de l'installateur du jeu</li>
+					<li>Ajout d'une suite de 4 sprites Link (renommé en Lynk dans le jeu pour éviter les litiges) !</li>
+					<li>Modification du système de parole des passants, bientôt applicable aux commerçants !</li>
+					<li>Correction de bug</li>
+					<li>Ajout de la technique dite des escaliers : on peut "grimper" et descendre grâce à une succession de bloc !</li>
+					<li>Dynamisation du fond en fonction des déplacements uniquement (pour le moment, à voir pour des nuages dynamiques)</li>
+					<li>Idée d'ajout d'un moteur physique pour inclure des particules et la gravité, ainsi que la possibilité de sauter</li>
+					<li>Ajout d'une IA pour les monstres</li>
+					<li>Ajout du module de parole par détection de la poisition courante et de l'orientation du personnage</li>
+					<li>Une idée qui sera sympa je pense : passer le jeu en mode "Terraria-like" donc garder le concept de base mais utiliser une 2D vue de côté et pouvoir créer / modifier son univers !</li>
+					<li>Amélioration du clique sur le menu</li>
+					<li>Mise à jour du tutoriel</li>
+					<li>Correction de bugs divers</li>
+					<li>Ajout de son quand on pêche / creuse</li>
+					<li>Ajout d'une 'IA' pour les personnages</li>
+					<li>Régulation du volume du jeu par le menu</li>
+					<li>Création d'un invite compilé (en python) de manière à lancer le jeu</li>
+					<li>Compilation du code dans un format caché pour ne pas y avoir accès, création d'un invite pour lancer le jeu</li>
+					<li>Ajout du controle du nombre de FPS depuis le menu</li>
+					<li>Ajout du joystick</li>
+					<li>Ajout de la nuit en fonction de l'heure actuelle par ajout de surface transparente</li>
+					<li>Possibilité de choisir le mode Peacefull</li>
+					<li>Modification de la carte pour afficher les numéros de niveaux où des monstres sont présents</li>
+					<li>Carte fixée, pas de GUI, juste du texte</li>
+					<li>Modification du système de base de données, juste des séparateurs ';'</li>
+					<li>On pourra ainsi avoir plusieurs parties</li>
+					<li>Connexion à une base de donnée : système plus simple et plus performant (récupération d'une chaine entre {} puis [] et enfin ())</li>
+					<li>Serveur en cours de modification pour ne pas qu'il se ferme lorsqu'un client se déconnecte</li>
+					<li class="en_cours">Création en cours du système de commerçants</li>
+					<li>Idée de mettre des monstres qui attaquent le village</li>
+					<li>Lors du démarrage du jeu : fenêtre tkinter pour choisir un pseudo qui sera affiché au-dessus de la tête du personnage</li>
+					<li>On interchange les niveaux avec les touches '1', [...], '9' disponible depuis les 2 emplacement de chaque chiffres sur le clavier</li>
+					<li>Fixation d'un bug : les images de poissons / trésors ne s'affiche pas</li>
+					<li>Ajout de la régulation des FPS autour de 50 environ</li>
+					<li>Ajout des images pour les poissons / trésors</li>
+					<li>Creuser / Pêcher avec des conditions : il faut la pelle ou la canne à pêche et de l'eau pour exécuter les actions correspondantes</li>
+					<li>Sauvegarde intégrale du sac et du niveau courant avec 'echap' qui quitte aussi le jeu</li>
+					<li>Ajout du module reader pour pouvoir 'dire' des choses à l'utilisateur</li>
+					<li>Intégration de la possibilité de pêcher / creuser et de trouver des choses (coffres / poissons) ajoutable à l'inventaire</li>
+					<li>Création d'un système de sauvegarde avec le module Pickle</li>
+					<li>Les niveaux sont désormais interchangeables en utilisant les touches 'a' et 'q'</li>
+					<li>Les niveaux sont chargés en tilemapping, il n'y a pas de collisions</li>
+					<li>Le fond du menu devient aléatoire et des musiques aussi choisies aléatoirement viennent s'y greffer</li>
+					<li>Déplacement pixel par pixel</li>
+					<li>Création d'un menu pour choisir un personnage et du jeu qui hérite du choix du personnage</li>
+					<li>Apprentissage de Pygame pour Python 3.4.0</li>
+					<li>Idée du jeu</li>
+				</ul>
+
+				<h1 id="8">Screenshots</h1>
+				<div align='right'><a onclick='javacript:window.scrollBy(0,-9999);'>(up)</a></div>
+				<p style="text-align: center;">
+					<img src="images/1.png" alt="Réglages des paramètres du jeu" width="70%;" /><br />
+					<i>Réglages des paramètres du jeu</i><br /><br /><br />
+					<img src="images/2.png" alt="Transition vers le menu Pygame" width="70%;" /><br />
+					<i>Réglages des paramètres du jeu</i><br /><br /><br />
+					<img src="images/3.png" alt="Menu de lancement de la aprtie sauvegardée" width="70%;" /><br />
+					<i>Réglages des paramètres du jeu</i><br /><br /><br />
+					<img src="images/4.png" alt="Affichage du pseudo au-dessus de la tête" width="70%;" /><br />
+					<i>Réglages des paramètres du jeu</i><br /><br /><br />
+					<img src="images/5.png" alt="Choix d'un outil : la canne à pêche" width="70%;" /><br />
+					<i>Réglages des paramètres du jeu</i><br /><br /><br />
+					<img src="images/6.png" alt="Je creuse mais je ne trouve rien" width="70%;" /><br />
+					<i>Je creuse mais je ne trouve rien</i><br /><br /><br />
+					<img src="images/7.png" alt="Test du pseudo (fenêtre de connexion)" width="70%;" /><br />
+					<i>Test du pseudo (fenêtre de connexion)</i><br /><br /><br />
+					<img src="images/8.png" alt="Affichage des crédits" width="70%;" /><br />
+					<i>Affichage des crédits</i><br /><br /><br />
+					<img src="images/9.png" alt="Build de la map (fait-maison)" width="70%;" /><br />
+					<i>Build de la map (fait-maison)</i><br /><br /><br />
+					<img src="images/10.png" alt="Sauvegarde (vu par la console)" width="70%;" /><br />
+					<i>Sauvegarde (vu par la console)</i><br /><br /><br />
+				</p>
+
+				<h1 id="9">Votre contribution</h1>
+				<div align='right'><a onclick='javacript:window.scrollBy(0,-9999);'>(up)</a></div>
+				<p>
+					Vous pouvez contribuer au projet et compléter le dictionnaire des textes de PNJ. Plus il sera étoffé, mieux ce sera ;)<br />
+					Téléchargez le dictionnaires des textes <a href="http://pyprojects.alwaysdata.net/paroles.sav">ici</a>
+				</p>
+
+				<h1 id="10">Tutoriel et notes</h1>
+				<div align='right'><a onclick='javacript:window.scrollBy(0,-9999);'>(up)</a></div>
+				<p>
+					<b>Menu</b><br /> 
+					Il faut cliquer sur un personnage pour le sélectionner (il se peut que cela ne marche très bien. Pour le bon fonctionnement faites un glissé-déplacé sur le nom du personnage pour le selectionner puis lancez le jeu normalement).<br />
+					Appuyez sur 'j' pour lancer le jeu, ou cliquez sur le bouton.<br /><br />
+					<b>Jeu</b> <br />
+					'1', [...], '9' permettent de changer d'objet actuel (pour construire son monde); <br />
+					'e' permet d'ouvrir l'inventaire; <br />
+					'Up', 'Down', 'Right' et 'Left' permettent de se déplacer et de changer de niveau; <br />
+					'd' permet de parler à la personne la plus proche; <br />
+					'x' permet de creuser / pêcher en fonction de l'équipement actuel; <br />
+					la molette de la souris permet de changer d'équipement; <br />
+					'echap' permet de sauvegarder le contenu du sac ainsi que ses sous; <br />
+					'c' affiche la carte et indique la présence par niveau (à chaque fois que cette carte est ouverte, la position des monstres change); <br />
+					'[...]' (toutes les touches) permettent de passer au texte suivant lorsque votre inventaire est ouvert ou que vous parlez à une Boubouille;<br /> 
+					'f' permet de choisir si le son est On ou Off; <br />
+					le controle au joystick est possible avec la croix directionnelle; <br />
+					le clique gauche permet de placer des blocs, le clique droit de se téléporter (attention à la gravité !); <br /><br />
+					<i>Ce "tutoriel" n'est pas fini.</i>
+				</p>
+				<p>
+					<b>Note n°1 :</b> il se peut que l'inventaire vienne à se bloquer et ne pas réagir à l'appui d'une touche. Dans ce cas, appuyez sur une touche (peu importe laquelle), et créez un évenement de mouvement de souris, déplacez votre pointeur sur la surface de jeu, tout simplement. Cela est à faire après l'appui puis la relâche d'une touche. Répéter l'opération jusqu'à ce que l'inventaire se ferme. Puis rouvrer-le : le bug est censé être résolu !<br /><br />
+					<b>Note n°2 :</b> il se peut que le jeu se démarre mais que le menu ne s'affiche pas et que la fenêtre se coupe. Cela est dû à une erreur dans 2 fichiers du dossier Parties/ :<br /> 
+					- dossier.sav, il ne doit contenir que 2 caractères comme ceci : 1/ (le nombre peut varier de 1 à 4 compris)<br />
+					- boubouilles.sav, il ne doit contenir qu'un seul 'mot' : soit Guerrier, Magicien, Boulanger ou Paysan<br />
+					Après rectification, le jeu doit se lancer correctement.<br /><b>Un bug non corrigé a été trouvé : il se peut que sur une map on ne puisse pas se déplacer, il faut donc se téléporter plusieurs fois avant de re-pouvoir se déplacer normalement</b></b>
+				</p>
+
+				<h1 id="11">Retours et copyrights</h1>
+				<div align='right'><a onclick='javacript:window.scrollBy(0,-9999);'>(up)</a></div>
+				<p>
+					Contactez-moi par mail : <b>python34_france [at] outlook [dot] fr</b> ! ou <b>urworld [at] outlook [dot] fr</b> !
+				</p>
+				<p style="text-align: center;"><i>
+					Logo 'UrWorld' fait par NeoBlast. <br />
+					Images (des niveaux) faites par Folaefolc. <br />
+					Images (des personnages) faites par Shamaneileen. <br />
+					Sons (courts) trouvés sur FindSound. <br />
+					Musiques (Forest_Maze_Symphony, Raibow_Road_Remix, et Rainbow_Road_Rock_II) faites par Mephiles200108420, copyright Nintendo &copy;. <br />
+					Jeu (idée, code, et concept arts) faits par Folaefolc. <br />
+					Tous droits réservés à Kubiangle &copy;&reg;tm et à Folaefolc.<br />
+				</i></p>
+			</div>
+		</div>
+	</body>
+</html>
