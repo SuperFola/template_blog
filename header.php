@@ -6,7 +6,7 @@
                 <a class="btn btn-primary btn-xs" href="login.php">Connexion</a>
                 <?php
                     } else {
-                        if (in_array($_SESSION['role'], array('ADMINISTRATEUR', 'MODERATEUR'))){
+                        if (in_array($_SESSION['role'], array('ADMINISTRATEUR', 'MODERATEUR', 'AUTEUR'))){
                             echo "<a class=\"btn btn-primary btn-xs\" href=\"admin/index.php\">" . $_SESSION['pseudo'] . "</a>";
                         } else {
                             echo "<a class=\"btn btn-primary btn-xs\">" . $_SESSION['pseudo'] . "</a>";

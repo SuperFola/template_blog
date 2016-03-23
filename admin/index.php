@@ -10,20 +10,28 @@
         <?php include(__DIR__ . '/header.php'); ?>
         <div class="container">
             <?php
-                if (!isset($_SESSION['pseudo']) and (!isset($_SESSION['role']) or $_SESSION['role'] != 'ADMINISTRATEUR')){
+                if (!isset($_SESSION['pseudo']) and !isset($_SESSION['role'])){
                     header("Location: ../login.php");
-                } else if ($_SESSION['role'] == 'ADMINISTRATEUR'){
+                } else if ($_SESSION['role'] == 'ADMINISTRATEUR' or $_SESSION['role'] == 'MODERATEUR' or $_SESSION['role'] == 'AUTEUR'){
                     // connexion réussie
                     echo "Interface d'administration, bonjour {$_SESSION['pseudo']}";
                     
-                    echo "<div class=\"breadcrumb-container\">
-                            <ol class=\"breadcrumb\">
-                                <li><a href=\"index.php\">Accueil</a></li>
-                                <li><a href=\"writing.php\">Ecrire un article</a></li>
-                                <li><a href=\"utilisateurs/\">Gérer les utilisateurs</a></li>
-                                <li><a href=\"remarquable_articles.php/\">Gérer les articles mis en avant</a></li>
-                            </ol>
-                        </div>";
+                    if ($_SESSION['role'] == 'ADMINISTRATEUR' or $_SESSION['role'] == 'MODERATEUR')
+                        echo "<div class=\"breadcrumb-container\">
+                                  <ol class=\"breadcrumb\">
+                                      <li><a href=\"../index.php\">Accueil</a></li>
+                                      <li><a href=\"writing.php\">Ecrire un article</a></li>
+                                      <li><a href=\"utilisateurs/\">Gérer les utilisateurs</a></li>
+                                      <li><a href=\"remarquable_articles.php/\">Gérer les articles mis en avant</a></li>
+                                  </ol>
+                              </div>";
+                    else if ($_SESSION['role'] == 'AUTEUR')
+                        echo "<div class=\"breadcrumb-container\">
+                                  <ol class=\"breadcrumb\">
+                                      <li><a href=\"../index.php\">Accueil</a></li>
+                                      <li><a href=\"writing.php\">Ecrire un article</a></li>
+                                  </ol>
+                              </div>";
                     
                     // les news
                     echo "Liste des news : <br />";

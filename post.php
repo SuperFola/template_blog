@@ -18,7 +18,7 @@
                 exit();
             }
 
-            if ($_POST['cmd'] == 'post_comment_add') {
+            if (isset($_POST['cmd']) and $_POST['cmd'] == 'post_comment_add') {
                 $commentaire = new Commentaire();
                 if (!isset($_SESSION) or !isset($_SESSION['pseudo']))
                     $pseudo = htmlentities($_POST['post_comment_pseudo']);
@@ -49,13 +49,13 @@
         <div class="post">
             <div class="post-header">
                 <h1><?php echo $post->getTitre() ?></h1>
-                <h4><?php echo $post->getDisplayableDate() ?></h4>
+                <h4><?php echo $post->getDisplayableDate(); ?> par <?php echo $post->getAuthor(); ?></h4>
                 <div class="col-md-4 col-md-offset-4">
                     <hr />
                 </div>
             </div>
             <div class="post-content">
-                <?php echo nl2br($post->getContent()) ?>
+                <?php echo nl2br($post->getContent()); ?>
             </div>
         </div>
         <hr>
@@ -128,7 +128,9 @@
         </div>
         <br />
         <br />
-
+        <?php
+            include('footer.php');
+        ?>
     </div>
     </body>
 </HTML>

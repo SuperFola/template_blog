@@ -202,14 +202,14 @@ class Post {
      */
     public function getContentPreview() {
         $preview = "";
-        $size = 158;
+        $size_max = 158;
         $count = 0;
         
-        foreach(array($this->content) as $char) {
+        foreach(str_split($this->content) as $char) {
             $preview .= $char;
-            ++$count;
+            $count++;
             
-            if ($count >= $size && in_array($char, array(' ', ',', ':', '!', '?', '.', ';'))){
+            if ($count >= $size_max){
                 break;
             }
         }
@@ -225,7 +225,7 @@ class Post {
     public function handlePostRequest($title, $categorie, $content, $author_name) {
         $this->titre = htmlentities($title);
         $this->categorie = htmlentities($categorie);
-        $this->content = htmlentities($content);
+        $this->content = $content;
         $this->author = htmlentities($author_name);
 
         $this->edited = true;
@@ -405,6 +405,10 @@ class Post {
         $this->edited = $edited;
 
         return $this;
+    }
+    
+    public function getAuthor() {
+        return $this->author;
     }
 
     public function getEdited() {

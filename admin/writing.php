@@ -32,7 +32,7 @@
                 }
             }
         ?>
-        <?php if (isset($_SESSION) and in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR'))) { ?>
+        <?php if (isset($_SESSION) and in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR', 'AUTEUR'))) { ?>
         <script src="../scripts/wysiwyg.js"></script>
         <div class="container">
             <div class="writing-form-container">
@@ -78,12 +78,12 @@
                                         <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                         <span class="fa fa-caret-down"></span></a>
                                             <ul class="dropdown-menu">
-                                                <li><a onclick="command('heading', 'h1')"><i class="fa fa-header fa-fw"></i>1</a></li>
-                                                <li><a onclick="command('heading', 'h2')"><i class="fa fa-header fa-fw"></i>2</a></li>
-                                                <li><a onclick="command('heading', 'h3')"><i class="fa fa-header fa-fw"></i>3</a></li>
-                                                <li><a onclick="command('heading', 'h4')"><i class="fa fa-header fa-fw"></i>4</a></li>
-                                                <li><a onclick="command('heading', 'h5')"><i class="fa fa-header fa-fw"></i>5</a></li>
-                                                <li><a onclick="command('heading', 'h6')"><i class="fa fa-header fa-fw"></i>6</a></li>
+                                                <li><a onclick="command('heading', 'h1');"><i class="fa fa-header fa-fw"></i>1</a></li>
+                                                <li><a onclick="command('heading', 'h2');"><i class="fa fa-header fa-fw"></i>2</a></li>
+                                                <li><a onclick="command('heading', 'h3');"><i class="fa fa-header fa-fw"></i>3</a></li>
+                                                <li><a onclick="command('heading', 'h4');"><i class="fa fa-header fa-fw"></i>4</a></li>
+                                                <li><a onclick="command('heading', 'h5');"><i class="fa fa-header fa-fw"></i>5</a></li>
+                                                <li><a onclick="command('heading', 'h6');"><i class="fa fa-header fa-fw"></i>6</a></li>
                                             </ul>
                                     </div>
                                     
@@ -92,14 +92,14 @@
                                         <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                         <span class="fa fa-caret-down"></span></a>
                                             <ul class="dropdown-menu">
-                                                <li><a onclick="command('justifycenter')"><i class="fa fa-align-center fa-fw"></i> Centrer</a></li>
-                                                <li><a onclick="command('justifyfull')"><i class="fa fa-align-justify fa-fw"></i> Justifier</a></li>
+                                                <li><a onclick="command('justifycenter');"><i class="fa fa-align-center fa-fw"></i> Centrer</a></li>
+                                                <li><a onclick="command('justifyfull');"><i class="fa fa-align-justify fa-fw"></i> Justifier</a></li>
                                                 <li class="divider"></li>
-                                                <li><a onclick="command('justifyleft')"><i class="fa fa-align-left fa-fw"></i> A gauche</a></li>
-                                                <li><a onclick="command('justifyright')"><i class="fa fa-align-right fa-fw"></i> A droite</a></li>
+                                                <li><a onclick="command('justifyleft');"><i class="fa fa-align-left fa-fw"></i> A gauche</a></li>
+                                                <li><a onclick="command('justifyright');"><i class="fa fa-align-right fa-fw"></i> A droite</a></li>
                                                 <li class="divider"></li>
-                                                <li><a onclick="command('subscript')"><i class="fa fa-subscript fa-fw"></i> Indice</a></li>
-                                                <li><a onclick="command('superscript')"><i class="fa fa-superscript fa-fw"></i> Exposant</a></li>
+                                                <li><a onclick="command('subscript');"><i class="fa fa-subscript fa-fw"></i> Indice</a></li>
+                                                <li><a onclick="command('superscript');"><i class="fa fa-superscript fa-fw"></i> Exposant</a></li>
                                             </ul>
                                     </div>
                                     
@@ -108,8 +108,8 @@
                                         <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                         <span class="fa fa-caret-down"></span></a>
                                             <ul class="dropdown-menu">
-                                                <li><a onclick="command('insertunorderedlist')"><i class="fa fa-list-ul fa-fw"></i> A puce</a></li>
-                                                <li><a onclick="command('insertorderedlist')"><i class="fa fa-list-ol fa-fw"></i> Numérotée</a></li>
+                                                <li><a onclick="command('insertunorderedlist');"><i class="fa fa-list-ul fa-fw"></i> A puce</a></li>
+                                                <li><a onclick="command('insertorderedlist');"><i class="fa fa-list-ol fa-fw"></i> Numérotée</a></li>
                                             </ul>
                                     </div>
                                     
@@ -118,12 +118,12 @@
                                         <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                         <span class="fa fa-caret-down"></span></a>
                                             <ul class="dropdown-menu">
-                                                <li><a onclick="command('forecolor', 'blue')"> Bleu</a></li>
-                                                <li><a onclick="command('forecolor', 'red')"> Rouge</a></li>
-                                                <li><a onclick="command('forecolor', 'yellow')"> Jaune</a></li>
-                                                <li><a onclick="command('forecolor', 'green')"> Vert</a></li>
-                                                <li><a onclick="command('forecolor', 'black')"> Noir</a></li>
-                                                <li><a onclick="command('forecolor', 'white')"> Blanc</a></li>
+                                                <li><a onclick="command('forecolor', 'blue');"> Bleu</a></li>
+                                                <li><a onclick="command('forecolor', 'red');"> Rouge</a></li>
+                                                <li><a onclick="command('forecolor', 'yellow');"> Jaune</a></li>
+                                                <li><a onclick="command('forecolor', 'green');"> Vert</a></li>
+                                                <li><a onclick="command('forecolor', 'black');"> Noir</a></li>
+                                                <li><a onclick="command('forecolor', 'white');"> Blanc</a></li>
                                             </ul>
                                     </div>
                                     
@@ -131,10 +131,17 @@
                                     <br />
                                     
                                     <div class="<?php if(array_key_exists('post_content', $validation['errors'])): ?>has-error<?php endif; ?>">
-                                        <div class="form-control" name="post_content" height="600" id="post_titre" contentEditable></div>
+                                        <div class="form-control" height="600" id="editeur" contentEditable></div>
                                         <?php if(array_key_exists('post_content', $validation['errors'])): ?>
                                             <span class="help-block"><?php echo $validation['errors']['post_content']; ?></span>
                                         <?php endif; ?>
+                                        <br />
+                                        Code source HTML :
+                                        <br />
+                                        <textarea name="post_content" id="hidden_content" rows="12" cols="64"></textarea>
+                                        <br />
+                                        <a class="btn btn-default" onclick="document.getElementById('hidden_content').value = document.getElementById('editeur').innerHTML;">Metter à jour ce code</a>
+                                        <a class="btn btn-primary" onclick="document.getElementById('editeur').innerHTML = document.getElementById('hidden_content').value;">Metter à jour la news</a>
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +150,7 @@
                     <div class="form-footer col-md-8 col-md-offset-2">
                         <a href="../index.php" class="btn btn-default">Retour</a>
                         <input type="hidden" name="cmd" value="post_add" />
-                        <input type="submit" class="btn btn-primary" value="Ajouter" />
+                        <input type="submit" class="btn btn-primary" value="Ajouter" onclick="document.getElementById('hidden_content').value = document.getElementById('editeur').innerHTML;" />
                     </div>
 
                 </form>

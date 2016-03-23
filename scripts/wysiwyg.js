@@ -10,11 +10,7 @@ function command(name, argument){
     if (typeof argument === 'undefined') {
         argument = '';
     }
-    if (name != "insertImage"){
-        document.execCommand(name, false, argument);
-    }else{
-        document.getElementById("editeur").innerHTML = document.getElementById("editeur").innerHTML + "<img src='" + argument + "' onclick='clickImg(this);'>";
-    }
+    document.execCommand(name, false, argument);
     
     document.getElementById("editeur").focus();
 }
