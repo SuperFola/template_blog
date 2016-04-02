@@ -21,7 +21,7 @@
             if (isset($_POST['cmd']) and $_POST['cmd'] == 'post_comment_add') {
                 $commentaire = new Commentaire();
                 if (!isset($_SESSION) or !isset($_SESSION['pseudo']))
-                    $pseudo = htmlentities($_POST['post_comment_pseudo']);
+                    $pseudo = "Anonyme";
                 else
                     $pseudo = $_SESSION['pseudo'];
                 $message = htmlentities($_POST['post_comment_message']);
@@ -66,9 +66,7 @@
                         <div class="container-fluid">
                             <?php if (!isset($_SESSION) or !isset($_SESSION['pseudo'])) { ?>
                             <h4>Donnez votre opinion !</h4>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Pseudo" name="post_comment_pseudo" />
-                            </div>
+                            Sera posté en tant que : <b>Anonyme</b><br />
                             <?php } else {
                                 echo '<h4 style="display: inline;">Donnez votre opinion !</h4>';
                                 echo '<div class="avatar" style="display: inline; float: right; line-height: 20px;">';
