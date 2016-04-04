@@ -22,7 +22,7 @@
                                       <li><a href=\"../index.php\">Accueil</a></li>
                                       <li><a href=\"writing.php\">Ecrire un article</a></li>
                                       <li><a href=\"utilisateurs/\">Gérer les utilisateurs</a></li>
-                                      <li><a href=\"remarquable_articles.php/\">Gérer les articles mis en avant</a></li>
+                                      <li><a href=\"remarquable_articles.php\">Gérer les articles mis en avant</a></li>
                                   </ol>
                               </div>";
                     else if ($_SESSION['role'] == 'AUTEUR')

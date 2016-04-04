@@ -20,35 +20,43 @@ class FirstPagePostsManager {
             $this->persistPostsList();
         }
 
-        $this->users = $this->getFile($filepath);
+        $this->posts_details = $this->getFile($filepath);
+    }
+    
+    public function getSize() {
+        return count($this->posts_details);
     }
     
     public function getPost($number) {
-        if ($number >= 0 && $number < $max_posts) {
+        if ($number >= 0 && $number < $this->getSize()) {
             return $this->posts_details[$number];
         }
         
         return null;
     }
     
+    public function findAll() {
+        return $this->posts_details;
+    }
+    
     public function hydrate($array) {
-        if (count($posts_details) < $max_posts) {
-            $posts_details[]['id'] = $array['post_id'];
-            $post_details[]['image'] = $array['post_image'];
+        if (count($this->posts_details) < $this->max_posts) {
+            $this->posts_details[]['id'] = $array['post_id'];
+            $this->posts_details[]['image'] = $array['post_image'];
         } else {
-            $post_details[0]['id'] = $array['post_id'];
-            $post_details[0]['image'] = $array['post_image'];
+            $this->posts_details[3] = $this->posts_details[2];
+            $this->posts_details[2] = $this->posts_details[1];
+            $this->posts_details[1] = $this->posts_details[0];
+            
+            $this->posts_details[0]['id'] = $array['post_id'];
+            $this->posts_details[0]['image'] = $array['post_image'];
         }
     }
     
-    private function persistPostsList() {
+    public function persistPostsList() {
         $filepath = $this->directory.'/'.$this->filename;
 
-        if (is_file($filepath)) {
-            throw new Exception('Le fichier "'. $filepath .' existe deja...');
-        }
-
-        $this->saveFile($filepath, serialize($this->users));
+        $this->saveFile($filepath, serialize($this->posts_details));
     }
     
     private function saveFile($filepath, $string) {

@@ -15,10 +15,54 @@
                 } else if ($_SESSION['role'] == 'ADMINISTRATEUR'){
                     // connexion réussie
                     echo "Interface d'administration, bonjour {$_SESSION['pseudo']}";
-                    echo "<br />";
+                    echo "<br /><br />";
+                    
+                    $fpp_mgr = new FirstPagePostsManager();
+                    $pm = new PostManager();
+                    
+                    if (isset($_POST['article_id']) && isset($_POST['image_path'])) {
+                        if ($_POST['article_id'] >= 1 && $_POST['article_id'] <= count($pm->findAll())) {
+                            $fpp_mgr->hydrate(array("post_id" => intval($_POST['article_id']), "post_image" => $_POST['image_path']));
+                            $fpp_mgr->persistPostsList();
+                            echo '<div class="alert alert-success" role="alert">Article ajouté avec succès !</div>';
+                        } else {
+                            echo '<div class="alert alert-danger" role="alert">Une erreur est survenue ! L\'id de l\'article ne doit pas être correct</div>';
+                        }
+                    }
+                    
                     echo "Liste des articles mis en avant : <br />";
+                    if ($fpp_mgr->getSize() != 0) {
+                        echo '<ul>';
+                        foreach ($fpp_mgr->findAll() as $article) {
+                            echo '<li>';
+                            $post = $pm->findPost($article['id']);
+                            echo $article['id'] . " - " . $post->getTitre() . " - Par " . $post->getAuthor();
+                            echo '</li>';
+                        }
+                        echo '</ul>';
+                    } else {
+                        echo '<div class="alert alert-info" role="alert">Aucun article n\'est actuellement mis en avant</div>';
+                    }
                 }
             ?>
+            <br />
+            <form action="remarquable_articles.php" method="post">
+                Ajouter un article :
+                <br /><br />
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">ID</span>
+                    <input type="text" class="form-control" placeholder="post ID" name="article_id" aria-describedby="basic-addon1">
+                </div>
+                <br />
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">Chemin vers l'image</span>
+                    <input type="text" class="form-control" placeholder="chemin/vers/l/image.png" name="image_path" aria-describedby="basic-addon2">
+                </div>
+                <br />
+                <a class="btn btn-default" href="index.php" target="blank">Liste des posts</a>&nbsp;&nbsp;
+                <a class="btn btn-default" href="../private/cible_envoi.php" target="blank">Héberger une image</a>&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </form>
             
             <?php
                 include(__DIR__ . '/../footer.php');
