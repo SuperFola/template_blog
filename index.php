@@ -14,7 +14,7 @@
                     $postManager = new PostManager();
                     $fpp_mgr = new FirstPagePostsManager();
                 ?>
-                <h1>Derniers articles</h1>
+                <h1>A la une</h1>
 
                 <div class="top-posts-container container-fluid">
                     <?php
@@ -50,7 +50,7 @@
                             }
                             
                             foreach($posts as $post) {
-                                if ($post->getId() >= $page * 12 && $post->getId() < $page * 12 + 1) {
+                                if ($post->getId() - $page * 12 >= 0 && $post->getId() < ($page + 1) * 12) {
                                 ?>
                                 <li>
                                     <div>
