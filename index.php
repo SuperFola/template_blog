@@ -21,7 +21,7 @@
                         if ($fpp_mgr->getSize() == 0) {
                             echo "<center><h4>Aucun post n'est actuellement mis en avant</h4></center>";
                         } else {
-                            echo "<ul class='top_posts'>";
+                            echo "<ul class='top-posts'>";
                             for ($i=0; $i < $fpp_mgr->getSize(); $i++) {
                                 $post_details = $fpp_mgr->getPost($i);
                                 if ($post_details) {

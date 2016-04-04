@@ -18,11 +18,15 @@
             }
             if ($_POST['pwd'] == $_POST['pwdc'] && $_POST['pwd'] != '') {
                 $um = new UserManager();
-                if (!$um->findUserByPseudo($_POST['pseudo'])) {
+                if (!$um->findUserByPseudo($_POST['user'])) {
                     if (true) {
                         $new_user = new User();
-                        $new_user->handlePostRequest($_POST['pseudo'], $_POST['pwd'], $_POST['email'], 'MEMBRE');
-                        $um->addUser($new_user);
+                        $new_user->handlePostRequest($_POST['user'], $_POST['pwd'], $_POST['email'], 'MEMBRE');
+                        $validation = $new_user->validate();
+                        if ($validation['valid']) {
+                            $um->addUser($new_user);
+                            $um->updateUsers();
+                        }
                         $_SESSION['pseudo'] = $new_user->getPseudo();
                         $_SESSION['role'] = $new_user->getRole();
                         header('Location: index.php');

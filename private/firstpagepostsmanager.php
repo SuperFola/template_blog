@@ -53,6 +53,14 @@ class FirstPagePostsManager {
         }
     }
     
+    public function deletePostNumber($number) {
+        if ($number >= 0 && $this->getSize() > 0 && $number < $this->getSize()) {
+            unset($this->posts_details[$number]);
+            return true;
+        }
+        return false;
+    }
+    
     public function persistPostsList() {
         $filepath = $this->directory.'/'.$this->filename;
 
