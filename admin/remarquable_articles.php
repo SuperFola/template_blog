@@ -44,11 +44,13 @@
                         echo '<ul>';
                         $nb = 0;
                         foreach ($fpp_mgr->findAll() as $article) {
-                            echo '<li>';
-                            $post = $pm->findPost($article['id']);
-                            echo $article['id'] . " - " . $post->getTitre() . " - Par " . $post->getAuthor() . " - Numéro " . $nb;
-                            echo '</li>';
-                            $nb++;
+                            if ($article['id']) {
+                                $post = $pm->findPost($article['id']);
+                                echo '<li>';
+                                echo $article['id'] . " - " . $post->getTitre() . " - Par " . $post->getAuthor() . " - Numéro " . $nb;
+                                echo '</li>';
+                                $nb++;
+                            }
                         }
                         echo '</ul>';
                     } else {

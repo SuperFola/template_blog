@@ -15,7 +15,7 @@
     }
 
     if (isset($_POST['witness'])) {
-        $user->handlePostRequest();
+        $user->handlePostRequest($_POST['user_pseudo'], $_POST['user_password'], $_POST['user_email'], $_POST['user_role']);
         $validation = $user->validate();
         if ($validation['valid']) {
             $userManager->editUser($user);

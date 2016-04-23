@@ -7,37 +7,32 @@
         if ($_SESSION['role'] == 'ADMINISTRATEUR') {
             // on est bien admin
             if (isset($_GET['action'])){
+                $postid = intval($_GET['postid']);
+                $timestamp = intval($_GET['comts']);
+                $done = false;
+                $pm = new PostManager();
+                $post = $pm->findPost($postid);
+                
                 if ($_GET['action'] == 'delete') {
                     if (isset($_GET['postid']) and isset($_GET['comts'])) {
-                        $postid = intval($_GET['postid']);
-                        $timestamp = intval($_GET['comts']);
-                        $done = false;
-                        $pm = new PostManager();
-                        foreach ($pm->findAll() as $post) {
-                            foreach($post->getCommentairesSorted() as $commentaire) {
-                                if ($post->getId() == $postid and $commentaire->getTimestamp()) {
-                                    $post->removeCommentaire($commentaire);
-                                    $done = true;
-                                }
-                                
-                                if ($done){
-                                    break;
-                                }
-                            }
-                            
-                            if ($done) {
+                        foreach($post->getCommentairesSorted() as $commentaire) {
+                            if ($commentaire->getTimestamp() == $timestamp) {
+                                $post->removeCommentaire($commentaire);
+                                $pm->updatePost($post);
+                                $done = true;
                                 break;
                             }
                         }
                         
-                        if ($done) {
+                        if ($done)
                             echo 'Supprimé';
-                        } else {
+                        else
                             echo 'Il s\'est passé quoi ?';
-                        }
+                    } else {
+                        echo 'Arguments manquants';
                     }
                 } else if ($_GET['action'] == 'edit') {
-                    
+                    $pm->updatePost($post);
                 }
             } else {
                 echo 'pas d\'action';

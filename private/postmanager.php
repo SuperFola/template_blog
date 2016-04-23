@@ -446,6 +446,10 @@ class Commentaire {
     public function handlePostRequest($pseudo, $message) {
         $this->pseudo = $pseudo;
         $this->message = $message;
+        if (isset($REMOTE_ADDR))
+            $this->ip = $REMOTE_ADDR;
+        else
+            $this->ip = $_SERVER['REMOTE_ADDR'];
     }
 
     /**

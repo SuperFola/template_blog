@@ -26,7 +26,7 @@
                                 $post_details = $fpp_mgr->getPost($i);
                                 if ($post_details) {
                                     echo "<li class='col-md-3'>";
-                                    echo "<div style=\"background-image: url('" . $post_details['image'] . "');\">";
+                                    echo "<div style=\"background-image: url('" . $post_details['image'] . "'); background-size: 100%;\">";
                                     echo "<a href='post.php?id=" . $post_details['id'] . "' style='color: black;'><h3>" . $postManager->findPost($post_details['id'])->getTitre() . "</h3></a>";
                                     echo "</div>";
                                     echo "</li>";

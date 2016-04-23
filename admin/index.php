@@ -23,6 +23,7 @@
                                       <li><a href=\"writing.php\">Ecrire un article</a></li>
                                       <li><a href=\"utilisateurs/\">Gérer les utilisateurs</a></li>
                                       <li><a href=\"remarquable_articles.php\">Gérer les articles mis en avant</a></li>
+                                      <li><a href=\"../private/cible_envoi.php\">Héberger une image</a></li>
                                   </ol>
                               </div>";
                     else if ($_SESSION['role'] == 'AUTEUR')
@@ -30,6 +31,7 @@
                                   <ol class=\"breadcrumb\">
                                       <li><a href=\"../index.php\">Accueil</a></li>
                                       <li><a href=\"writing.php\">Ecrire un article</a></li>
+                                      <li><a href=\"../private/cible_envoi.php\">Héberger une image</a></li>
                                   </ol>
                               </div>";
                     
@@ -39,7 +41,7 @@
                     $pm = new PostManager();
                     foreach ($pm->findAll() as $post) {
                         echo "<li>";
-                        echo "{$post->getId()} - {$post->getCategorie()} {$post->getTitre()}  {$post->getDisplayableDate()}";
+                        echo "{$post->getId()} - Catégorie : <b>{$post->getCategorie()}</b> - Titre : <b><a href=\"../post.php?id={$post->getId()}\" target=blank>{$post->getTitre()}</a></b> ; {$post->getDisplayableDate()}";
                         if ($post->getEdited()){
                             echo " - A été édité";
                         }
@@ -60,7 +62,7 @@
                         foreach($post->getCommentairesSorted() as $commentaire) {
                             if ($count < $max){
                                 echo "<li>";
-                                echo "Par {$commentaire->getPseudo()} (ip:{$commentaire->getIp()}) - <a onclick=\"s('" . $count . "');\">{$commentaire->getDisplayableDate()}</a> - 
+                                echo "Par {$commentaire->getPseudo()} (ip:{$commentaire->getIp()}) - Sur le post : <b>{$post->getId()} : {$post->getTitre()}</b> - <a onclick=\"s('" . $count . "');\">{$commentaire->getDisplayableDate()}</a> - 
                                       <a href=\"ad-com-ed-su.php?action=delete&postid={$post->getId()}&comts={$commentaire->getTimestamp()}\" target=blank>Supprimer</a> - 
                                       <a href=\"ad-com-ed-su.php?action=edit&postid={$post->getId()}&comts={$commentaire->getTimestamp()}\" target=blank>Editer</a><br />";
                                 echo "<div class=\"spoiler\" id='" . $count . "'>{$commentaire->getMessage()}</div>";
