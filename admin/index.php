@@ -45,7 +45,7 @@
                         if ($post->getEdited()){
                             echo " - A été édité";
                         }
-                        echo " - <a href='supr_edit_news.php?edit=1&post={$post->getId()}' target='blank'>Editer</a> - <a href='supr_edit_news.php?edit=0&post={$post->getId()}' target='blank'>Supprimer</a>";
+                        echo " - <a href='writing.php?action=post_edit&post={$post->getId()}' target='blank'>Editer</a> - <a href='supr_edit_news.php?edit=0&post={$post->getId()}' target='blank'>Supprimer</a>";
                         echo "</li>";
                     }
                     echo "</ul>";

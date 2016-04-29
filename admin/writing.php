@@ -14,10 +14,18 @@
                 'valid' => false,
                 'errors' => array()
             );
-            $post = new Post();
+            if (isset($_GET['action']) and isset($_GET['post'])) {
+                if ($_GET['action'] == 'post_edit') {
+                    $post = $postManager->findPost(intval($_GET['post']));
+                } else {
+                    $post = new Post();
+                }
+            } else {
+                $post = new Post();
+            }
             $categories = array('Programmation', 'Vie du blog', 'Windows', 'Android', 'Github', 'Les langages du web', 'Python', 'La famille C');
 
-            if (isset($_POST['cmd'])) {
+            if (isset($_POST['cmd']) and isset($_SESSION) and in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR', 'AUTEUR'))) {
                 if ($_POST['cmd'] == 'post_add') {
                     $post = new Post();
                     //handlePostRequest($title, $categorie, $content, $author_name)
@@ -28,6 +36,19 @@
 
                         header('Location: ../index.php');
                         exit('Post successfuly added');
+                    }
+                } else if($_POST['cmd'] == 'post_edit' and isset($_POST['post'])) {
+                    $post->setTitre($_POST['post_titre']);
+                    $post->setCategorie($_POST['post_categorie']);
+                    $post->setTimestampEdition(time());
+                    $post->setContent($_POST['post_content']);
+                    
+                    $validation = $post->validate();
+                    if ($validation['valid']) {
+                        $postManager->persistPost($post);
+
+                        header('Location: ../index.php');
+                        exit('Post successfuly edited');
                     }
                 }
             }
@@ -132,6 +153,7 @@
                                     
                                     <div class="<?php if(array_key_exists('post_content', $validation['errors'])): ?>has-error<?php endif; ?>">
                                         <div class="form-control" height="600" id="editeur" contentEditable></div>
+                                        <script type="text/javascript">document.getElementById('editeur').innerHTML = "<?php echo $post->getContent(); ?>";</script>
                                         <?php if(array_key_exists('post_content', $validation['errors'])): ?>
                                             <span class="help-block"><?php echo $validation['errors']['post_content']; ?></span>
                                         <?php endif; ?>
@@ -149,7 +171,12 @@
                     </div>
                     <div class="form-footer col-md-8 col-md-offset-2">
                         <a href="../index.php" class="btn btn-default">Retour</a>
+                        <?php if (!isset($_GET['action']) or (isset($_GET['action']) and $_GET['action'] != 'post_edit')): ?>
                         <input type="hidden" name="cmd" value="post_add" />
+                        <?php else: ?>
+                        <input type="hidden" name="cmd" value="post_edit" />
+                        <input type="hidden" name="post" value="<?php echo $post->getId() ?>" />
+                        <?php endif; ?>
                         <input type="submit" class="btn btn-primary" value="Ajouter" onclick="document.getElementById('hidden_content').value = document.getElementById('editeur').innerHTML;" />
                     </div>
 
