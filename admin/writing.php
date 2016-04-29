@@ -153,7 +153,7 @@
                                     
                                     <div class="<?php if(array_key_exists('post_content', $validation['errors'])): ?>has-error<?php endif; ?>">
                                         <div class="form-control" height="600" id="editeur" contentEditable></div>
-                                        <script type="text/javascript">document.getElementById('editeur').innerHTML = "<?php echo $post->getContent(); ?>";</script>
+                                        <script type="text/javascript">document.getElementById('editeur').innerHTML = "<?php echo addslashes($post->getContent()); ?>";</script>
                                         <?php if(array_key_exists('post_content', $validation['errors'])): ?>
                                             <span class="help-block"><?php echo $validation['errors']['post_content']; ?></span>
                                         <?php endif; ?>
