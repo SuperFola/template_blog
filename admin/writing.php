@@ -45,7 +45,7 @@
                     
                     $validation = $post->validate();
                     if ($validation['valid']) {
-                        $postManager->persistPost($post);
+                        $postManager->updatePost($post);
 
                         header('Location: ../index.php');
                         exit('Post successfuly edited');
