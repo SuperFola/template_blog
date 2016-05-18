@@ -1,56 +1,80 @@
 <?php
-    class ConfigManager {
-        public $path;
+class ConfigManager {
+    public $path;
+    private $config;
+    
+    public function __construct() {
+        $this->path = __DIR__.'/config.json';
         
-        public function __construct() {
-            $this->path = __DIR__.'/../private/config.json';
+        if (!is_file($this->path)) {
+            $this->persistConfig();
         }
         
-        /**
-         * Retourne la configuration
-         *
-         * @return array
-         */
-        public function getConfig() {
-            $filecontent = file_get_contents($this->path);
-            $array = json_decode($filecontent, true);
-            return $array;
+        $this->config = $this->getFile($this->path);
+    }
+    
+    /**
+     * Retourne la configuration
+     *
+     * @return array
+     */
+    public function getConfig() {
+        return $this->config;
+    }
+    
+    public function persistConfig() {
+        $this->saveFile($this->path, $this->config);
+    }
+    
+    private function saveFile($filepath, $string) {
+        $file = fopen($filepath, 'w+');
+        fwrite($file, json_encode($string));
+        fclose($file);
+    }
+    
+    private function getFile($filepath) {
+        return json_decode(file_get_contents($filepath), true);
+    }
+    
+    public function getBlogTitle() {
+        $config = $this->getConfig();
+        if (isset($config['blogtitle'])) {
+            return $config['blogtitle'];
         }
-        
-        public function getBlogTitle() {
-            $config = $this->getConfig();
-            if (isset($config['blogtitle'])) {
-                return $config['blogtitle'];
-            }
-            return "Title";
+        return "Title";
+    }
+    
+    public function getBlogSlogan() {
+        $config = $this->getConfig();
+        if (isset($config['blogslogan'])) {
+            return $config['blogslogan'];
         }
-        
-        public function getBlogSlogan() {
-            $config = $this->getConfig();
-            if (isset($config['blogslogan'])) {
-                return $config['blogslogan'];
-            }
-            return "Slogan";
+        return "Slogan";
+    }
+    
+    public function getBlogFooter() {
+        $config = $this->getConfig();
+        if (isset($config['blogfooter'])) {
+            return $config['blogfooter'];
         }
-        
-        public function getBlogFooter() {
-            $config = $this->getConfig();
-            if (isset($config['blogfooter'])) {
-                return $config['blogfooter'];
-            }
-            return "";
-        }
-        
-        /**
-         * Permet de configurer un champ spécifique de la config
-         *
-         * @param $key
-         */
-        public function setConfig($key) {
-            $config = $this->getConfig();
-            if (isset($config[$key])) {
-                // do some stuff
-            }
+        return "Footer";
+    }
+    
+    /**
+     * Permet de configurer un champ spécifique de la config
+     *
+     * @param $key
+     */
+    public function setConfigKey($key, $value) {
+        $config = $this->getConfig();
+        if (isset($config[$key])) {
+            $this->config[$key] = $value;
         }
     }
+    
+    public function setConfig($content) {
+        $this->config = json_decode($content, true);
+        $this->persistConfig();
+    }
+}
 ?>

@@ -21,5 +21,5 @@
             ?>
             <h1><a href="../index.php" style="text-decoration: none;"><?php echo $title; ?></a></h1>
             <h3><?php echo $slogan; ?></h3>
-            <h5>- Administration -</h5>
+            <h5><a href="index.php">- Administration -</a></h5>
         </div>

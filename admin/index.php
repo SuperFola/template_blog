@@ -19,9 +19,11 @@
                     if ($_SESSION['role'] == 'ADMINISTRATEUR' or $_SESSION['role'] == 'MODERATEUR')
                         echo "<div class=\"breadcrumb-container\">
                                   <ol class=\"breadcrumb\">
-                                      <li><a href=\"../index.php\">Accueil</a></li>
+                                      <li><a href=\"../index.php\">Accueil du blog</a></li>
                                       <li><a href=\"writing.php\">Ecrire un article</a></li>
                                       <li><a href=\"utilisateurs/\">Gérer les utilisateurs</a></li>
+                                      <li><a href=\"edit_config.php\">Editer la configuration du blog</a></li>
+                                      <li><a href=\"block_ip.php\">Bloquer une IP</a></li>
                                       <li><a href=\"remarquable_articles.php\">Gérer les articles mis en avant</a></li>
                                       <li><a href=\"../private/cible_envoi.php\">Héberger une image</a></li>
                                   </ol>

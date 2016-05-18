@@ -62,6 +62,10 @@
         <div>
             <div class="row">
                 <div class="commentaire-form-container well col-md-8 col-md-offset-2">
+                    <?php
+                        $blocked_mgr = new BlockedUsersManager();
+                        if (! $blocked_mgr->isBlocked($_SERVER['REMOTE_ADDR'])) {
+                    ?>
                     <form class="commentaire-form form-horizontal" method="post">
                         <div class="container-fluid">
                             <?php if (!isset($_SESSION) or !isset($_SESSION['pseudo'])) { ?>
@@ -84,6 +88,7 @@
                             </div>
                         </div>
                     </form>
+                    <?php } else {echo 'Votre adresse IP a été bloquée. Veuillez nous envoyer un mail si vous pensez que c\'est une erreur';} ?>
                 </div>
             </div>
             <div class="row">
@@ -118,9 +123,7 @@
                             </div>
                         </div>
                     </div>
-                    <?php
-                    }
-                    ?>
+                    <?php } ?>
                 </div>
             </div>
         </div>
