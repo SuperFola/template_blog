@@ -206,12 +206,15 @@ class Post {
         $count = 0;
         
         foreach(str_split($this->content) as $char) {
-            $preview .= $char;
-            $count++;
-            
-            if ($count >= $size_max){
-                break;
+            if ($char != '<'){
+                $preview .= $char;
+                $count++;
             }
+            else
+                break;
+            
+            if ($count >= $size_max)
+                break;
         }
 
         $preview .= '<br />';
