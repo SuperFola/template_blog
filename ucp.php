@@ -15,15 +15,17 @@
                     header("Location: error.php?error=404");
             ?>
             <h2><?php $user->getPseudo() ?></h2>
-            Email : <?php $user->getEmail() ?>
+            Email : <?php echo $user->getEmail() ?>
             <br />
-            Rôle : <?php $user->getRole() ?>
+            Rôle : <?php echo $user->getRole() ?>
             <br />
-            Dernière connexion : <?php $user->getLastLogin() ?>
+            Dernière connexion : <?php echo $user->getLastLogin() ?>
             <br />
             <br />
             <a href="logout.php" class="btn btn-danger">Déconnexion</a>
-            
+            <br />
+            <hr />
+            <?php include('footer.php'); ?>
         </div>
     </body>
 </html>
