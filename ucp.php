@@ -24,7 +24,6 @@
             <br />
             <a href="logout.php" class="btn btn-danger">Déconnexion</a>
             <br />
-            <hr />
             <?php include('footer.php'); ?>
         </div>
     </body>

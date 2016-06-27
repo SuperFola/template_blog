@@ -77,7 +77,7 @@
                     Il est interdit aux membres de télécharger, diffuser, transmettre ou d’envoyer sur le site des contenus qui ont un caractère 
                     injurieux ou diffamatoire, pornographique, portent atteinte à la vie privée et/ou au droit à l’image d’autrui, incitent à la 
                     commission de crimes et délits, incitent à la consommation d’alcool, du tabac ou de médicaments, mettent en péril le bon 
-                    fonctionnement du site, de ses serveurs et la protection des données de zestedesavoir.com ou de ses membres et d’une manière 
+                    fonctionnement du site, de ses serveurs et la protection des données du site ou de ses membres et d’une manière 
                     générale, ont un caractère contraire à la législation en vigueur.
                     <br />
                     Cette interdiction s'applique également aux contenus auxquels donnent accès les liens hypertextes fournis par un membre sur le site.

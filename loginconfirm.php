@@ -9,6 +9,9 @@
         if ($user){
             if ($user->checkLogin($_POST['pwd'])) {
                 // connexion réussie
+                $user->setLastLogin(time());
+                $um->editUser($user);
+                $um->updateUsers();
                 $_SESSION["pseudo"] = $_POST["user"];
                 $_SESSION["role"] = $user->getRole();
                 header("Location: index.php");
