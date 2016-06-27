@@ -25,7 +25,7 @@
             }
             $categories = array('Programmation', 'Vie du blog', 'Windows', 'Android', 'Github', 'Les langages du web', 'Python', 'La famille C');
 
-            if (isset($_POST['cmd']) and isset($_SESSION) and in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR', 'AUTEUR'))) {
+            if (isset($_POST['cmd']) and isset($_SESSION) and in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR', 'AUTEUR')) and isset($_POST['post_titre']) and isset($_POST['post_categorie']) and isset($_POST['post_content'])) {
                 if ($_POST['cmd'] == 'post_add') {
                     $post = new Post();
                     //handlePostRequest($title, $categorie, $content, $author_name)
@@ -152,18 +152,11 @@
                                     <br />
                                     
                                     <div class="<?php if(array_key_exists('post_content', $validation['errors'])): ?>has-error<?php endif; ?>">
-                                        <div class="form-control" height="600" id="editeur" contentEditable></div>
-                                        <script type="text/javascript">document.getElementById('editeur').innerHTML = "<?php echo str_replace("\r\n", "\\\r\n", addslashes($post->getContent())); ?>";</script>
+                                        <textarea class="form-control" rows="24" id="editeur" name="post_content"><?php echo $post->getContent() ?></textarea>
                                         <?php if(array_key_exists('post_content', $validation['errors'])): ?>
                                             <span class="help-block"><?php echo $validation['errors']['post_content']; ?></span>
                                         <?php endif; ?>
                                         <br />
-                                        Code source HTML :
-                                        <br />
-                                        <textarea name="post_content" id="hidden_content" rows="12" cols="64"></textarea>
-                                        <br />
-                                        <a class="btn btn-default" onclick="document.getElementById('hidden_content').value = document.getElementById('editeur').innerHTML;">Metter à jour ce code</a>
-                                        <a class="btn btn-primary" onclick="document.getElementById('editeur').innerHTML = document.getElementById('hidden_content').value;">Metter à jour la news</a>
                                     </div>
                                 </div>
                             </div>

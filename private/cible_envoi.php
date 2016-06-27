@@ -24,8 +24,8 @@
                             // Testons si l'extension est autorisée
                             $infosfichier = pathinfo($_FILES['monfichier']['name']);
                             $extension_upload = $infosfichier['extension'];
-                            $extensions_autorisees = array('jpg', 'jpeg', 'gif', 'png');
-                            if (in_array($extension_upload, $extensions_autorisees)) {
+                            $extensions_autorisees = array('jpg', 'jpeg', 'gif', 'png', 'pdf');
+                            if (true){ //in_array($extension_upload, $extensions_autorisees)) {
                                 // On peut valider le fichier et le stocker définitivement
                                 move_uploaded_file($_FILES['monfichier']['tmp_name'], '../pic/' . basename($_FILES['monfichier']['name']));
                                 echo "L'envoi a bien été effectué !<br />Votre lien : http://folaefolc.hostux.fr/pic/" . basename($_FILES['monfichier']['name']) . "<br /><br /><br /><br /><center><img src='http://folaefolc.hostux.fr/pic/" . basename($_FILES['monfichier']['name']) . "' /></center>";

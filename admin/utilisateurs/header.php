@@ -32,7 +32,7 @@
                         </ul>
 
                         <!-- Recherche -->
-                        <form class="navbar-form navbar-left" action="index.php?action=search" method="get">
+                        <form class="navbar-form navbar-left" action="../../index.php?action=search" method="get">
                             <div class="row">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Rechercher" />
@@ -47,11 +47,11 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #000;"><?php echo $_SESSION['pseudo'] ?> <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="../ucp.php">Profil</a></li>
-                                    <li><a href="index.php">Interface Administrateur</a></li>
-                                    <li><a href="writing.php">Ecrire un article</a></li>
+                                    <li><a href="../../ucp.php">Profil</a></li>
+                                    <li><a href="../index.php">Interface Administrateur</a></li>
+                                    <li><a href="../writing.php">Ecrire un article</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="../logout.php">Déconnexion</a></li>
+                                    <li><a href="../../logout.php">Déconnexion</a></li>
                                 </ul>
                             </li>
                         </ul>

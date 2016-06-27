@@ -37,8 +37,10 @@
             header("Location: index.php");
         }
         include("header.php");
+        $Parsedown = new Parsedown();
     ?>
     <div class="container">
+        <br />
         <div class="breadcrumb-container">
             <ol class="breadcrumb">
                 <li><a href="index.php">Accueil</a></li>
@@ -55,7 +57,7 @@
                 </div>
             </div>
             <div class="post-content">
-                <?php echo nl2br($post->getContent()); ?>
+                <?php echo $Parsedown->text($post->getContent()); ?>
             </div>
         </div>
         <hr>
@@ -70,7 +72,7 @@
                         <div class="container-fluid">
                             <?php if (!isset($_SESSION) or !isset($_SESSION['pseudo'])) { ?>
                             <h4>Donnez votre opinion !</h4>
-                            Sera posté en tant que : <b>Anonyme</b><br />
+                            Sera postÃ© en tant que : <b>Anonyme</b><br />
                             <?php } else {
                                 echo '<h4 style="display: inline;">Donnez votre opinion !</h4>';
                                 echo '<div class="avatar" style="display: inline; float: right; line-height: 20px;">';
@@ -88,7 +90,7 @@
                             </div>
                         </div>
                     </form>
-                    <?php } else {echo 'Votre adresse IP a été bloquée. Veuillez nous envoyer un mail si vous pensez que c\'est une erreur';} ?>
+                    <?php } else {echo 'Votre adresse IP a Ã©tÃ© bloquÃ©e. Veuillez nous envoyer un mail si vous pensez que c\'est une erreur';} ?>
                 </div>
             </div>
             <div class="row">

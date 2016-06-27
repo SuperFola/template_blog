@@ -1,0 +1,27 @@
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="login_modLabel">Connexion</h4>
+                </div>
+                <form action="loginconfirm.php" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="login_usr">Pseudo</span>
+                                <input type="text" class="form-control" placeholder="Username" name="user" aria-describedby="login_usr">
+                            </div>
+                            <br />
+                            <div class="input-group">
+                                <span class="input-group-addon" id="pwd">Mot de passe</span>
+                                <input type="password" class="form-control" placeholder="Password" name="pwd" aria-describedby="pwd">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Connexion</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    </div>
+                </form>
+            </div>
+        </div>

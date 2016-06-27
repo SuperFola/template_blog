@@ -1,0 +1,37 @@
+﻿        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="signup_modLabel">Inscription</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="signup.php" method="post">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="user">Pseudo</span>
+                                <input type="text" class="form-control" placeholder="Username" name="user" aria-describedby="user">
+                            </div>
+                            <br />
+                            <div class="input-group">
+                                <span class="input-group-addon" id="pwd">Mot de passe</span>
+                                <input type="password" class="form-control" placeholder="Password" name="pwd" aria-describedby="pwd">
+                            </div>
+                            <br />
+                            <div class="input-group">
+                                <span class="input-group-addon" id="pwdc">Répéter le mot de passe</span>
+                                <input type="password" class="form-control" placeholder="Password" name="pwdc" aria-describedby="pwdc">
+                            </div>
+                            <br />
+                            <div class="input-group">
+                                <span class="input-group-addon" id="email">E-Mail</span>
+                                <input type="text" class="form-control" placeholder="john.doe@example.org" name="email" aria-describedby="email">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Inscription</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>

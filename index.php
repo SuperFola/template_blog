@@ -13,6 +13,7 @@
                 <?php
                     $postManager = new PostManager();
                     $fpp_mgr = new FirstPagePostsManager();
+                    $Parsedown = new Parsedown();
                 ?>
                 <h1>A la une</h1>
 
@@ -39,6 +40,7 @@
 
                 <hr />
 
+                <h1>Articles</h1>
                 <div class="posts-list-container container-fluid">
                     <ul class="posts-list">
                         <?php
@@ -58,9 +60,9 @@
                                             <h3><a href="post.php?id=<?php echo $post->getId() ?>"><?php echo $post->getTitre() ?></a></h3>
                                             <h4><span class="label label-default"><?php echo $post->getCategorie() ?></span></h4>
                                         </div>
-                                        <p class="content-preview">
-                                            <?php echo nl2br($post->getContentPreview()); ?>
-                                        </p>
+                                        <div class="content-preview">
+                                            <?php echo $Parsedown->text($post->getContent()); ?>
+                                        </div>
                                     </div>
                                 </li>
                             <?php

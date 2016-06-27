@@ -1,4 +1,4 @@
-﻿<?php
+<?php
     session_start();
 ?>
 
@@ -14,12 +14,10 @@
                     header("Location: ../login.php");
                 } else if ($_SESSION['role'] == 'ADMINISTRATEUR' or $_SESSION['role'] == 'MODERATEUR' or $_SESSION['role'] == 'AUTEUR'){
                     // connexion réussie
-                    echo "Interface d'administration, bonjour {$_SESSION['pseudo']}";
-                    
-                    if ($_SESSION['role'] == 'ADMINISTRATEUR' or $_SESSION['role'] == 'MODERATEUR')
+                    echo "<br />";
+                   if ($_SESSION['role'] == 'ADMINISTRATEUR' or $_SESSION['role'] == 'MODERATEUR')
                         echo "<div class=\"breadcrumb-container\">
                                   <ol class=\"breadcrumb\">
-                                      <li><a href=\"../index.php\">Accueil du blog</a></li>
                                       <li><a href=\"writing.php\">Ecrire un article</a></li>
                                       <li><a href=\"utilisateurs/\">Gérer les utilisateurs</a></li>
                                       <li><a href=\"edit_config.php\">Editer la configuration du blog</a></li>
@@ -31,7 +29,6 @@
                     else if ($_SESSION['role'] == 'AUTEUR')
                         echo "<div class=\"breadcrumb-container\">
                                   <ol class=\"breadcrumb\">
-                                      <li><a href=\"../index.php\">Accueil</a></li>
                                       <li><a href=\"writing.php\">Ecrire un article</a></li>
                                       <li><a href=\"../private/cible_envoi.php\">Héberger une image</a></li>
                                   </ol>

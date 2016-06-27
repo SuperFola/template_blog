@@ -28,7 +28,7 @@ class FirstPagePostsManager {
     }
     
     public function getPost($number) {
-        if ($number >= 0 && $number < $this->getSize()) {
+        if ($number >= 0 && $number < $this->getSize() and isset($this->post_details[$number])) {
             return $this->posts_details[$number];
         }
         

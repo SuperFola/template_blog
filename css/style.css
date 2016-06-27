@@ -4,12 +4,13 @@ body {
 div.login-btn {
     text-align: right;
 }
-.jumbotron {
-    padding-top: 10px;
-    text-align: center;
-}
 .container {
     background-color: white;
+}
+.navbar {
+    padding: 0px;
+    border: none;
+    width: auto;
 }
 div.top-posts-container {
     margin-top: 25px;
@@ -71,8 +72,9 @@ ul.posts-list li div h4 {
     margin-top: 0;
     font-size: 12px;
 }
-ul.posts-list li div p.content-preview {
-    color: #AAAAAA;
+div.content-preview {
+    overflow: hidden;
+    max-height: 300px;
 }
 div.writing-form-container {
     padding-top: 20px;
@@ -153,8 +155,4 @@ form.login {
     margin: auto;
     text-align: center;
     border: 1px dashed black;
-}
-div#editeur {
-    height: 450px;
-    overflow: scroll;
 }
