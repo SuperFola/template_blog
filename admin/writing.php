@@ -33,9 +33,6 @@
                     $validation = $post->validate();
                     if ($validation['valid']) {
                         $postManager->persistPost($post);
-
-                        header('Location: ../index.php');
-                        exit('Post successfuly added');
                     }
                 } else if($_POST['cmd'] == 'post_edit' and isset($_POST['post'])) {
                     $post->setTitre($_POST['post_titre']);
@@ -46,11 +43,9 @@
                     $validation = $post->validate();
                     if ($validation['valid']) {
                         $postManager->updatePost($post);
-
-                        header('Location: ../index.php');
-                        exit('Post successfuly edited');
                     }
                 }
+                header('Location: ../index.php');
             }
         ?>
         <?php if (isset($_SESSION) and in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR', 'AUTEUR'))) { ?>

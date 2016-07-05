@@ -390,6 +390,7 @@ class Post {
 
     public function removeCommentaire(Commentaire $commentaire) {
         unset($this->commentaires[$commentaire->getId()]);
+        $this->commentaires = array_values($this->commentaires);
     }
 
     public function getCommentaires() {

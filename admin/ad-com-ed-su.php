@@ -4,7 +4,7 @@
     include(__DIR__ . "/../private/postmanager.php");
     
     if (isset($_SESSION)) {
-        if ($_SESSION['role'] == 'ADMINISTRATEUR') {
+        if ($_SESSION['role'] == 'ADMINISTRATEUR' or $_SESSION['role'] == 'MODERATEUR') {
             // on est bien admin
             if (isset($_GET['action'])){
                 $postid = intval($_GET['postid']);

@@ -56,6 +56,7 @@
                                 </ul>
                             </li>
                             <?php else: ?>
+                            <li><a onclick="load_modal('signup_mod');" style="color: #000;">Inscription</a></li>
                             <li><a onclick="load_modal('login_mod');" style="color: #000;">Connexion</a></li>
                             <?php endif; ?>
                         </ul>

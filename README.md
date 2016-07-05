@@ -11,4 +11,4 @@ If you want to change the header and the footer, just go in private/config.json 
 
 You don't need to setup any data base, we are using JSON files :)
 
-We will as soon as possible add a test account (as an ADMIN), which you'll be able to modify ;)
+The default credentials for the admin account are : ADMIN (username), admin (password)
