@@ -5,11 +5,9 @@
             ?>
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
-                    <!--
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="index.php" style="padding: 0px;"><img src="pic/logo.png" alt="WeAreCoders" style="max-height: 50px;height: 50px;"/></a>
+                        <img src="../../logoAlphaWeAreCoders.png" alt="WeAreCoders" style="max-height: 50px;height: 50px;"/>
                     </div>
-                    -->
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
