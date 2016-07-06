@@ -3,7 +3,7 @@
                 $cm = new ConfigManager();
                 $title = $cm->getBlogTitle();
             ?>
-            <nav class="navbar navbar-static-top" style="background-color: #76AC62;">
+            <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <!--
                     <div class="navbar-header">
