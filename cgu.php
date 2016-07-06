@@ -102,7 +102,7 @@
                     l’éditeur du site de représenter, modifier, adapter et diffuser sa publication sur le site, pour la durée de la propriété 
                     intellectuelle. Il autorise notamment l’éditeur du site à utiliser sa publication sur Internet dans le but de faire connaître le site.
                     <br />
-                    La licence appliquée à <b>tous les contenus</b> est la <a href="https://creativecommons.org/licenses/by/4.0/">Creative Comman - BY - 4.0</a>.
+                    La licence appliquée à <b>tous les contenus</b> est la <a href="https://creativecommons.org/licenses/by/4.0/">Creative Common - BY - 4.0</a>.
                     <br />
                     La mise en ligne d'un tutoriel ou d'un article est soumise à une post-validation par l'éditeur du site. L'éditeur du site est libre 
                     de refuser la publication d'un article, sans avoir à s'en justifier auprès du membre et sans qu'aucune contrepartie puisse être exigée. 
