@@ -32,10 +32,10 @@
                         </ul>
 
                         <!-- Recherche -->
-                        <form class="navbar-form navbar-left" action="index.php?action=search" method="get">
+                        <form class="navbar-form navbar-left" action="search.php" method="get">
                             <div class="row">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Rechercher" />
+                                    <input type="text" class="form-control" placeholder="Rechercher" name="search" />
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" type="submit">Go!</button>
                                     </span>

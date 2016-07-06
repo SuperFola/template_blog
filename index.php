@@ -63,6 +63,7 @@
                                         <div class="content-preview">
                                             <?php echo $Parsedown->text($post->getContent()); ?>
                                         </div>
+                                        <hr />
                                     </div>
                                 </li>
                             <?php
