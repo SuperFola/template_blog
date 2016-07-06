@@ -1,6 +1,9 @@
 body {
     background-color: #2B2B2B;
 }
+a[onclick]{
+    cursor: pointer;
+}
 div.login-btn {
     text-align: right;
 }

@@ -19,7 +19,7 @@
                             
                             <!-- Projets (en construction, est amené à changer) -->
                             <li class="dropdown" id="navbar-projects-dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nos projets <span class="caret"></span></a>
+                                <a class="dropdown-toggle" style="color: #000;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nos projets <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="">Test</a></li>
                                     <li><a href="">Test</a></li>
