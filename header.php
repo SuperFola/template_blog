@@ -14,21 +14,22 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li><a style="color: #000;"><?php echo $title ?></a></li>
-                            <li id="navbar-accueil-lnk"><a href="index.php" style="color: #000;">Accueil</a></li>
-                            <!--
-                            <li class="dropdown" id="navbar-starters-kit-dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Starters-Kits <span class="caret"></span></a>
+                            
+                            <li id="navbar-accueil-lnk"><a href="../index.php" style="color: #000;">Accueil</a></li>
+                            
+                            <!-- Projets (en construction, est amené à changer) -->
+                            <li class="dropdown" id="navbar-projects-dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nos projets <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="index.php?action=starters-kits&v=1">Pokémon Script Project 0.7</a></li>
-                                    <li><a href="index.php?action=starters-kits&v=2">Pokémon Script Project 4G+</a></li>
-                                    <li><a href="index.php?action=starters-kits&v=3">Pokémon Script Project DS</a></li>
+                                    <li><a href="">Test</a></li>
+                                    <li><a href="">Test</a></li>
+                                    <li><a href="">Test</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="index.php?action=starters-kits&v=4">Pokémon SDK</a></li>
+                                    <li><a href="">Test</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="index.php?action=starters-kits&v=5">Donjon Mystère Ace - DMA</a></li>
+                                    <li><a href="">Test</a></li>
                               </ul>
                             </li>
-                            -->
                         </ul>
 
                         <!-- Recherche -->
