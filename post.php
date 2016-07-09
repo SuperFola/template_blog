@@ -11,8 +11,9 @@
             $postid = intval($_GET['id']);
 
             $postManager = new PostManager();
+            $lastid = $postManager->findAll()[0]->getId();
             try {
-                if ($postid >= 1 && $postid <= $postManager->findAll()[count($postManager->findAll()) - 1]->getId())
+                if (1 <= $postid && $postid <= $lastid)
                     $post = $postManager->findPost($postid);
                 else
                     header('Location: index.php');

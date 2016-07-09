@@ -13,14 +13,16 @@
             <br />
             <center>
                 <?php
-                    if (isset($_GET['error'])){
-                        if ($_GET['error'] == 'connexion'){
+                    if (isset($_GET['error'])) {
+                        if ($_GET['error'] == 'connexion')
                             echo 'Impossible de se connecter. Vérifiez votre nom d\'utilisateur et votre mot de passe ...';
-                        } else if ($_GET['error'] == '404'){
+                        else if ($_GET['error'] == 'ip_blocked')
+                            echo 'Votre adresse IP a été bloquée par un de nos administrateurs, vous ne pouvez donc pas vous connecter.'
+                        else if ($_GET['error'] == '404')
                             echo 'La page que vous cherchez n\'existe probablement plus (ou n\'a jamais existée)';
-                        } else if ($_GET['error'] == '403') {
+                        else if ($_GET['error'] == '403')
                             echo 'Vous n\'avez pas les droits suffisants pour accéder à cette page';
-                        } else {
+                        else
                             echo 'Aucune erreur ne s\'est produite';
                         }
                     } else {

@@ -12,9 +12,9 @@
             <?php
                 if (!isset($_SESSION['pseudo']) and !isset($_SESSION['role'])){
                     header("Location: ../login.php");
-                } else if ($_SESSION['role'] == 'ADMINISTRATEUR' or $_SESSION['role'] == 'MODERATEUR' or $_SESSION['role'] == 'AUTEUR'){
-                    // connexion réussie
-                    echo "<br />";
+                } else if (in_array($_SESSION['role'], array('ADMINISTRATEUR', 'MODERATEUR', 'AUTEUR'))) {
+                   // connexion réussie
+                   echo "<br />";
                    if ($_SESSION['role'] == 'ADMINISTRATEUR' or $_SESSION['role'] == 'MODERATEUR')
                         echo "<div class=\"breadcrumb-container\">
                                   <ol class=\"breadcrumb\">
@@ -47,34 +47,9 @@
                         echo " - <a href='writing.php?action=post_edit&post={$post->getId()}' target='blank'>Editer</a> - <a href='supr_edit_news.php?edit=0&post={$post->getId()}' target='blank'>Supprimer</a>";
                         echo "</li>";
                     }
-                    echo "</ul>";
-                    
-                    echo "<hr />";
-                    
-                    // les commentaires (tous)
-                    echo "<br />";
-                    echo "Liste des commentaires de tous les articles : <br />";
-                    echo "<ul>";
-                    $count = 0;
-                    $max = 100;
-                    foreach ($pm->findAll() as $post) {
-                        foreach($post->getCommentairesSorted() as $commentaire) {
-                            if ($count < $max){
-                                echo "<li>";
-                                echo "Par {$commentaire->getPseudo()} (ip:{$commentaire->getIp()}) - Sur le post : <b>{$post->getId()} : {$post->getTitre()}</b> - <a onclick=\"s('" . $count . "');\">{$commentaire->getDisplayableDate()}</a> - 
-                                      <a href=\"ad-com-ed-su.php?action=delete&postid={$post->getId()}&comts={$commentaire->getTimestamp()}\" target=blank>Supprimer</a> - 
-                                      <a href=\"ad-com-ed-su.php?action=edit&postid={$post->getId()}&comts={$commentaire->getTimestamp()}\" target=blank>Editer</a><br />";
-                                echo "<div class=\"spoiler\" id='" . $count . "'>{$commentaire->getMessage()}</div>";
-                                echo "</li>";
-                                
-                                ++$count;
-                            }
-                        }
-                        if ($count >= $max){
-                            break;
-                        }
-                    }
-                    echo "</ul>";
+                    echo "</ul><hr><a class=\"btn btn-primary\" href=\"comments.php\">Liste des commentaires</a>";
+                } else {
+                    header('Location: ../error.php?error=403');
                 }
             ?>
             

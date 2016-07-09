@@ -15,6 +15,8 @@
                             
                             <li id="navbar-accueil-lnk"><a href="../index.php" style="color: #000;">Accueil</a></li>
                             
+                            <li id="navbar-accueil-lnk"><a href="index.php" style="color: #000;">Accueil admin</a></li>
+                            
                             <li id="navbar-projects-lnk"><a href="../projets/" style="color: #000;">Nos projets</a></li>
                         </ul>
 

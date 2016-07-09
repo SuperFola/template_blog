@@ -24,7 +24,7 @@
             }
             if ($_POST['pwd'] == $_POST['pwdc'] && $_POST['pwd'] != '') {
                 $um = new UserManager();
-                if (!$um->findUserByPseudo($_POST['user'])) {
+                if (!$um->findUserByPseudo($_POST['user']) && $_POST['user'] != "Anonyme") {
                     if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                         $new_user = new User();
                         $new_user->handlePostRequest($_POST['user'], $_POST['pwd'], $_POST['email'], 'MEMBRE');
