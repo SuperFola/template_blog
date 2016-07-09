@@ -34,6 +34,8 @@
                 <div class="posts-list-container container-fluid">
                     <ul class="posts-list">
                     <?php
+                        if (count($matching_post) == 0)
+                            echo "La recherche a été infructeuse ... :(";
                         foreach($matching_post as $post) {
                         ?>
                         <li>

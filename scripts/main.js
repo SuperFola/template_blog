@@ -8,7 +8,7 @@ function s(obj) {
     }
 }
 
-function load_modal(id) {
+function load_modal(id, cur="./") {
     var el;
     
     if(dce(id)) {
@@ -16,7 +16,7 @@ function load_modal(id) {
         return;
     } else {
         var request = new XMLHttpRequest();
-        request.open("GET", "./modales/"+id+".html", true);
+        request.open("GET", cur+"modales/"+id+".html", true);
         request.onreadystatechange = function() {
             if(request.readyState == 4 && request.status == 200) {
                 el = document.createElement("div");

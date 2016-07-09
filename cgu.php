@@ -25,8 +25,8 @@
                 
                 <h2>2. Mentions légales</h2>
                 L'édition du site est assurée par le groupement We Are Coders composé actuellement de Folaefolc, iReplace, myrma, et The New Sky. 
-                Le site est hébergé chez <a href="http://hostux.fr">hostux</a>. 
-                Nous sommes joignable par email : &gt;en train d'être remis en place&lt;
+                Le site est hébergé chez <a href="http://<?php echo $domaine; ?>.fr"><?php echo $domaine; ?></a>. 
+                Nous sommes joignable par email : <?php echo $site . " [ @ ] " . $domaine . " [ .fr ]"; ?>
                 <br />
                 
                 <h2>3. Définitions</h2>
@@ -220,7 +220,7 @@
                 La durée des présentes conditions générales d'utilisation est indéterminée.
                 <br />
                 
-                <h5>12. Notes</h5>
+                <h2>12. Notes</h2>
                 <ul>
                     <li>Ces conditions d'utilisations sont inspirées de celle de Zeste De Savoir, trouvable à <a href="https://zestedesavoir.com/pages/cgu/">cette adresse</a>, sous licence Creative Common 4.0</li>
                     <li>Des modifications au CGU de Zeste De Savoir ici réadaptées ont été effectuées</li>

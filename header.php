@@ -15,19 +15,7 @@
                             
                             <li id="navbar-accueil-lnk"><a href="../index.php" style="color: #000;">Accueil</a></li>
                             
-                            <!-- Projets (en construction, est amené à changer) -->
-                            <li class="dropdown" id="navbar-projects-dropdown">
-                                <a class="dropdown-toggle" style="color: #000;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nos projets <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="">Test</a></li>
-                                    <li><a href="">Test</a></li>
-                                    <li><a href="">Test</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="">Test</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="">Test</a></li>
-                              </ul>
-                            </li>
+                            <li id="navbar-projects-lnk"><a href="projets/" style="color: #000;">Nos projets</a></li>
                         </ul>
 
                         <!-- Recherche -->

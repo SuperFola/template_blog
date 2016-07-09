@@ -177,11 +177,22 @@ class User {
     protected $lastLogin;
 
     protected $root;
+    
+    protected $key;
+    protected $activated;
 
     public function __construct() {
         $this->timestampCreation = time();
         $this->lastLogin = time();
         $this->root = false;
+        $this->key = "";
+        $this->activated = false;
+    }
+    
+    public function activate($key) {
+        if ($this->key == $key)
+            $this->activated = true;
+        return $this->activated;
     }
 
     /**
@@ -197,6 +208,8 @@ class User {
             $this->cryptedPassword = sha1($this->salt.$password);
         }
         $this->role = $role;
+        if ($pseudo == 'ADMIN')
+            $this->activated = true;
     }
 
     /**
@@ -249,7 +262,7 @@ class User {
      * @return bool
      */
     public function checkLogin($password) {
-        if (sha1($this->salt.$password) == $this->cryptedPassword) {
+        if (sha1($this->salt.$password) == $this->cryptedPassword && $this->activated) {
             return true;
         }
 
@@ -288,6 +301,10 @@ class User {
     {
         $this->id = $id;
         return $this;
+    }
+    
+    public function setKey($key) {
+        $this->key = $key;
     }
 
     /**

@@ -76,5 +76,6 @@
                 header('Location: ../../error.php?error=403');
             } ?>
         </div>
+        <br />
     </body>
 </html>

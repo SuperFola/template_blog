@@ -11,7 +11,14 @@
             $postid = intval($_GET['id']);
 
             $postManager = new PostManager();
-            $post = $postManager->findPost($postid);
+            try {
+                if ($postid >= 1 && $postid <= $postManager->findAll()[count($postManager->findAll()) - 1]->getId())
+                    $post = $postManager->findPost($postid);
+                else
+                    header('Location: index.php');
+            } catch (Exception $e) {
+                header('Location: index.php');
+            }
 
             if ($post->getId() == 0) {
                 http_response_code(404);
@@ -50,7 +57,7 @@
         <hr>
         <div class="post">
             <div class="post-header">
-                <h1><?php echo $post->getTitre() ?></h1>
+                <h1><?php echo $post->getTitre(); ?></h1>
                 <h4><?php echo $post->getDisplayableDate(); ?> par <?php echo $post->getAuthor(); ?></h4>
                 <div class="col-md-4 col-md-offset-4">
                     <hr />
@@ -66,7 +73,7 @@
                 <div class="commentaire-form-container well col-md-8 col-md-offset-2">
                     <?php
                         $blocked_mgr = new BlockedUsersManager();
-                        if (! $blocked_mgr->isBlocked($_SERVER['REMOTE_ADDR'])) {
+                        if (!$blocked_mgr->isBlocked($_SERVER['REMOTE_ADDR'])) {
                     ?>
                     <form class="commentaire-form form-horizontal" method="post">
                         <div class="container-fluid">

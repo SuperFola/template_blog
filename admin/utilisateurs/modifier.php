@@ -15,13 +15,17 @@
     }
 
     if (isset($_POST['witness'])) {
-        $user->handlePostRequest($_POST['user_pseudo'], $_POST['user_password'], $_POST['user_email'], $_POST['user_role']);
-        $validation = $user->validate();
-        if ($validation['valid']) {
-            $userManager->editUser($user);
-            $userManager->updateUsers();
-            header('Location: index.php');
-            exit();
+        if ($_SESSION['role'] == 'MODERATEUR' && !$user->is('ADMINISTRATEUR')) {
+            $user->handlePostRequest($_POST['user_pseudo'], $_POST['user_password'], $_POST['user_email'], $_POST['user_role']);
+            $validation = $user->validate();
+            if ($validation['valid']) {
+                $userManager->editUser($user);
+                $userManager->updateUsers();
+                header('Location: index.php');
+                exit();
+            }
+        } else {
+            header('Location: ../../error.php?error=403');
         }
     }
 
@@ -33,7 +37,7 @@
     <body>
         <?php include('header.php'); ?>
         <div class="container">
-            <?php if (isset($_SESSION) and $_SESSION['role'] == 'ADMINISTRATEUR') { ?>
+            <?php if (isset($_SESSION) and ($_SESSION['role'] == 'ADMINISTRATEUR' || $_SESSION['role'] == 'MODERATEUR')) { ?>
             <h2>Modifier : <?php echo $user->getPseudo() ?></h2>
             <p class="text-left">
                 <a class="btn btn-default" href="index.php">Retour</a>
@@ -52,7 +56,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="user_role" class="col-sm-2 control-label">Role</label>
+                    <label for="user_role" class="col-sm-2 control-label">Rôle</label>
                     <div class="col-sm-10">
                         <select class="form-control" id="user_role" name="user_role">
                             <?php foreach($roles as $role): ?>
@@ -80,5 +84,6 @@
                 header('Location: ../../error.php?error=403');
             }?>
         </div>
+        <br />
     </body>
 </html>

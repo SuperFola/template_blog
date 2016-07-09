@@ -7,13 +7,7 @@
 <HTML>
     <?php include("head.php"); ?>
     <body>
-        <?php
-        include('header.php');
-        
-        function generateKey($uid) {
-            return $uid . "--" . md5(uniqid(rand(), true));
-        }
-        
+        <?php include('header.php');
         $validation = array('errors' => array());
         if (isset($_POST['user']) && isset($_POST['pwd']) && isset($_POST['pwdc']) && isset($_POST['email'])) {
             if ($_POST['user'] == '') {
@@ -25,18 +19,12 @@
             if ($_POST['pwd'] == $_POST['pwdc'] && $_POST['pwd'] != '') {
                 $um = new UserManager();
                 if (!$um->findUserByPseudo($_POST['user'])) {
-                    if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                    if (true) {
                         $new_user = new User();
                         $new_user->handlePostRequest($_POST['user'], $_POST['pwd'], $_POST['email'], 'MEMBRE');
                         $validation = $new_user->validate();
                         if ($validation['valid']) {
                             $um->addUser($new_user);
-                            $key = generateKey($new_user->getId());
-                            $new_user->setKey($key);
-                            $message = "Bienvenue sur WeAreCoders " . $_POST["user"] . " !\r\n" .
-                                       "Nous avez bien été inscrit sur notre site, et il ne vous reste plus qu'une étape à compléter avant de pouvoir rejoindre nos membres !\r\n" .
-                                       "Pour valider votre compte, il vous suffit de suivre ce lien : http://" . $site . "." . $domaine . ".fr/valid.php?key=" . $key;
-                            mail($_POST['email'], 'Inscription sur WeAreCoders', wordwrap($message, 70, "\r\n"));
                             $um->updateUsers();
                         }
                         $_SESSION['pseudo'] = $new_user->getPseudo();
@@ -86,7 +74,7 @@
                     <input type="submit" class="btn btn-primary" value="S'inscrire">
                 </form>
             </div>
-        <?php include('footer.php'); ?>
+        <?php include('../footer.php'); ?>
         </div>
     </body>
 </HTML>
