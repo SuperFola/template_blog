@@ -14,6 +14,15 @@
                     $postManager = new PostManager();
                     $fpp_mgr = new FirstPagePostsManager();
                     $Parsedown = new Parsedown();
+                    
+                    if (isset($_GET['action'])) {
+                        if ($_GET['action'] == 'activated') {
+                            echo "<div class=\"alert alert-success alert-dismissible\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button><strong>Inscription réussie !</strong> Bienvenue sur WeAreCoders, " . $_SESSION['pseudo'] . "</div>";
+                        }
+                        if ($_GET['action'] == 'failed_activation') {
+                            echo "<div class=\"alert alert-warning alert-dismissible\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button><strong>Erreur !</strong> La clé d'activation du compte ne correspond à aucun compte connu.</div>";
+                        }
+                    }
                 ?>
                 <h1>A la une</h1>
 

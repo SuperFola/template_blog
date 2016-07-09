@@ -15,9 +15,13 @@
     }
 
     if (isset($_POST['witness'])) {
-        if ($_SESSION['role'] == 'MODERATEUR' && !$user->is('ADMINISTRATEUR')) {
+        if (in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR')) && (!$user->is('ADMINISTRATEUR') || in_array($_SESSION['pseudo'], array('Folaefolc', 'ADMIN')))) {
             $user->handlePostRequest($_POST['user_pseudo'], $_POST['user_password'], $_POST['user_email'], $_POST['user_role']);
             $validation = $user->validate();
+            if (intval($_POST['user_on']))
+                $user->setActivated();
+            else
+                $user->setActivated(false);
             if ($validation['valid']) {
                 $userManager->editUser($user);
                 $userManager->updateUsers();
@@ -56,7 +60,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="user_role" class="col-sm-2 control-label">R�le</label>
+                    <label for="user_role" class="col-sm-2 control-label">Rôle</label>
                     <div class="col-sm-10">
                         <select class="form-control" id="user_role" name="user_role">
                             <?php foreach($roles as $role): ?>
@@ -72,6 +76,13 @@
                         <span id="helpBlock" class="help-block">Laissez vide si vous ne souhaiter pas changer le mot de passe</span>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="user_on" class="col-sm-2 control-label">Mot de passe</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="user_on" name="user_on" placeholder="1 = activé, 0 = désactivé">
+                        <span id="helpBlock" class="help-block">Laissez vide si vous ne souhaiter pas changer l'état d'activation de l'utilisateur</span>
+                    </div>
+                </div>
                 <div class="text-right">
                     <input type="hidden" name="witness" value="X">
                     <?php if (!$user->isRoot()): ?>
@@ -82,8 +93,8 @@
             </form>
             <?php } else {
                 header('Location: ../../error.php?error=403');
-            }?>
+            } ?>
+            <?php include('../../footer.php'); ?>
         </div>
-        <br />
     </body>
 </html>

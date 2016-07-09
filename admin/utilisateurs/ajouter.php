@@ -75,7 +75,7 @@
             <?php } else {
                 header('Location: ../../error.php?error=403');
             } ?>
+            <?php include('../../footer.php'); ?>
         </div>
-        <br />
     </body>
 </html>

@@ -24,6 +24,7 @@
                     <th>Pseudo</th>
                     <th>Email</th>
                     <th>Role</th>
+                    <th>Activé</th>
                     <th>Dernière activité</th>
                     <th style="width: 100px;" class="text-center">Action</th>
                 </tr>
@@ -39,6 +40,7 @@
                         <td><?php echo $user->getPseudo() ?></td>
                         <td><?php echo $user->getEmail() ?></td>
                         <td><?php echo $user->getRole() ?></td>
+                        <td><?php echo $user->getActivated() ?></td>
                         <td><?php echo $user->getLastLogin() ?></td>
                         <td class="text-center"><a class="btn btn-default" href="modifier.php?id=<?php echo $user->getId() ?>">Modifier</a></td>
                     </tr>
@@ -48,7 +50,7 @@
             <?php } else {
                 header("Location: ../../error.php?error=403");
             } ?>
+            <?php include('../../footer.php'); ?>
         </div>
-        <br />
     </body>
 </html>

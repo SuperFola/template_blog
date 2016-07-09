@@ -211,6 +211,14 @@ class User {
         if ($pseudo == 'ADMIN')
             $this->activated = true;
     }
+    
+    public function setActivated($val=true) {
+        $this->activated = $val;
+    }
+    
+    public function getActivated() {
+        return $this->activated;
+    }
 
     /**
      * Retourne une array composé d'un boolean de validaté et d'une array des toutes les erreurs rencontrées
