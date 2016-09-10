@@ -55,7 +55,15 @@ class FirstPagePostsManager {
     
     public function deletePostNumber($number) {
         if ($number >= 0 && $this->getSize() > 0 && $number < $this->getSize()) {
-            unset($this->posts_details[$number]);
+            $i = 0;
+            $temp = array();
+            foreach ($this->posts_details as $post)
+            {
+                if ($i != $number)
+                    $temp[] = $post;
+                $i++;
+            }
+            $this->posts_details = $temp;
             return true;
         }
         return false;
