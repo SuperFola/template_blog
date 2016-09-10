@@ -42,7 +42,16 @@ class BlockedUsersManager {
     }
     
     public function deleteNumber($number) {
-        unset($this->ips[$number]);
+        $temp = array();
+        $i = 0;
+        
+        foreach($this->ips as $ip) {
+            if ($i != $number)
+                $temp[] = $ip;
+            $i++;
+        }
+        
+        $this->ips = $temp;
     }
     
     public function unlock($ip) {

@@ -36,7 +36,10 @@
                                 <a href="#" class="dropdown-toggle" style="color: #000;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['pseudo'] ?> <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="ucp.php">Profil</a></li>
+                                    <?php if ($_SESSION['role'] == 'ADMINISTRATEUR' or $_SESSION['role'] == 'MODERATEUR'): ?>
                                     <li><a href="admin/">Interface Administrateur</a></li>
+                                    <li><a href="admin/utilisateurs/index.php">Gestion des utilisateurs</a></li>
+                                    <?php endif; ?>
                                     <li><a href="admin/writing.php">Ecrire un article</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="logout.php">Déconnexion</a></li>

@@ -24,6 +24,7 @@
                                       <li><a href=\"block_ip.php\">Bloquer une IP</a></li>
                                       <li><a href=\"remarquable_articles.php\">Gérer les articles mis en avant</a></li>
                                       <li><a href=\"../private/cible_envoi.php\">Héberger une image</a></li>
+                                      <li><a href=\"../pic/\">Fichiers hébergés</a></li>
                                   </ol>
                               </div>";
                     else if ($_SESSION['role'] == 'AUTEUR')
@@ -31,6 +32,7 @@
                                   <ol class=\"breadcrumb\">
                                       <li><a href=\"writing.php\">Ecrire un article</a></li>
                                       <li><a href=\"../private/cible_envoi.php\">Héberger une image</a></li>
+                                      <li><a href=\"../pic/\">Fichiers hébergés</a></li>
                                   </ol>
                               </div>";
                     

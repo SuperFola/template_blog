@@ -28,7 +28,7 @@
                             if (true){ //in_array($extension_upload, $extensions_autorisees)) {
                                 // On peut valider le fichier et le stocker définitivement
                                 move_uploaded_file($_FILES['monfichier']['tmp_name'], '../pic/' . basename($_FILES['monfichier']['name']));
-                                echo "L'envoi a bien été effectué !<br />Votre lien : http://folaefolc.hostux.fr/pic/" . basename($_FILES['monfichier']['name']) . "<br /><br /><br /><br /><center><img src='http://folaefolc.hostux.fr/pic/" . basename($_FILES['monfichier']['name']) . "' /></center>";
+                                echo "L'envoi a bien été effectué !<br />Votre lien : http://wearecoders.hostux.fr/pic/" . basename($_FILES['monfichier']['name']) . "<br /><br /><br /><br /><center><img src='http://wearecoders.hostux.fr/pic/" . basename($_FILES['monfichier']['name']) . "' /></center>";
                             } else {
                                 echo 'Extension invalide';
                             }

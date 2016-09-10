@@ -36,6 +36,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="../../ucp.php">Profil</a></li>
                                     <li><a href="../index.php">Interface Administrateur</a></li>
+                                    <li><a href="index.php">Gestion des utilisateurs</a></li>
                                     <li><a href="../writing.php">Ecrire un article</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="../../logout.php">Déconnexion</a></li>

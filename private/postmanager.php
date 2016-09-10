@@ -388,9 +388,13 @@ class Post {
         $this->commentaires[] = $commentaire;
     }
 
-    public function removeCommentaire(Commentaire $commentaire) {
-        unset($this->commentaires[$commentaire->getId()]);
-        $this->commentaires = array_values($this->commentaires);
+    public function removeCommentaire(Commentaire $todel) {
+        $temp = array();
+        foreach ($this->commentaires as $commentaire) {
+            if ($commentaire->getTimestamp() != $todel->getTimestamp())
+                $temp[] = $commentaire;
+        }
+        $this->commentaires = $temp;
     }
 
     public function getCommentaires() {

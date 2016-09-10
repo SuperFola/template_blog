@@ -38,6 +38,9 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="../ucp.php">Profil</a></li>
                                     <li><a href="index.php">Interface Administrateur</a></li>
+                                    <?php if ($_SESSION['role'] == 'ADMINISTRATEUR' or $_SESSION['role'] == 'MODERATEUR'): ?>
+                                    <li><a href="utilisateurs/index.php">Gestion des utilisateurs</a></li>
+                                    <?php endif; ?>
                                     <li><a href="writing.php">Ecrire un article</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="../logout.php">Déconnexion</a></li>

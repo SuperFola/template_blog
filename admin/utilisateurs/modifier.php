@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="user_on" class="col-sm-2 control-label">Mot de passe</label>
+                    <label for="user_on" class="col-sm-2 control-label">Activé</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="user_on" name="user_on" placeholder="1 = activé, 0 = désactivé">
                         <span id="helpBlock" class="help-block">Laissez vide si vous ne souhaiter pas changer l'état d'activation de l'utilisateur</span>

@@ -5,49 +5,56 @@
 <!DOCTYPE html>
 <html>
     <?php include("head.php"); ?>
-    <link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
-    <body>
-        <?php include('header.php'); ?>
-        <?php
-            $postManager = new PostManager();
-            $validation = array(
-                'valid' => false,
-                'errors' => array()
-            );
-            if (isset($_GET['action']) and isset($_GET['post'])) {
-                if ($_GET['action'] == 'post_edit') {
-                    $post = $postManager->findPost(intval($_GET['post']));
-                } else {
+    <?php
+        $postManager = new PostManager();
+        $validation = array(
+            'valid' => false,
+            'errors' => array()
+        );
+        if (isset($_GET['action']) and isset($_GET['post'])) {
+            if ($_GET['action'] == 'post_edit') {
+                $post = $postManager->findPost(intval($_GET['post']));
+                if ($post->getAuthor() != $_SESSION['pseudo'] or $_SESSION['role'] != 'ADMINISTRATEUR') {
                     $post = new Post();
+                    $validation['errors']["propriete"] = "Vous n'êtes pas l'auteur original de cet article et ne pouvez donc pas l'éditer";
                 }
             } else {
                 $post = new Post();
             }
-            $categories = array('Programmation', 'Vie du blog', 'Windows', 'Android', 'Github', 'Les langages du web', 'Python', 'La famille C');
+        } else {
+            $post = new Post();
+        }
+        $categories = array('Programmation', 'Vie du blog', 'Windows', 'Android', 'Github', 'Les langages du web', 'Python', 'La famille C');
 
-            if (isset($_POST['cmd']) and isset($_SESSION) and in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR', 'AUTEUR')) and isset($_POST['post_titre']) and isset($_POST['post_categorie']) and isset($_POST['post_content'])) {
-                if ($_POST['cmd'] == 'post_add') {
-                    $post = new Post();
-                    //handlePostRequest($title, $categorie, $content, $author_name)
-                    $post->handlePostRequest($_POST['post_titre'], $_POST['post_categorie'], $_POST['post_content'], $_SESSION['pseudo']);
-                    $validation = $post->validate();
-                    if ($validation['valid']) {
-                        $postManager->persistPost($post);
-                    }
-                } else if($_POST['cmd'] == 'post_edit' and isset($_POST['post'])) {
-                    $post->setTitre($_POST['post_titre']);
-                    $post->setCategorie($_POST['post_categorie']);
-                    $post->setTimestampEdition(time());
-                    $post->setContent($_POST['post_content']);
-                    
-                    $validation = $post->validate();
-                    if ($validation['valid']) {
-                        $postManager->updatePost($post);
-                    }
+        if (isset($_POST['cmd']) and isset($_SESSION) and in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR', 'AUTEUR')) and isset($_POST['post_titre']) and isset($_POST['post_categorie']) and isset($_POST['post_content'])) {
+            $rd = false;
+            if ($_POST['cmd'] == 'post_add') {
+                $post = new Post();
+                $post->handlePostRequest($_POST['post_titre'], $_POST['post_categorie'], $_POST['post_content'], $_SESSION['pseudo']);
+                $validation = $post->validate();
+                if ($validation['valid']) {
+                    $postManager->persistPost($post);
+                    $rd = true;
                 }
-                header('Location: ../index.php');
+            } else if($_POST['cmd'] == 'post_edit' and isset($_POST['post'])) {
+                $post->setTitre($_POST['post_titre']);
+                $post->setCategorie($_POST['post_categorie']);
+                $post->setTimestampEdition(time());
+                $post->setContent($_POST['post_content']);
+                
+                $validation = $post->validate();
+                if ($validation['valid']) {
+                    $postManager->updatePost($post);
+                    $rd = true;
+                }
             }
-        ?>
+            if ($rd)
+                header('Location: ../index.php');
+        }
+    ?>
+    <link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
+    <body>
+        <?php include('header.php'); ?>
         <?php if (isset($_SESSION) and in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR', 'AUTEUR'))) { ?>
         <script src="../scripts/wysiwyg.js"></script>
         <div class="container">
@@ -56,6 +63,9 @@
                     <div class="well col-md-12 col-lg-10 col-lg-offset-1">
                         <div class="container-fluid">
                             <div class="form-group">
+                                <?php if(array_key_exists('propriete', $validation['errors'])): ?>
+                                <span class="help-block"><?php echo $validation['errors']['propriete']; ?></span>
+                                <?php endif; ?>
                                 <i>Ne vous préocupez pas d'ajouter la date à la news, cela est fait automatiquement :)</i><br /><br />
                                 <div class="form-group<?php if(array_key_exists('post_titre', $validation['errors'])): ?> has-error<?php endif; ?>">
                                     <label for="post_titre" class="col-sm-2 control-label">Titre</label>

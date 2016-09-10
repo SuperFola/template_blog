@@ -67,7 +67,7 @@
                                     <div>
                                         <div class="posts-list-item-header">
                                             <h3><a href="post.php?id=<?php echo $post->getId() ?>"><?php echo $post->getTitre() ?></a></h3>
-                                            <h4><span class="label label-default"><?php echo $post->getCategorie() ?></span></h4>
+                                            <h4><span class="label label-default"><?php echo $post->getCategorie() ?></span> par <?php echo $post->getAuthor(); ?></h4>
                                         </div>
                                         <div class="content-preview">
                                             <?php echo $Parsedown->text($post->getContent()); ?>
@@ -87,6 +87,14 @@
                             echo "<a href='index.php?page=" . intval($page + 1) . "'>News suivantes</a>";
                         }
                     ?>
+                </div>
+                
+                <hr />
+                
+                <div>
+                    <a class="twitter-timeline" data-lang="fr" data-width="540" data-height="420" href="https://twitter.com/Hxokunlug">Tweets de @Hxokunlug</a> <script async src="scripts/widgets.js" charset="utf-8"></script>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="twitter-timeline" data-lang="fr" data-width="540" data-height="420" href="https://twitter.com/the_new_sky">Tweets de @the_new_sky</a> <script async src="scripts/widgets.js" charset="utf-8"></script>
                 </div>
             </div>
             <?php
