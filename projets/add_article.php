@@ -43,11 +43,12 @@
                         if ($_POST['cmd'] == 'post_add') {
                             $article = new Article();
                             //handlePostRequest($title, $content, $author_name)
-                            $article->handlePostRequest($_POST['post_titre'], $_POST['post_content'], $_SESSION['pseudo']);
+                            echo $project->getId();
+                            $article->handlePostRequest($_POST['post_titre'], $_POST['post_content'], $_SESSION['pseudo'], $project->getId());
                             $validation = $article->validate();
                             if ($validation['valid']) {
                                 $project->addArticle($article);
-                                $projectManager->persistProject($project);
+                                $projectManager->updateProject($project);
                             }
                         } else if($_POST['cmd'] == 'post_edit' and isset($_POST['post'])) {
                             $article->setTitre($_POST['post_titre']);

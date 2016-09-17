@@ -15,7 +15,13 @@
             $Parsedown = new Parsedown();
             if (!isset($_GET['id'])) { header('Location: index.php'); }
             try {
-                if (intval($_GET['id']) >= 1 && intval($_GET['id']) <= $projectManager->findAll()[count($projectManager->findAll()) - 1]->getId())
+                $max = 1;
+                foreach ($projectManager->findAll() as $proj) {
+                    if ($proj->getId() < $max)
+                        $max = $proj->getId();
+                }
+                
+                if (intval($_GET['id']) >= 1 && intval($_GET['id']) <= $max)
                     $project = $projectManager->findProject(intval($_GET['id']));
                 else
                     header('Location: index.php');

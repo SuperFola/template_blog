@@ -42,7 +42,7 @@
                         }
                         
                         if (count($my_projects) == 0)
-                            echo "Pas de projets pour le moment ...<br>Voulez-vous peut-être en ajouter un ?";
+                            echo "Pas de projets pour le moment ...<br>Peut-être voulez-vous en ajouter un ?";
                         
                         foreach($my_projects as $project) { ?>
                         <li>

@@ -521,13 +521,15 @@ class Article {
     protected $commentaires;
     protected $edited;
     protected $author;
+    protected $dad;
 
     public function __construct($id = 0) {
         $this->id = $id;
         $this->timestampCreation = time();
         $this->commentaires = array();
         $this->edited = false;
-        $author = "Anonyme";
+        $this->author = "Anonyme";
+        $this->dad = 1;  // default value
     }
 
     /**
@@ -540,6 +542,7 @@ class Article {
         $this->content = $array['content'];
         $this->storedData = $array;
         $this->author = $array['author'];
+        $this->dad = $array['dad'];
         foreach($array['commentaires'] as $commentaireArray) {
             $commentaire = new Commentaire();
             $commentaire->hydrate($commentaireArray);
@@ -571,12 +574,13 @@ class Article {
     }
 
     /**
-     * Remplit le'Article à partir de la requête
+     * Remplit l'Article à partir de la requête
      */
-    public function handlePostRequest($title, $content, $author_name) {
+    public function handlePostRequest($title, $content, $author_name, $dad) {
         $this->titre = htmlentities($title);
         $this->content = $content;
         $this->author = htmlentities($author_name);
+        $this->dad = $dad;
 
         $this->edited = true;
     }
@@ -593,7 +597,8 @@ class Article {
             'timestamp' => $this->timestampCreation,
             'content' => $this->content,
             'author' => $this->author,
-            'commentaires' => array()
+            'commentaires' => array(),
+            'dad' => $this->dad
         );
 
         foreach($this->commentaires as $commentaire) {
@@ -682,6 +687,10 @@ class Article {
     public function getId() {
         return $this->id;
     }
+    
+    public function getDad() {
+        return $this->dad;
+    }
 
     public function setTitre($titre) {
         $this->titre = $titre;
@@ -755,213 +764,3 @@ class Article {
         return $this->storedData;
     }
 }
-
-// class Commentaire {
-    // protected $id;
-    // protected $pseudo;
-    // protected $timestamp;
-    // protected $ip;
-    // protected $message;
-    // protected $storedData;
-
-    // public function  __construct() {
-        // $this->timestamp = time();
-    // }
-
-    // public function hydrate($array) {
-        // $this->pseudo = $array['pseudo'];
-        // $this->timestamp = $array['timestamp'];
-        // $this->ip = $array['ip'];
-        // $this->message = $array['message'];
-        // $this->storedData = $array;
-    // }
-
-    // /**
-     // * Remplit le Commentaire à partir de la requête
-     // */
-    // public function handlePostRequest($pseudo, $message) {
-        // $this->pseudo = $pseudo;
-        // $this->message = $message;
-        // if (isset($REMOTE_ADDR))
-            // $this->ip = $REMOTE_ADDR;
-        // else
-            // $this->ip = $_SERVER['REMOTE_ADDR'];
-    // }
-
-    // /**
-     // * Génère une version sous forme d'array de Commentaire
-     // *
-     // * @return array
-     // */
-    // public function asArray() {
-        // $array = array(
-            // 'pseudo' => $this->pseudo,
-            // 'timestamp' => $this->timestamp,
-            // 'ip' => $this->ip,
-            // 'message' => $this->message
-        // );
-
-        // return $array;
-    // }
-
-    // /**
-     // * Retourne une array composé d'un boolean de validaté et d'une array des toutes les erreurs rencontrées
-     // *
-     // * @return array
-     // */
-    // public function validate() {
-        // $validation = array(
-            // 'valid' => true,
-            // 'errors' => array()
-        // );
-
-        // if ($this->pseudo == '') {
-            // $validation['valid'] = false;
-            // $validation['errors']['post_comment_pseudo'] = 'Vous devez spécifier un pseudo';
-        // }
-        // if ($this->message == '') {
-            // $validation['valid'] = false;
-            // $validation['errors']['post_comment_message'] = 'Votre message doit avoir un contenu !';
-        // }
-
-        // return $validation;
-    // }
-
-    // /**
-     // * Retourne sous forme de string une date formulée de façon sympa
-     // *
-     // * @return string
-     // */
-    // public function getDisplayableDate() {
-        // $diff = time() - $this->timestamp;
-        // if ($diff < 120) {
-            // return 'à l\'instant';
-        // }
-        // if ($diff < 3600) {
-            // return 'Il y a '. date('i', $diff) . ' minutes';
-        // } elseif ($diff < 86400) {
-            // if (intval(date('G', $diff)) > 1) {
-                // return 'Il y a '. date('G', $diff) . ' heures';
-            // } else {
-                // return 'Il y a '. date('G', $diff) . ' heure';
-            // }
-        // } elseif ($diff < 172800) {
-            // return 'Hier à '. date('H', $this->timestamp) . 'h';
-        // } else {
-            // if (intval(date('Y')) != intval(date('Y', $this->timestamp))) {
-                // return date('j', $this->timestamp) . ' ' . date('F', $this->timestamp) . ' ' . date('Y', $this->timestamp) . ', ' . date('H', $this->timestamp) . 'h' . date('i', $this->timestamp);
-            // } else {
-                // return date('j', $this->timestamp) . ' ' . date('F', $this->timestamp) . ', ' . date('H', $this->timestamp) . 'h' . date('i', $this->timestamp);
-            // }
-        // }
-    // }
-
-    // /**
-     // * @return mixed
-     // */
-    // public function getId()
-    // {
-        // return $this->id;
-    // }
-
-    // /**
-     // * @param mixed $id
-     // * @return Commentaire
-     // */
-    // public function setId($id)
-    // {
-        // $this->id = $id;
-        // return $this;
-    // }
-
-    // /**
-     // * @return mixed
-     // */
-    // public function getPseudo()
-    // {
-        // return $this->pseudo;
-    // }
-
-    // /**
-     // * @param mixed $pseudo
-     // * @return Commentaire
-     // */
-    // public function setPseudo($pseudo)
-    // {
-        // $this->pseudo = $pseudo;
-        // return $this;
-    // }
-
-    // /**
-     // * @return int
-     // */
-    // public function getTimestamp()
-    // {
-        // return $this->timestamp;
-    // }
-
-    // /**
-     // * @param int $timestamp
-     // * @return Commentaire
-     // */
-    // public function setTimestamp($timestamp)
-    // {
-        // $this->timestamp = $timestamp;
-        // return $this;
-    // }
-
-    // /**
-     // * @return mixed
-     // */
-    // public function getIp()
-    // {
-        // return $this->ip;
-    // }
-
-    // /**
-     // * @param mixed $ip
-     // * @return Commentaire
-     // */
-    // public function setIp($ip)
-    // {
-        // $this->ip = $ip;
-        // return $this;
-    // }
-
-    // /**
-     // * @return mixed
-     // */
-    // public function getMessage()
-    // {
-        // return $this->message;
-    // }
-
-    // /**
-     // * @param mixed $message
-     // * @return Commentaire
-     // */
-    // public function setMessage($message)
-    // {
-        // $this->message = $message;
-        // return $this;
-    // }
-
-    // /**
-     // * @return mixed
-     // */
-    // public function getStoredData()
-    // {
-        // return $this->storedData;
-    // }
-
-    // /**
-     // * @param mixed $storedData
-     // * @return Commentaire
-     // */
-    // public function setStoredData($storedData)
-    // {
-        // $this->storedData = $storedData;
-        // return $this;
-    // }
-// }
-

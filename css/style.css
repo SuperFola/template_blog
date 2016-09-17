@@ -79,6 +79,12 @@ div.content-preview {
     overflow: hidden;
     max-height: 300px;
 }
+div.preview-article {
+    background-color: #9ceef8;
+}
+div.preview-project {
+    background-color: #9cf89e;
+}
 div.writing-form-container {
     padding-top: 20px;
 }
