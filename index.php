@@ -57,9 +57,7 @@
                             $posts = $postManager->findAll();
                             $projects = $projectManager->findAll();
                             $articles = array();
-                            foreach ($projects as $proj) {
-                                $articles = $articles + $proj->getArticlesSorted();
-                            }
+                            foreach ($projects as $proj) { $articles = $articles + $proj->getArticlesSorted(); }
                             $result = array();
                             foreach($projects as $p) {$result[$p->getTimestampCreation()] = $p;}
                             foreach($articles as $a) {if(array_key_exists($a->getTimestampCreation(), $result)) {$result[$a->getTimestampCreation() + 1] = $a;} else {$result[$a->getTimestampCreation()] = $a;}}

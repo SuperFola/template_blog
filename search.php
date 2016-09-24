@@ -22,8 +22,18 @@
                 
                 <?php
                     $posts = $postManager->findAll();
+                    $projects = $projectManager->findAll();
+                    $articles = array();
+                    foreach ($projects as $proj) { $articles = $articles + $proj->getArticlesSorted(); }
+                    $result = array();
+                    foreach($projects as $p) {$result[$p->getTimestampCreation()] = $p;}
+                    foreach($articles as $a) {if(array_key_exists($a->getTimestampCreation(), $result)) {$result[$a->getTimestampCreation() + 1] = $a;} else {$result[$a->getTimestampCreation()] = $a;}}
+                    foreach($posts as $r) {if(array_key_exists($r->getTimestampCreation(), $result)) {$result[$r->getTimestampCreation() + 1] = $r;} else {$result[$r->getTimestampCreation()] = $r;}}
+                    ksort($result);
+                    $result = array_values(array_reverse($result));
+
                     $matching_post = array();
-                    foreach($posts as $post) {
+                    foreach($result as $post) {
                         if (preg_match("#".$_GET["search"]."#", $post->getContent()) or preg_match("#".$_GET["search"]."#", $post->getTitre()) or preg_match("#".$_GET["search"]."#", $post->getAuthor())) {
                             $matching_post[] = $post;
                         }
@@ -39,14 +49,44 @@
                         foreach($matching_post as $post) {
                         ?>
                         <li>
-                            <div>
+                            <?php
+                            if (is_a($post, 'Article')) {
+                                echo '<div class="preview-article">';
+                            } else if (is_a($post, 'Project')) {
+                                echo '<div class="preview-project">';
+                            } else {
+                                echo '<div>';
+                            }
+                            ?>
                                 <div class="posts-list-item-header">
-                                    <h3><a href="post.php?id=<?php echo $post->getId() ?>"><?php echo $post->getTitre() ?></a></h3>
-                                    <h4><span class="label label-default"><?php echo $post->getCategorie() ?></span></h4>
+                                    <?php
+                                    if (is_a($post, 'Post')) {
+                                        echo '<h3><a href="post.php?id='.$post->getId().'">'.$post->getTitre().'</a></h3>';
+                                    } else if (is_a($post, 'Article')) {
+                                        echo '<h3><a href="projets/article.php?project='.$post->getDad().'&id='.$post->getId().'">'.$post->getTitre().'</a></h3>';
+                                    } else if (is_a($post, 'Project')) {
+                                        echo '<h3><a href="projets/project.php?id='.$post->getId().'">'.$post->getTitre().'</a></h3>';
+                                    }
+                                    ?>
+                                    <h4>
+                                        <span class="label label-default" id="c<?php echo $i; ?>" onclick="window.location='categorie.php?id=<?php if (is_a($post, 'Post') or is_a($post, 'Project')) {echo $post->getCategorie();} else if (is_a($post, 'Article')) {echo "Article";} ?>';">
+                                            <?php if (is_a($post, 'Post') or is_a($post, 'Project')) {echo $post->getCategorie();} else if (is_a($post, 'Article')) {echo "Article";} ?>
+                                        </span> par
+                                        <?php if (is_a($post, 'Post') or is_a($post, 'Article')) {echo $post->getAuthor();} else if (is_a($post, 'Project')) {echo implode(", ", $post->getMembers());} ?>
+                                    </h4>
+                                    <script type="text/javascript">dce("c<?php echo $i; ?>").style.cursor = "pointer";</script>
                                 </div>
-                                <div class="content-preview">
-                                    <?php echo $Parsedown->text($post->getContent()); ?>
-                                </div>
+                                <?php
+                                    echo '<div class="content-preview">';
+                                    if (is_a($post, 'Post')) {
+                                        echo $Parsedown->text($post->getContent());
+                                    } else if (is_a($post, 'Article')) {
+                                        echo $Parsedown->text($post->getContent());
+                                    } else if (is_a($post, 'Project')) {
+                                        echo $Parsedown->text($post->getPresentation());
+                                    }
+                                    echo '</div>';
+                                ?>
                                 <hr />
                             </div>
                         </li>
