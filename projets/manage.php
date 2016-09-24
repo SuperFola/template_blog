@@ -62,14 +62,46 @@
                 </div>
                 <?php } else {
                     $project = $projectManager->findProject(intval($_GET['id']));
+                    if (isset($_POST) and isset($_POST['ups']) and isset($_POST['downs']) and isset($_GET['votechange'])) {
+                        // modifying up and down votes
+                        $project->setUpVote(intval($_POST['ups']));
+                        $project->setDownVote(intval($_POST['downs']));
+                        $projectManager->updateProject($project);
+                        echo "<h1>Modified</h1>";
+                    }
                 ?>
                 <br><br>
                 <div class="posts-list-item-header" id="<?php echo "id-plih-" . $project->getId(); ?>">
                     <h1 style="display: inline;"><?php echo $project->getTitre(); ?></h1>&nbsp;&nbsp;
                     <h4 style="display: inline;"><span class="label label-default"><?php echo $project->getCategorie() ?></span></h4>
                     <h4><?php echo $project->getDisplayableDate(); ?> par <?php echo implode(", ", $project->getMembers()); ?></h4>
-                    <?php echo $project->getUpVote(); ?>&nbsp;<i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
-                    <?php echo $project->getDownVote(); ?>&nbsp;<i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                    <form method="post" action="manage.php?id=<?php echo $project->getId(); ?>&votechange=1">
+                        <input name="ups" type="text" placeholder=<?php echo $project->getUpVote(); ?>>&nbsp;<i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
+                        <input name="downs" type="text" placeholder=<?php echo $project->getDownVote(); ?>>&nbsp;<i class="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                    </form>
+                </div>
+                <hr />
+                <div class="posts-list-container container-fluid">
+                    <ul class="posts-list">
+                        <?php
+                        $articles = $project->getArticlesSorted();
+                        if (count($articles) == 0)
+                            echo "Pas d'article disponnible sur ce projet.";
+                        foreach($articles as $article) { ?>
+                        <li>
+                            <div>
+                                <div class="posts-list-item-header">
+                                    <h3><a href="add_article.php?project=<?php echo $project->getId(); ?>&id=<?php echo $article->getId(); ?>&action=post_edit"><?php echo $article->getTitre(); ?></a> par <?php echo $article->getAuthor(); ?></h3>
+                                </div>
+                                <div class="content-preview">
+                                    <?php echo $Parsedown->text($article->getContent()); ?>
+                                </div>
+                                <hr />
+                            </div>
+                        </li>
+                    <?php } ?>
+                    </ul>
                 </div>
                 <?php } ?>
             </div>

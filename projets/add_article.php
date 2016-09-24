@@ -6,65 +6,63 @@
 
 <HTML>
     <?php include('head.php'); ?>
+    <?php
+        $projectManager = new ProjectManager();
+        $um = new UserManager();
+        $Parsedown = new Parsedown();
+        
+        if (!isset($_SESSION['pseudo']) || $um->findUserByPseudo($_SESSION['pseudo'])->getRole() == 'MEMBRE') {
+            header('Location: index.php');
+        }
+        if (isset($_GET['project']) && intval($_GET['project']) >= 1 && intval($_GET['project']) <= count($projectManager->findAll()))
+            $project = $projectManager->findProject(intval($_GET['project']));
+        else
+            header('Location: ../error.php?error=404');
+        
+        $validation = array(
+            'valid' => false,
+            'errors' => array()
+        );
+        if (isset($_GET['project']))
+            $article = new Article();
+        if (isset($_GET['action']) and isset($_GET['project']) and isset($_GET['id'])) {
+            if ($_GET['action'] == 'post_edit' && in_array($_SESSION['pseudo'], $project->getMembers())) {
+                $article = $project->findArticle(intval($_GET['id']));
+            } else {
+                header('Location: index.php');
+            }
+        }
+
+        if (isset($_POST['cmd']) and isset($_SESSION) and in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR', 'AUTEUR')) and isset($_POST['post_titre']) and isset($_POST['post_content'])) {
+            if ($_POST['cmd'] == 'post_add') {
+                $article = new Article();
+                echo $project->getId();
+                $article->handlePostRequest($_POST['post_titre'], $_POST['post_content'], $_SESSION['pseudo'], $project->getId());
+                $validation = $article->validate();
+                if ($validation['valid']) {
+                    $project->addArticle($article);
+                    $projectManager->updateProject($project);
+                }
+            } else if($_POST['cmd'] == 'post_edit' and isset($_POST['post'])) {
+                $article->setTitre($_POST['post_titre']);
+                $article->setTimestampEdition(time());
+                $article->setPresentation($_POST['post_content']);
+                
+                $validation = $article->validate();
+                if ($validation['valid']) {
+                    $project->updateArticle($article);
+                    $projectManager->updateProject($project);
+                }
+            }
+            header('Location: index.php');
+        }
+    ?>
     <link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
     <body>
         <?php include('header.php'); ?>
         <script src="../scripts/wysiwyg.js"></script>
         <div class="container">
             <div class="posts">
-                <?php
-                    $projectManager = new ProjectManager();
-                    $um = new UserManager();
-                    $Parsedown = new Parsedown();
-                    
-                    if (!isset($_SESSION['pseudo']) || $um->findUserByPseudo($_SESSION['pseudo'])->getRole() == 'MEMBRE') {
-                        header('Location: index.php');
-                    }
-                    if (isset($_GET['project']) && intval($_GET['project']) >= 1 && intval($_GET['project']) <= count($projectManager->findAll()))
-                        $project = $projectManager->findProject(intval($_GET['project']));
-                    else
-                        header('Location: ../error.php?error=404');
-                    
-                    $validation = array(
-                        'valid' => false,
-                        'errors' => array()
-                    );
-                    if (isset($_GET['project']))
-                        $article = new Article();
-                    if (isset($_GET['action']) and isset($_GET['project']) and isset($_GET['id'])) {
-                        if ($_GET['action'] == 'post_edit' && in_array($_SESSION['pseudo'], $project->getMembers())) {
-                            $article = $project->findArticle(intval($_GET['id']));
-                        } else {
-                            header('Location: index.php');
-                        }
-                    }
-
-                    if (isset($_POST['cmd']) and isset($_SESSION) and in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR', 'AUTEUR')) and isset($_POST['post_titre']) and isset($_POST['post_content'])) {
-                        if ($_POST['cmd'] == 'post_add') {
-                            $article = new Article();
-                            //handlePostRequest($title, $content, $author_name)
-                            echo $project->getId();
-                            $article->handlePostRequest($_POST['post_titre'], $_POST['post_content'], $_SESSION['pseudo'], $project->getId());
-                            $validation = $article->validate();
-                            if ($validation['valid']) {
-                                $project->addArticle($article);
-                                $projectManager->updateProject($project);
-                            }
-                        } else if($_POST['cmd'] == 'post_edit' and isset($_POST['post'])) {
-                            $article->setTitre($_POST['post_titre']);
-                            $article->setTimestampEdition(time());
-                            $article->setPresentation($_POST['post_content']);
-                            
-                            $validation = $article->validate();
-                            if ($validation['valid']) {
-                                $project->updateArticle($article);
-                                $projectManager->updateProject($project);
-                            }
-                        }
-                        header('Location: index.php');
-                    }
-                ?>
-
                 <h1 style="display: inline;">Ajout d'un article sur le projet : <?php echo $project->getTitre(); ?></h1>
                 <div style="display: inline; float: right">
                 </div>

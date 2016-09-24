@@ -14,17 +14,28 @@
         if (isset($_GET['action']) and isset($_GET['post'])) {
             if ($_GET['action'] == 'post_edit') {
                 $post = $postManager->findPost(intval($_GET['post']));
-                if ($post->getAuthor() != $_SESSION['pseudo'] or $_SESSION['role'] != 'ADMINISTRATEUR') {
+                /*if ($post->getAuthor() != $_SESSION['pseudo'] or !in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR'))) {
                     $post = new Post();
                     $validation['errors']["propriete"] = "Vous n'êtes pas l'auteur original de cet article et ne pouvez donc pas l'éditer";
-                }
+                }*/
             } else {
                 $post = new Post();
             }
         } else {
             $post = new Post();
         }
-        $categories = array('Programmation', 'Vie du blog', 'Windows', 'Android', 'Github', 'Les langages du web', 'Python', 'La famille C');
+        $categories = array(
+            'Programmation',
+            'Vie du blog',
+            'Windows',
+            'Android',
+            'Github',
+            'Les langages du web',
+            'Python',
+            'La famille C',
+            'DIY',
+            'Technologie'
+        );
 
         if (isset($_POST['cmd']) and isset($_SESSION) and in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR', 'AUTEUR')) and isset($_POST['post_titre']) and isset($_POST['post_categorie']) and isset($_POST['post_content'])) {
             $rd = false;

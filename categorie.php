@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     session_start();
 ?>
 
@@ -16,41 +16,14 @@
                     $fpp_mgr = new FirstPagePostsManager();
                     $Parsedown = new Parsedown();
                     
-                    if (isset($_GET['action'])) {
-                        if ($_GET['action'] == 'activated') {
-                            echo "<div class=\"alert alert-success alert-dismissible\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button><strong>Inscription réussie !</strong> Bienvenue sur WeAreCoders, " . $_SESSION['pseudo'] . "</div>";
-                        }
-                        if ($_GET['action'] == 'failed_activation') {
-                            echo "<div class=\"alert alert-warning alert-dismissible\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button><strong>Erreur !</strong> La clé d'activation du compte ne correspond à aucun compte connu.</div>";
-                        }
+                    if (isset($_GET['id'])) {
+                        
+                    } else {
+                        header('Location: error.php?error=404');
                     }
                 ?>
-                <h1>A la une</h1>
+                <h2>Articles dans la catégorie `<?php echo $_GET['id']; ?>`</h2>
 
-                <div class="top-posts-container container-fluid">
-                    <?php
-                        if ($fpp_mgr->getSize() == 0) {
-                            echo "<center><h4>Aucun post n'est actuellement mis en avant</h4></center>";
-                        } else {
-                            echo "<ul class='top-posts'>";
-                            for ($i=0; $i < $fpp_mgr->getSize(); $i++) {
-                                $post_details = $fpp_mgr->getPost($i);
-                                if ($post_details) {
-                                    echo "<li class='col-md-3'>";
-                                    echo "<div style=\"background-image: url('" . $post_details['image'] . "'); background-size: 100%;\">";
-                                    echo "<a href='post.php?id=" . $post_details['id'] . "' style='color: black;'><h3>" . $postManager->findPost($post_details['id'])->getTitre() . "</h3></a>";
-                                    echo "</div>";
-                                    echo "</li>";
-                                }
-                            }
-                            echo "</ul>";
-                        }
-                    ?>
-                </div>
-
-                <hr />
-
-                <h1>Articles</h1>
                 <div class="posts-list-container container-fluid">
                     <ul class="posts-list">
                         <?php
@@ -61,9 +34,9 @@
                                 $articles = $articles + $proj->getArticlesSorted();
                             }
                             $result = array();
-                            foreach($projects as $p) {$result[$p->getTimestampCreation()] = $p;}
-                            foreach($articles as $a) {if(array_key_exists($a->getTimestampCreation(), $result)) {$result[$a->getTimestampCreation() + 1] = $a;} else {$result[$a->getTimestampCreation()] = $a;}}
-                            foreach($posts as $r) {if(array_key_exists($r->getTimestampCreation(), $result)) {$result[$r->getTimestampCreation() + 1] = $r;} else {$result[$r->getTimestampCreation()] = $r;}}
+                            foreach($projects as $p) { if($p->getCategorie() == $_GET['id']) $result[$p->getTimestampCreation()] = $p;}
+                            foreach($articles as $a) {if(array_key_exists($a->getTimestampCreation(), $result) and $_GET['id'] == 'Article') {$result[$a->getTimestampCreation() + 1] = $a;} else {if ($_GET['id'] == 'Article') $result[$a->getTimestampCreation()] = $a;}}
+                            foreach($posts as $r) {if(array_key_exists($r->getTimestampCreation(), $result) and $r->getCategorie() == $_GET['id']) {$result[$r->getTimestampCreation() + 1] = $r;} else { if ($r->getCategorie() == $_GET['id']) $result[$r->getTimestampCreation()] = $r;}}
                             ksort($result);
                             $result = array_values(array_reverse($result));
                             
@@ -126,20 +99,12 @@
                     </ul>
                     <?php
                         if ($page - 1 >= 0) {
-                            echo "<a href='index.php?page=" . intval($page - 1) . "'>News précédentes</a>&nbsp;&nbsp;";
+                            echo "<a href='categorie.php?id=" . $_GET['id'] . "&page=" . intval($page - 1) . "'>News précédentes</a>&nbsp;&nbsp;";
                         }
                         if (($page + 1) * 12 <= count($posts)) {
-                            echo "<a href='index.php?page=" . intval($page + 1) . "'>News suivantes</a>";
+                            echo "<a href='categorie.php?id=" . $_GET['id'] . "&page=" . intval($page + 1) . "'>News suivantes</a>";
                         }
-                    ?>
-                </div>
-                
-                <hr />
-                
-                <div>
-                    <a class="twitter-timeline" data-lang="fr" data-width="540" data-height="420" href="https://twitter.com/Hxokunlug">Tweets de @Hxokunlug</a> <script async src="scripts/widgets.js" charset="utf-8"></script>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a class="twitter-timeline" data-lang="fr" data-width="540" data-height="420" href="https://twitter.com/the_new_sky">Tweets de @the_new_sky</a> <script async src="scripts/widgets.js" charset="utf-8"></script>
+                     ?>
                 </div>
             </div>
             <?php
