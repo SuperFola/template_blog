@@ -12,6 +12,7 @@
             <div class="posts">
                 <?php
                     $postManager = new PostManager();
+                    $projectManager = new ProjectManager();
                     $Parsedown = new Parsedown();
                 ?>
                 <div class="post-header">
@@ -34,7 +35,15 @@
 
                     $matching_post = array();
                     foreach($result as $post) {
-                        if (preg_match("#".$_GET["search"]."#", $post->getContent()) or preg_match("#".$_GET["search"]."#", $post->getTitre()) or preg_match("#".$_GET["search"]."#", $post->getAuthor())) {
+                        $content = "";
+                        if (is_a($post, 'Article')) {
+                            $content = $post->getContent();
+                        } else if (is_a($post, 'Project')) {
+                            $content = $post->getPresentation();
+                        } else {
+                            $content = $post->getContent();
+                        }
+                        if (preg_match("#".$_GET["search"]."#", $content) or preg_match("#".$_GET["search"]."#", $post->getTitre()) or preg_match("#".$_GET["search"]."#", $post->getAuthor())) {
                             $matching_post[] = $post;
                         }
                     }
@@ -46,7 +55,9 @@
                     <?php
                         if (count($matching_post) == 0)
                             echo "La recherche a été infructeuse ... :(";
+                        $i = 0;
                         foreach($matching_post as $post) {
+                            $i += 1;
                         ?>
                         <li>
                             <?php
