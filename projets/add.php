@@ -7,11 +7,10 @@
 <HTML>
     <?php include('head.php'); ?>
     <body>
-        <?php include('header.php'); ?>
         <?php
             $projectManager = new ProjectManager();
             $validation = array(
-                'valid' => false,
+                'valid' => true,
                 'errors' => array()
             );
             if (isset($_GET['action']) and isset($_GET['project'])) {
@@ -27,7 +26,6 @@
             if (isset($_POST['cmd']) and isset($_SESSION) and in_array($_SESSION['role'], array('MODERATEUR', 'ADMINISTRATEUR', 'AUTEUR')) and isset($_POST['post_titre']) and isset($_POST['post_categorie']) and isset($_POST['post_content'])) {
                 if ($_POST['cmd'] == 'post_add') {
                     $project = new Project();
-                    //handlePostRequest($title, $categorie, $content, $author_name)
                     $members = explode(",", $_POST['post_members']);
                     $members[] = $_SESSION['pseudo'];
                     $project->handlePostRequest($_POST['post_titre'], $_POST['post_categorie'], $_POST['post_content'], $members);
@@ -47,6 +45,7 @@
                 header('Location: index.php');
             }
         ?>
+        <?php include('header.php'); ?>
         <script src="../scripts/wysiwyg.js"></script>
         <div class="container">
             <div class="posts">

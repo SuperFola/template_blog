@@ -94,10 +94,6 @@
                                 <div class="posts-list-item-header">
                                     <h3><a href="add_article.php?project=<?php echo $project->getId(); ?>&id=<?php echo $article->getId(); ?>&action=post_edit"><?php echo $article->getTitre(); ?></a> par <?php echo $article->getAuthor(); ?></h3>
                                 </div>
-                                <div class="content-preview">
-                                    <?php echo $Parsedown->text($article->getContent()); ?>
-                                </div>
-                                <hr />
                             </div>
                         </li>
                     <?php } ?>

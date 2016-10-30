@@ -382,6 +382,14 @@ class Project {
         if (!in_array($_SERVER['REMOTE_ADDR'], $this->votants)) {
             $votants[] = $_SERVER['REMOTE_ADDR'];
             $this->plus++;
+        } else {
+            $tmp = array();
+            foreach($this->votants as $vot) {
+                if ($vot != $_SERVER['REMOTE_ADDR'])
+                    $tmp[] = $vot;
+            }
+            $this->votants = $tmp;
+            $this->plus--;
         }
     }
     
@@ -389,6 +397,14 @@ class Project {
         if (!in_array($_SERVER['REMOTE_ADDR'], $this->votants)) {
             $votants[] = $_SERVER['REMOTE_ADDR'];
             $this->minus++;
+        } else {
+            $tmp = array();
+            foreach($this->votants as $vot) {
+                if ($vot != $_SERVER['REMOTE_ADDR'])
+                    $tmp[] = $vot;
+            }
+            $this->votants = $tmp;
+            $this->minus--;
         }
     }
     
@@ -398,6 +414,14 @@ class Project {
     
     public function getDownVote() {
         return $this->minus;
+    }
+    
+    public function setUpVote($value) {
+        $this->plus = $value;
+    }
+    
+    public function setDownVote($value) {
+        $this->minus = $value;
     }
 
     public function setId($id) {

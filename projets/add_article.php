@@ -46,7 +46,7 @@
             } else if($_POST['cmd'] == 'post_edit' and isset($_POST['post'])) {
                 $article->setTitre($_POST['post_titre']);
                 $article->setTimestampEdition(time());
-                $article->setPresentation($_POST['post_content']);
+                $article->setContent($_POST['post_content']);
                 
                 $validation = $article->validate();
                 if ($validation['valid']) {

@@ -8,7 +8,6 @@
     <?php include('head.php'); ?>
     <link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
     <body>
-        <?php include('header.php'); ?>
         <?php
             $projectManager = new ProjectManager();
             $um = new UserManager();
@@ -19,7 +18,12 @@
                     $project = $projectManager->findProject(intval($_GET['project']));
                 else
                     header('Location: project.php?id=' . $_GET['project']);
-                if (intval($_GET['id']) >= 0 && intval($_GET['id']) <= $project->getArticlesSorted()[count($project->getArticlesSorted()) - 1]->getId())
+                $max = 0;
+                foreach ($project->getArticlesSorted() as $a) {
+                    if ($a->getId() > $max)
+                        $max = $a->getId();
+                }
+                if (intval($_GET['id']) >= 0 && intval($_GET['id']) <= $max)
                     $article = $project->findArticle(intval($_GET['id']));
                 else
                     header('Location: project.php?id=' . $_GET['project']);
@@ -44,6 +48,7 @@
                 header("Location: article.php?id=" . $_GET['id'] . "&project=" . $_GET['project'] . "#comments");
             }
         ?>
+        <?php include('header.php'); ?>
         <div class="container">
             <br />
             <div class="breadcrumb-container">

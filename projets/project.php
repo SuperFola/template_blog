@@ -17,7 +17,7 @@
             try {
                 $max = 1;
                 foreach ($projectManager->findAll() as $proj) {
-                    if ($proj->getId() < $max)
+                    if ($proj->getId() > $max)
                         $max = $proj->getId();
                 }
                 
