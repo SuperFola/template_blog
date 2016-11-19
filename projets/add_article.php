@@ -26,7 +26,7 @@
         if (isset($_GET['project']))
             $article = new Article();
         if (isset($_GET['action']) and isset($_GET['project']) and isset($_GET['id'])) {
-            if ($_GET['action'] == 'post_edit' && in_array($_SESSION['pseudo'], $project->getMembers())) {
+            if ($_GET['action'] == 'post_edit' && (in_array($_SESSION['pseudo'], $project->getMembers()) || in_array($_SESSION['role'], array('ADMINISTRATEUR', 'MODERATEUR')))) {
                 $article = $project->findArticle(intval($_GET['id']));
             } else {
                 header('Location: index.php');

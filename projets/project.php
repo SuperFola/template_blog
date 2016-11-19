@@ -61,7 +61,7 @@
                     <h4 style="display: inline;"><span class="label label-default"><?php echo $project->getCategorie() ?></span></h4>
                     <?php if (isset($_SESSION['pseudo']) && $um->findUserByPseudo($_SESSION['pseudo'])->getRole() != 'MEMBRE') { ?>
                     <div style="display: inline; float: right">
-                        <?php if (in_array($_SESSION['pseudo'], $projectManager->findProject(intval($_GET['id']))->getMembers())) { ?>
+                        <?php if (in_array($_SESSION['pseudo'], $projectManager->findProject(intval($_GET['id']))->getMembers()) || in_array($_SESSION['role'], array('ADMINISTRATEUR', 'MODERATEUR'))) { ?>
                         <a href="manage.php?id=<?php echo intval($_GET['id']); ?>" class="btn btn-warning">Modifier le projet</a>&nbsp;&nbsp;
                         <?php } ?>
                         <a href="add.php" class="btn btn-primary">Ajouter un projet</a>&nbsp;&nbsp;
