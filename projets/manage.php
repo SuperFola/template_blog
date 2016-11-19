@@ -104,8 +104,8 @@
                 <div class="posts-list-container container-fluid">
                     <?php
                         $message = "Edité par " . $_SESSION['pseudo'];
+                        $count = 0;
                         foreach ($project->getArticlesSorted() as $a) {
-                            $count = 0;
                             foreach($a->getCommentairesSorted() as $commentaire) {
                                 $pseudoFormated = $commentaire->getPseudo();
                                 if ($um->findUserByPseudo($pseudoFormated))
