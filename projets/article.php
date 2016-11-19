@@ -70,7 +70,7 @@
                     <h1 style="display: inline;"><?php echo $article->getTitre(); ?></h1>&nbsp;&nbsp;
                     <?php if (isset($_SESSION['pseudo']) && $um->findUserByPseudo($_SESSION['pseudo'])->getRole() != 'MEMBRE') { ?>
                     <div style="display: inline; float: right">
-                        <?php if (in_array($_SESSION['pseudo'], $projectManager->findProject(intval($_GET['project']))->getMembers())) { ?>
+                        <?php if (in_array($_SESSION['pseudo'], $projectManager->findProject(intval($_GET['project']))->getMembers()) || in_array($_SESSION['role'], array('ADMINISTRATEUR', 'MODERATEUR'))) { ?>
                         <a href="manage.php?id=<?php echo intval($_GET['project']); ?>" class="btn btn-warning">Modifier le projet</a>&nbsp;&nbsp;
                         <?php } ?>
                         <a href="add.php" class="btn btn-primary">Ajouter un projet</a>&nbsp;&nbsp;

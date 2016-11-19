@@ -100,6 +100,29 @@
                     </ul>
                 </div>
                 <?php } ?>
+                <hr />
+                <div class="posts-list-container container-fluid">
+                    <?php
+                        $message = "Edité par " . $_SESSION['pseudo'];
+                        foreach ($project->getArticlesSorted() as $a) {
+                            $count = 0;
+                            foreach($a->getCommentairesSorted() as $commentaire) {
+                                $pseudoFormated = $commentaire->getPseudo();
+                                if ($um->findUserByPseudo($pseudoFormated))
+                                    $pseudoFormated = "<a href=\"../ucp.php?id=" . $um->findUserByPseudo($pseudoFormated)->getId() . "\">" . $pseudoFormated . "</a>";
+                                echo "<li>";
+                                echo "Par {$pseudoFormated} (ip:{$commentaire->getIp()}) - ";
+                                echo "<a onclick=\"s('" . $count . "');\">{$commentaire->getDisplayableDate()}</a> - ";
+                                echo "<a href=\"macoedsu.php?action=delete&postid={$project->getId()}&aid={$a->getId()}&comts={$commentaire->getTimestamp()}\" target=blank>Supprimer</a> - ";
+                                echo "<a href=\"macoedsu.php?action=edit&postid={$project->getId()}&aid={$a->getId()}&message={$message}&comts={$commentaire->getTimestamp()}\" target=blank>Editer</a>";
+                                echo "<br />";
+                                echo "<div class=\"spoiler\" id='" . $count . "'>{$commentaire->getMessage()}</div>";
+                                echo "</li>";
+                                $count++;
+                            }
+                        }
+                    ?>
+                </div>
             </div>
             <?php
                 include('../footer.php');
