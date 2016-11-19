@@ -128,7 +128,7 @@
                 <?php } else { header('Location: index.php'); } ?>
             </div>
             <?php
-                include('../footer.php');
+                include('footer.php');
             ?>
         </div>
     </body>
