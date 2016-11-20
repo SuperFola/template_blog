@@ -28,7 +28,7 @@
                    ?>
            <form action="edit_config.php" method="post">
                 <div class="input-group">
-                    <textarea name="config_content" rows="12" cols="128"><?php echo "{'" . implode("','", $cm->getConfig()) . "'}"; ?></textarea>
+                    <textarea name="config_content" rows="12" cols="128"><?php echo $cm->getData(); ?></textarea>
                 </div>
                 <br />
                 <button type="submit" class="btn btn-primary">Valider</button>

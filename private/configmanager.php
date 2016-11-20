@@ -10,6 +10,7 @@ class ConfigManager {
             $this->persistConfig();
         }
         
+        $this->data = "";
         $this->config = $this->getFile($this->path);
     }
     
@@ -20,6 +21,10 @@ class ConfigManager {
      */
     public function getConfig() {
         return $this->config;
+    }
+    
+    public function getData() {
+        return $this->data;
     }
     
     public function persistConfig() {
@@ -33,7 +38,8 @@ class ConfigManager {
     }
     
     private function getFile($filepath) {
-        return json_decode(file_get_contents($filepath), true);
+        $this->data = file_get_contents($filepath);
+        return json_decode($this->data, true);
     }
     
     public function getBlogTitle() {
@@ -67,9 +73,7 @@ class ConfigManager {
      */
     public function setConfigKey($key, $value) {
         $config = $this->getConfig();
-        if (isset($config[$key])) {
-            $this->config[$key] = $value;
-        }
+        $this->config[$key] = $value;
     }
     
     public function setConfig($content) {

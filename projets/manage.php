@@ -75,10 +75,19 @@
                     <h1 style="display: inline;"><?php echo $project->getTitre(); ?></h1>&nbsp;&nbsp;
                     <h4 style="display: inline;"><span class="label label-default"><?php echo $project->getCategorie() ?></span></h4>
                     <h4><?php echo $project->getDisplayableDate(); ?> par <?php echo implode(", ", $project->getMembers()); ?></h4>
+                    
                     <form method="post" action="manage.php?id=<?php echo $project->getId(); ?>&votechange=1">
-                        <input name="ups" type="text" placeholder=<?php echo $project->getUpVote(); ?>>&nbsp;<i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
-                        <input name="downs" type="text" placeholder=<?php echo $project->getDownVote(); ?>>&nbsp;<i class="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
-                        <button type="submit" class="btn btn-primary">Modifier</button>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-6 input-group">
+                                    <input class="form-control" name="ups" type="text" placeholder=<?php echo $project->getUpVote(); ?>>&nbsp;<i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
+                                </div>
+                                <div class="col-lg-6 input-group">
+                                    <input class="form-control" name="downs" type="text" placeholder=<?php echo $project->getDownVote(); ?>>&nbsp;<i class="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Modifier</button>
+                        </div>
                     </form>
                 </div>
                 <hr />
