@@ -22,9 +22,11 @@ class BlockedUsersManager {
     }
     
     public function isBlocked($ip) {
-        foreach($this->findAll() as $ip_blocked){
-            if ($ip_blocked['ip'] == $ip)
-                return true;
+        if (count($this->findAll())) {
+            foreach($this->findAll() as $ip_blocked){
+                if ($ip_blocked['ip'] == $ip)
+                    return true;
+            }
         }
         return false;
     }

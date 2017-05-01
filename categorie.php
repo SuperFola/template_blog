@@ -73,9 +73,9 @@
                                             ?>
                                             <h4>
                                                 <span class="label label-default" id="c<?php echo $i; ?>" onclick="window.location='categorie.php?id=<?php if (is_a($post, 'Post') or is_a($post, 'Project')) {echo $post->getCategorie();} else if (is_a($post, 'Article')) {echo "Article";} ?>';">
-                                                    <?php if (is_a($post, 'Post') or is_a($post, 'Project')) {echo $post->getCategorie();} else if (is_a($post, 'Article')) {echo "Article";} ?>
-                                                </span> par
-                                                <?php if (is_a($post, 'Post') or is_a($post, 'Article')) {echo $post->getAuthor();} else if (is_a($post, 'Project')) {echo implode(", ", $post->getMembers());} ?>
+                                                    <?php if (is_a($post, 'Post') or is_a($post, 'Project')) {echo $post->getCategorie();} else if (is_a($post, 'Article')) {echo "Article";} ?></span> par
+                                                <?php if (is_a($post, 'Post') or is_a($post, 'Article')) {echo $post->getAuthor();} else if (is_a($post, 'Project')) {echo implode(", ", $post->getMembers());} ?>,
+                                                <?php echo $post->getDisplayableDate() ?>
                                             </h4>
                                             <script type="text/javascript">dce("c<?php echo $i; ?>").style.cursor = "pointer";</script>
                                         </div>

@@ -31,8 +31,11 @@
             
             if (isset($_POST['cmd']) and $_POST['cmd'] == 'post_comment_add') {
                 $commentaire = new Commentaire();
-                if (!isset($_SESSION) or !isset($_SESSION['pseudo']))
-                    $pseudo = "Anonyme";
+                $pseudo = "*(nullptr)";
+                if (!isset($_SESSION) or !isset($_SESSION['pseudo'])) {
+                    http_response_code(404);
+                    exit();
+                }
                 else
                     $pseudo = $_SESSION['pseudo'];
                 $message = htmlentities($_POST['post_comment_message']);
@@ -57,7 +60,7 @@
             <hr>
             <div class="post">
                 <div class="post-header">
-                    <h1 style="display: inline;"><?php echo $project->getTitre(); ?></h1>&nbsp;&nbsp;
+                    <h1 style="display: inline;"><?php echo $project->getTitre(); ?></h1>
                     <h4 style="display: inline;"><span class="label label-default"><?php echo $project->getCategorie() ?></span></h4>
                     <?php if (isset($_SESSION['pseudo']) && $um->findUserByPseudo($_SESSION['pseudo'])->getRole() != 'MEMBRE') { ?>
                     <div style="display: inline; float: right">
@@ -67,7 +70,7 @@
                         <a href="add.php" class="btn btn-primary">Ajouter un projet</a>&nbsp;&nbsp;
                         <a href="manage.php" class="btn btn-primary">Gérer mes projets</a>
                     </div>
-                    <h4><?php echo $project->getDisplayableDate(); ?> par <?php echo implode(", ", $project->getMembers()); ?></h4>
+                    <h4><?php echo $project->getDisplayableDate(); ?> par <?php if (count($project->getMembers()) > 1) {echo implode(", ", $project->getMembers());} else {echo $project->getMembers()[0];} ?></h4>
                     <?php echo $project->getUpVote(); ?>&nbsp;<i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
                     <?php echo $project->getDownVote(); ?>&nbsp;<i class="fa fa-thumbs-down" aria-hidden="true"></i>
                     <?php } ?>
@@ -111,7 +114,9 @@
                             <div class="container-fluid">
                                 <?php if (!isset($_SESSION) or !isset($_SESSION['pseudo'])) { ?>
                                 <h4>Donnez votre opinion !</h4>
-                                Sera posté en tant que : <b>Anonyme</b><br />
+                                Ah mince, vous devez être connecté pour continuer :( <br />
+                                    <a onclick="load_modal('signup_mod', '../');" class="btn btn-default" style="margin-top: 10px;">Inscription</a>&nbsp;
+                                    <a onclick="load_modal('login_mod', '../');" class="btn btn-default" style="margin-top: 10px;">Connexion</a>
                                 <?php } else {
                                     echo '<h4 style="display: inline;">Donnez votre opinion !</h4>';
                                     echo '<div class="avatar" style="display: inline; float: right; line-height: 20px;">';
@@ -119,7 +124,7 @@
                                     echo '<img src="http://identicon.org?t=' . $_SESSION['pseudo'] . '&s=50" class="img-responsive">';
                                     echo '<br />';
                                     echo '</div>';
-                                } ?>
+                                ?>
                                 <div class="form-group">
                                     <textarea class="form-control" row="5" placeholder="Votre message..." name="post_comment_message"></textarea>
                                 </div>
@@ -127,6 +132,7 @@
                                     <input type="hidden" name="cmd" value="post_comment_add" />
                                     <input type="submit" class="btn btn-primary" value="Poster" />
                                 </div>
+                                <?php } ?>
                             </div>
                         </form>
                         <?php } else {echo 'Votre adresse IP a été bloquée. Veuillez nous envoyer un mail si vous pensez que c\'est une erreur';} ?>

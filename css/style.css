@@ -81,9 +81,11 @@ div.content-preview {
 }
 div.preview-article {
     background-color: #9ceef8;
+    border-radius: 5px;
 }
 div.preview-project {
     background-color: #9cf89e;
+    border-radius: 5px;
 }
 div.writing-form-container {
     padding-top: 20px;
@@ -163,5 +165,4 @@ form.login {
     max-width: 250px;
     margin: auto;
     text-align: center;
-    border: 1px dashed black;
 }

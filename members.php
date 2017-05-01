@@ -20,6 +20,7 @@
                     <th>Pseudo</th>
                     <th>Rôle</th>
                     <th>Dernière activité</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -34,6 +35,7 @@
                         <td><?php echo $user->getPseudo() ?></td>
                         <td><?php echo $user->getRole() ?></td>
                         <td><?php echo $user->getLastLogin() ?></td>
+                        <td><a href="ucp.php?id=<?php echo $user->getId() ?>">Voir le profil</a></td>
                     </tr>
                 <?php endforeach ?>
                 </tbody>

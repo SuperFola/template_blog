@@ -265,7 +265,7 @@ class Project {
             'minus' => $this->minus,
             'plus' => $this->plus,
             'commentaires' => array(),
-            'votants' => $this->votants
+            'votants' => array()
         );
 
         foreach($this->commentaires as $commentaire) {
@@ -273,6 +273,9 @@ class Project {
         }
         foreach($this->articles as $article) {
             $array['articles'][] = $article->asArray();
+        }
+        foreach($this->votants as $votant) {
+            $array['votants'][] = $votant;
         }
 
         return $array;
@@ -380,13 +383,14 @@ class Project {
     
     public function upVote() {
         if (!in_array($_SERVER['REMOTE_ADDR'], $this->votants)) {
-            $votants[] = $_SERVER['REMOTE_ADDR'];
+            $this->votants[] = $_SERVER['REMOTE_ADDR'];
             $this->plus++;
         } else {
             $tmp = array();
             foreach($this->votants as $vot) {
-                if ($vot != $_SERVER['REMOTE_ADDR'])
+                if ($vot != $_SERVER['REMOTE_ADDR']) {
                     $tmp[] = $vot;
+                }
             }
             $this->votants = $tmp;
             $this->plus--;
@@ -395,7 +399,7 @@ class Project {
     
     public function downVote() {
         if (!in_array($_SERVER['REMOTE_ADDR'], $this->votants)) {
-            $votants[] = $_SERVER['REMOTE_ADDR'];
+            $this->votants[] = $_SERVER['REMOTE_ADDR'];
             $this->minus++;
         } else {
             $tmp = array();

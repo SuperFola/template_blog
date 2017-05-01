@@ -38,8 +38,11 @@
             
             if (isset($_POST['cmd']) and $_POST['cmd'] == 'post_comment_add') {
                 $commentaire = new Commentaire();
-                if (!isset($_SESSION) or !isset($_SESSION['pseudo']))
-                    $pseudo = "Anonyme";
+                $pseudo = "*(nullptr)";
+                if (!isset($_SESSION) or !isset($_SESSION['pseudo'])) {
+                    http_response_code(404);
+                    exit();
+                }
                 else
                     $pseudo = $_SESSION['pseudo'];
                 $message = htmlentities($_POST['post_comment_message']);
@@ -95,7 +98,9 @@
                             <div class="container-fluid">
                                 <?php if (!isset($_SESSION) or !isset($_SESSION['pseudo'])) { ?>
                                 <h4>Donnez votre opinion !</h4>
-                                Sera posté en tant que : <b>Anonyme</b><br />
+                                Ah mince, vous devez être connecté pour continuer :( <br />
+                                    <a onclick="load_modal('signup_mod', '../');" class="btn btn-default" style="margin-top: 10px;">Inscription</a>&nbsp;
+                                    <a onclick="load_modal('login_mod', '../');" class="btn btn-default" style="margin-top: 10px;">Connexion</a>
                                 <?php } else {
                                     echo '<h4 style="display: inline;">Donnez votre opinion !</h4>';
                                     echo '<div class="avatar" style="display: inline; float: right; line-height: 20px;">';
@@ -103,7 +108,7 @@
                                     echo '<img src="http://identicon.org?t=' . $_SESSION['pseudo'] . '&s=50" class="img-responsive">';
                                     echo '<br />';
                                     echo '</div>';
-                                } ?>
+                                ?>
                                 <div class="form-group">
                                     <textarea class="form-control" row="5" placeholder="Votre message..." name="post_comment_message"></textarea>
                                 </div>
@@ -111,6 +116,7 @@
                                     <input type="hidden" name="cmd" value="post_comment_add" />
                                     <input type="submit" class="btn btn-primary" value="Poster" />
                                 </div>
+                                <?php } ?>
                             </div>
                         </form>
                         <?php } else {echo 'Votre adresse IP a été bloquée. Veuillez nous envoyer un mail si vous pensez que c\'est une erreur';} ?>

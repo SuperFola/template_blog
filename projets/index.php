@@ -24,6 +24,7 @@
                             $temp->downVote();
                         }
                         $projectManager->updateProject($temp);
+                        header("Location: index.php#id-plih-" . $_GET['id']);
                     }
                 ?>
 

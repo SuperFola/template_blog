@@ -6,6 +6,7 @@
     
     $um = new UserManager();
     $bum = new BlockedUsersManager();
+    $r = false;
     
     if (isset($_POST['user']) and isset($_POST['pwd'])){
         $user = $um->findUserByPseudo($_POST['user']);
@@ -18,13 +19,15 @@
                     $um->updateUsers();
                     $_SESSION["pseudo"] = $_POST["user"];
                     $_SESSION["role"] = $user->getRole();
+                    $r = true;
                     header("Location: index.php");
-                } else
-                    header("Location: error.php?error=connexion");
-            } else
-                header("Location: error.php?error=connexion");
-        } else
-            header("Location: error.php?error=ip_blocked");
-    } else
-        header("Location: error.php?error=connexion");
+                }
+            }
+        }
+    }
+    if (!$r) {
+        // if we are here it is because we we'ren't redirected
+        http_response_code(403);
+        exit();
+    }
 ?>

@@ -25,30 +25,28 @@
                         }
                     }
                 ?>
+                <?php if ($fpp_mgr->getSize() != 0) { ?>
                 <h1>A la une</h1>
 
                 <div class="top-posts-container container-fluid">
                     <?php
-                        if ($fpp_mgr->getSize() == 0) {
-                            echo "<center><h4>Aucun post n'est actuellement mis en avant</h4></center>";
-                        } else {
-                            echo "<ul class='top-posts'>";
-                            for ($i=0; $i < $fpp_mgr->getSize(); $i++) {
-                                $post_details = $fpp_mgr->getPost($i);
-                                if ($post_details) {
-                                    echo "<li class='col-md-3'>";
-                                    echo "<div style=\"background-image: url('" . $post_details['image'] . "'); background-size: 100%;\">";
-                                    echo "<a href='post.php?id=" . $post_details['id'] . "' style='color: black;'><h3>" . $postManager->findPost($post_details['id'])->getTitre() . "</h3></a>";
-                                    echo "</div>";
-                                    echo "</li>";
-                                }
-                            }
-                            echo "</ul>";
+                    echo "<ul class='top-posts'>";
+                    for ($i=0; $i < $fpp_mgr->getSize(); $i++) {
+                        $post_details = $fpp_mgr->getPost($i);
+                        if ($post_details) {
+                            echo "<li class='col-md-3'>";
+                            echo "<div style=\"background-image: url('" . $post_details['image'] . "'); background-size: 100%;\">";
+                            echo "<a href='post.php?id=" . $post_details['id'] . "' style='color: black;'><h3>" . $postManager->findPost($post_details['id'])->getTitre() . "</h3></a>";
+                            echo "</div>";
+                            echo "</li>";
                         }
+                    }
+                    echo "</ul>";
                     ?>
                 </div>
 
                 <hr />
+                <?php } ?>
 
                 <h1>Articles</h1>
                 <div class="posts-list-container container-fluid">
@@ -79,31 +77,29 @@
                                 <li>
                                     <?php
                                     if (is_a($post, 'Article')) {
-                                        echo '<div class="preview-article">';
+                                        echo '<div class="preview-article ';
                                     } else if (is_a($post, 'Project')) {
-                                        echo '<div class="preview-project">';
+                                        echo '<div class="preview-project ';
                                     } else {
-                                        echo '<div>';
+                                        echo '<div class="';
                                     }
-                                    ?>
-                                        <div class="posts-list-item-header">
-                                            <?php
-                                            if (is_a($post, 'Post')) {
-                                                echo '<h3><a href="post.php?id='.$post->getId().'">'.$post->getTitre().'</a></h3>';
-                                            } else if (is_a($post, 'Article')) {
-                                                echo '<h3><a href="projets/article.php?project='.$post->getDad().'&id='.$post->getId().'">'.$post->getTitre().'</a></h3>';
-                                            } else if (is_a($post, 'Project')) {
-                                                echo '<h3><a href="projets/project.php?id='.$post->getId().'">'.$post->getTitre().'</a></h3>';
-                                            }
-                                            ?>
-                                            <h4>
-                                                <span class="label label-default" id="c<?php echo $i; ?>" onclick="window.location='categorie.php?id=<?php if (is_a($post, 'Post') or is_a($post, 'Project')) {echo $post->getCategorie();} else if (is_a($post, 'Article')) {echo "Article";} ?>';">
-                                                    <?php if (is_a($post, 'Post') or is_a($post, 'Project')) {echo $post->getCategorie();} else if (is_a($post, 'Article')) {echo "Article";} ?>
-                                                </span> par
-                                                <?php if (is_a($post, 'Post') or is_a($post, 'Article')) {echo $post->getAuthor();} else if (is_a($post, 'Project')) {echo implode(", ", $post->getMembers());} ?>
-                                            </h4>
-                                            <script type="text/javascript">dce("c<?php echo $i; ?>").style.cursor = "pointer";</script>
-                                        </div>
+                                    echo 'col-md-8 col-md-offset-2" style="margin-top: 5px; margin-bottom: 5px;">';
+                                    // div
+                                        if (is_a($post, 'Post')) {
+                                            echo '<h3><a href="post.php?id='.$post->getId().'">'.$post->getTitre().'</a></h3>';
+                                        } else if (is_a($post, 'Article')) {
+                                            echo '<h3><a href="projets/article.php?project='.$post->getDad().'&id='.$post->getId().'">'.$post->getTitre().'</a></h3>';
+                                        } else if (is_a($post, 'Project')) {
+                                            echo '<h3><a href="projets/project.php?id='.$post->getId().'">'.$post->getTitre().'</a></h3>';
+                                        }
+                                        ?>
+                                        <h4>
+                                            <span class="label label-default" id="c<?php echo $i; ?>" onclick="window.location='categorie.php?id=<?php if (is_a($post, 'Post') or is_a($post, 'Project')) {echo $post->getCategorie();} else if (is_a($post, 'Article')) {echo "Article";} ?>';">
+                                                <?php if (is_a($post, 'Post') or is_a($post, 'Project')) {echo $post->getCategorie();} else if (is_a($post, 'Article')) {echo "Article";} ?></span> par
+                                            <?php if (is_a($post, 'Post') or is_a($post, 'Article')) {echo $post->getAuthor();} else if (is_a($post, 'Project')) {echo implode(", ", $post->getMembers());} ?>,
+                                            <?php echo $post->getDisplayableDate() ?>
+                                        </h4>
+                                        <script type="text/javascript">dce("c<?php echo $i; ?>").style.cursor = "pointer";</script>
                                         <?php
                                             echo '<div class="content-preview">';
                                             if (is_a($post, 'Post')) {
@@ -114,8 +110,8 @@
                                                 echo $Parsedown->text($post->getPresentation());
                                             }
                                             echo '</div>';
+                                            // end div
                                         ?>
-                                        <hr />
                                     </div>
                                 </li>
                             <?php
@@ -130,14 +126,6 @@
                             echo "<a href='index.php?page=" . intval($page + 1) . "'>News suivantes</a>";
                         }
                     ?>
-                </div>
-                
-                <hr />
-                
-                <div>
-                    <a class="twitter-timeline" data-lang="fr" data-width="540" data-height="420" href="https://twitter.com/Hxokunlug">Tweets de @Hxokunlug</a> <script async src="scripts/widgets.js" charset="utf-8"></script>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a class="twitter-timeline" data-lang="fr" data-width="540" data-height="420" href="https://twitter.com/the_new_sky">Tweets de @the_new_sky</a> <script async src="scripts/widgets.js" charset="utf-8"></script>
                 </div>
             </div>
             <?php

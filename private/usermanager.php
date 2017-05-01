@@ -180,6 +180,7 @@ class User {
     
     protected $key;
     protected $activated;
+    protected $bio;
 
     public function __construct() {
         $this->timestampCreation = time();
@@ -464,5 +465,17 @@ class User {
     public function setRoot($root)
     {
         $this->root = $root;
+    }
+    
+    public function setBio($bio)
+    {
+        $this->bio = $bio;
+    }
+    
+    public function getBio()
+    {
+        if (isset($this->bio))
+            return $this->bio;
+        return "";
     }
 }

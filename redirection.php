@@ -2,11 +2,12 @@
 
 <html>
     <head>
-        <title>Redirection vers le nouveau site</title>
+        <title>Nous sommes en travaux !</title>
     </head>
     <body>
-        Bonjour, cette URL va être désactivée dans quelques temps.
-        <br>
-        La nouvelle URL qui reflète beaucoup plus l'esprit du blog est ici : <a href="http://wearecoders.hostux.fr">WeAreCoders.hostux.fr</a>
+        Bonjour à toi cher codeur ! Le site est actuellement en travaux en raison de plusieurs problèmes qui ont été soulevés sur le github du projet
+        (<a href="https://github.com/Loodoor/template_blog">https://github.com/Loodoor/template_blog</a>) <br />
+        Le site devrait re-être en ligne, tout neuf (tous les utilisateurs, posts, commentaires, projets seront supprimés au passage) vers mi juillet si tout se passe bien. <br />
+        En cas de problème n'hésitez pas à nous contacter au travers des issues sur le github du projet !
     </body>
 </html>
